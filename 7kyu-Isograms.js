@@ -13,4 +13,3 @@ const isIsogram = (str) => {
   }
   return true;
 };
-isIsogram("Dermatoglyphics");
