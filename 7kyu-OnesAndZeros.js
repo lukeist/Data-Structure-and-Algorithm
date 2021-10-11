@@ -22,3 +22,5 @@ const binaryArrayToNumber = (arr) => {
     .map((b, i) => Math.pow(2, i) * b)
     .reduce((p, c) => p + c, 0);
 };
+
+// better: const binaryArrayToNumber = arr => parseInt(arr.join(''), 2);
