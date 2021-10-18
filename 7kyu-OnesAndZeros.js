@@ -13,8 +13,12 @@
 // Testing: [1, 0, 1, 1] ==> 11
 
 const binaryArrayToNumber = (arr) => {
-  console.log(arr.join("").toString(10));
-  // your code
-};
+  //reverse arr
+  // map all binary to 2powX * binary
+  // use reduce to sum all mapped num
 
-binaryArrayToNumber([1, 0, 1, 1]);
+  return arr
+    .reverse()
+    .map((b, i) => Math.pow(2, i) * b)
+    .reduce((p, c) => p + c, 0);
+};

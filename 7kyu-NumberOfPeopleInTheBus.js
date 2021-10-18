@@ -13,3 +13,5 @@ var number = function (busStops) {
     busStops.reduce((p, c) => p + c[1], 0)
   );
 };
+
+// better solution const number = (busStops) => busStops.reduce((rem, [on, off]) => rem + on - off, 0);
