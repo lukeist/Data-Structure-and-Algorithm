@@ -33,19 +33,29 @@
 //// f(n)
 ////////////////////////////////////////////////////////////////
 
-//
+// DP
 var fib = function (n) {
   if (n === 0) return 0;
   if (n === 1) return 1;
-  let arr = [0, 1];
-  for (i = 2; i <= n; i++) {
-    arr[i] = arr[i - 1] + arr[i - 2];
-
-    if (i === n) {
-      console.log(arr[i]);
-      return arr[i];
-    }
-  }
+  console.log(fib(n - 1) + fib(n - 2));
+  return fib(n - 1) + fib(n - 2);
 };
 
-fib(0);
+fib(4);
+
+// // DP
+// var fib = function (n) {
+//     if (n === 0) return 0;
+//     if (n === 1) return 1;
+
+//     let arr = [0, 1];
+
+//     for (i = 2; i <= n; i++) {
+//       arr[i] = arr[i - 1] + arr[i - 2];
+
+//       if (i === n) {
+//         console.log(arr[i]);
+//         return arr[i];
+//       }
+//     }
+//   };
