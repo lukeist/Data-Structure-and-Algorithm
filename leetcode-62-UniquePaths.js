@@ -74,13 +74,19 @@ const uniquePaths = function (m, n, red) {
   console.log(arr);
 
   //   console.log(arr[m - 1][n - 1]);
-  return arr[m - 1][n - 1];
+  //   return arr[m - 1][n - 1];
 };
 
-uniquePaths(7, 3, [
+// uniquePaths(7, 3, [
+//   [1, 2],
+//   [5, 1],
+//   [3, 0],
+// ]);
+
+uniquePaths(3, 4, [
+  [1, 1],
   [1, 2],
-  [5, 1],
-  [3, 0],
+  [1, 3],
 ]);
 
 // // WITHOUT RED SQUARE
