@@ -7,3 +7,5 @@ function DNAtoRNA(dna) {
     .map((v) => (v === "T" ? "U" : v))
     .join("");
 }
+
+// better solution:   return dna.split("T").join("U");
