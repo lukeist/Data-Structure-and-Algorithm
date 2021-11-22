@@ -19,23 +19,29 @@ class Node {
 //   return null;
 // };
 
+// const getNodeValue = (head, index) => {
+//   let count = 0;
+//   const findIndex = (head, index, count) => {
+//     // console.log(head, count);
+
+//     if (!head) return null;
+//     if (index === count) {
+//       //   console.log(count, head.val);
+//       return head.val;
+//     }
+
+//     count++;
+//     return findIndex(head.next, index, count);
+//   };
+//   // const a
+//   console.log(findIndex(head, index, count));
+//   return findIndex(head, index, count);
+// };
 const getNodeValue = (head, index) => {
-  let count = 0;
-  const findIndex = (head, index, count) => {
-    // console.log(head, count);
-
-    if (!head) return null;
-    if (index === count) {
-      //   console.log(count, head.val);
-      return head.val;
-    }
-
-    count++;
-    return findIndex(head.next, index, count);
-  };
-  // const a
-  console.log(findIndex(head, index, count));
-  return findIndex(head, index, count);
+  if (!head) return null;
+  if (index === 0) return head.val;
+  index--;
+  return getNodeValue(head.next, index);
 };
 
 const a = new Node("a");
