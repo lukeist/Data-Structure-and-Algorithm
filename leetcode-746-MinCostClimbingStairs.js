@@ -1,4 +1,8 @@
 // https://leetcode.com/problems/min-cost-climbing-stairs/
+////////////////////////////////////////////////////////////////
+// LAST step's price !== 0
+////////////////////////////////////////////////////////////////
+const minCostStairs = (cost) => {};
 
 // p: array of int
 // r: num int
@@ -71,7 +75,6 @@
 // [10, 15, 20, 0];
 // [1, 100, 1, 1, 1, 100, 1, 1, 100, 1, 0 ]
 //
-//
 var minCostClimbingStairs = function (cost) {
   cost.push(0);
 
@@ -91,5 +94,5 @@ var minCostClimbingStairs = function (cost) {
 // if step from firstStep to nextStep = 2 => set nextStep = firstStep
 // if step from firstStep to nextStep = 1 => set nextStep = temp => temp >= new nextStep => new nextStep = firstStep
 
-minCostClimbingStairs([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]);
-minCostClimbingStairs([10, 15, 20]);
+// minCostClimbingStairs([1, 100, 1, 1, 1, 100, 1, 1, 100, 1]);
+// minCostClimbingStairs([10, 15, 20]);

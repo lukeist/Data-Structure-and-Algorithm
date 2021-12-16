@@ -14,12 +14,40 @@
 // Input: list1 = [], list2 = [0]
 // Output: [0]
 
-var mergeTwoLists = function (list1, list2) {
-  console.log([...list1, ...list2].sort((a, b) => a - b));
+class ListNode {
+  constructor(val, next) {
+    this.val = val === undefined ? 0 : val;
+    this.next = next === undefined ? null : next;
+  }
+}
 
-  return [...list1, ...list2].sort((a, b) => a - b);
+// l1  1   2   4
+// l2  1   3   4
+
+var mergeTwoLists = function (l1, l2) {
+  let newList = new ListNode();
+  let dummy = new ListNode();
+
+  l1.val > l2.val ? (dummy = l2) : (dummy = l1);
+  newList = dummy;
+  console.log(dummy, newList);
+
+  while (dummy) {
+    dummy = l1.next;
+    dummy = l2.next;
+  }
 };
 
-mergeTwoLists([1, 2, 4], [1, 3, 4]);
-mergeTwoLists([], []);
-mergeTwoLists([], [0]);
+const a = new ListNode(1);
+const b = new ListNode(2);
+const c = new ListNode(4);
+a.next = b;
+b.next = c;
+
+const d = new ListNode(1);
+const e = new ListNode(3);
+const f = new ListNode(4);
+d.next = e;
+e.next = f;
+
+mergeTwoLists(a, d);
