@@ -39,6 +39,7 @@ f.right = g;
 //         13
 // [17,-10,16] = 23
 
+// recursion
 function maxSum(root) {
   if (!root) return -Infinity;
   if (!root.left && !root.right) return root.value;
@@ -51,7 +52,7 @@ function maxSum(root) {
   return root.value + Math.max(left, right);
 }
 
-// // DFS
+// // DFS NOT WORKING
 // function maxSum(root) {
 //   if (!root) return -Infinity;
 //   let max = -Infinity;
