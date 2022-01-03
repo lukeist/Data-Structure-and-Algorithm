@@ -9,13 +9,28 @@ class Node {
 }
 const root = new Node(666, new Node(555), new Node(444));
 
+// using queue
 function search(n, root) {
-  return !root
-    ? false
-    : root.value === n
-    ? true
-    : search(n, root.left) || search(n, root.right);
+  if (!root) return false;
+
+  const queue = [root];
+
+  while (queue.length > 0) {
+    const current = queue.shift();
+    if (current.value === n) console.log(true);
+    if (current.left) queue.push(current.left);
+    if (current.right) queue.push(current.right);
+  }
+  console.log(false);
 }
+
+// function search(n, root) {
+//   return !root
+//     ? false
+//     : root.value === n
+//     ? true
+//     : search(n, root.left) || search(n, root.right);
+// }
 
 // // using queue
 // function search(n, root) {
@@ -51,4 +66,4 @@ function search(n, root) {
 //   console.log(result.indexOf(n) > -1);
 // }
 
-search(777, root);
+search(666, root);
