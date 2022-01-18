@@ -8,34 +8,47 @@ class Node {
   }
 }
 const root = new Node(666, new Node(555), new Node(444));
+
 function search(n, root) {
-  // Determines if a value is in a binary tree (NOT bst)
-  // Your code here!
-  if (!root) return false;
-
-  const searchTree = (node) => {
-    if (!node) return false;
-
-    if (node.left.value === n) {
-      return true;
-    } else {
-      return searchTree(node);
-    }
-
-    if (node.right.value === n) {
-      return true;
-    } else {
-      return searchTree(node);
-    }
-    return false;
-  };
-
-  if (root.value === n) {
-    return true;
-  } else {
-  }
-  console.log(root);
-  return false;
+  return !root
+    ? false
+    : root.value === n
+    ? true
+    : search(n, root.left) || search(n, root.right);
 }
 
-search(666, root);
+// // using queue
+// function search(n, root) {
+//   if (!root) return false;
+
+//   const queue = [root];
+//   const result = [];
+
+//   while (queue.length > 0) {
+//     const current = queue.shift();
+//     result.push(current.value);
+//     if (current.left) queue.push(current.left);
+//     if (current.right) queue.push(current.right);
+//   }
+
+//   return result.indexOf(n) > -1;
+// }
+
+// using stack
+// function search(n, root) {
+//   if (!root) return false;
+
+//   const stack = [root];
+//   const result = [];
+
+//   while (stack.length > 0) {
+//     const current = stack.pop();
+//     result.push(current.value);
+
+//     if (current.right) stack.push(current.right);
+//     if (current.left) stack.push(current.left);
+//   }
+//   console.log(result.indexOf(n) > -1);
+// }
+
+search(777, root);
