@@ -7,12 +7,6 @@
 // [18, 63, 80, 25, 32, 43, 80, 93, 80, 25, 93, -1, 28, -1, -1].
 
 function arrayManip(array) {
-  //   console.log(
-  //     array.map((num, i, arr) => {
-  //       arr.splice(0, i);
-  //       Math.min(...arr.filter((n) => n > num));
-  //     })
-  //   );
   const result = [];
   // loop all num
   while (array.length > 0) {
