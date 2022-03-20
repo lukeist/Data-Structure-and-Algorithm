@@ -14,5 +14,6 @@ function rgb(r, g, b) {
 }
 
 rgb(148, 0, 211);
+rgb(148, -1, 256);
 
 // better solution: use .toString(16)????
