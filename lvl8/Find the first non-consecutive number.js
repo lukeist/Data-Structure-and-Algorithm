@@ -20,13 +20,13 @@
 // Nim: none(int) (See options)
 function firstNonConsecutive(arr) {
   const temp = [];
-  for (let i = 0; i < arr.length - 1; i++) {
-    const num = arr[i + 1] - arr[i];
-    temp.push(num);
+  for (let i = 1; i < arr.length; i++) {
+    const num = Math.abs(arr[i]) - Math.abs(arr[i - 1]);
+    temp.push(Math.abs(num));
   }
 
   const index = temp.findIndex((el) => el !== 1);
-  if (index > 0) {
+  if (index >= 0) {
     return arr[index + 1];
   } else {
     return null;
@@ -34,3 +34,13 @@ function firstNonConsecutive(arr) {
 }
 
 firstNonConsecutive([1, 2, 3, 4, 6, 7, 8]);
+
+// better solution:
+function firstNonConsecutive(arr) {
+  for (let i = 0; i < arr.length - 1; i++) {
+    if (arr[i] + 1 !== arr[i + 1]) {
+      return arr[i + 1];
+    }
+  }
+  return null;
+}
