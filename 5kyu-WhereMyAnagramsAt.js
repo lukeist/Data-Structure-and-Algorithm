@@ -29,5 +29,5 @@ function anagrams(word, words) {
     (w) => w.split("").sort().join("") === word.split("").sort().join("")
   );
 }
-anagrams("racer", ["crazer", "carer", "racar", "caers", "racer"]);
+anagrams("racer", ["crazer", "carer", "racar", "caers", "racer", "carerq"]);
 //['carer', 'racer']
