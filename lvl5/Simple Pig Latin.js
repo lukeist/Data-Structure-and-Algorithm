@@ -56,3 +56,8 @@ function pigIt(str) {
     })
     .join(" ");
 }
+
+// best use regex:
+function pigIt(str) {
+  return str.replace(/(\w)(\w*)(\s|$)/g, "$2$1ay$3"); // dont understand
+}
