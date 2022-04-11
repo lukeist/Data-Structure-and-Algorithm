@@ -24,10 +24,24 @@ function narcissistic(value) {
     sum = sum + Math.pow(parseInt(valueToString[i]), lengthOfValue);
   }
   if (sum === value) {
+    // return sum === value is better
     return true;
   } else {
     return false;
   }
+}
+// VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+
+function narcissistic(value) {
+  // Code me to return true or false
+  const valueToString = value.toString();
+  let sum = 0;
+  // length of number
+  const lengthOfValue = Math.ceil(Math.log10(value + 1));
+  for (let i = 0; i < lengthOfValue; i++) {
+    sum = sum + Math.pow(parseInt(valueToString[i]), lengthOfValue);
+  }
+  return sum === value;
 }
 
 // better solution:
