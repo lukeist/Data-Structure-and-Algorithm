@@ -34,7 +34,7 @@ function domainName(url) {
   }
 }
 
-// much better solution:
+// better solution: ==> but not working with this.domain.com
 function domainName(url) {
   url = url.replace("https://", "");
   url = url.replace("http://", "");
