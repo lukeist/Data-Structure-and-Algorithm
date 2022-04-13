@@ -1,9 +1,9 @@
 class Netflix {
-  constructor(action, drama, comedy, war) {
-    this.action = action;
-    this.drama = drama;
-    this.comedy = comedy;
-    this.war = war;
+  constructor(title, genre, rating, numOfEp) {
+    this.title = title;
+    this.genre = genre;
+    this.rating = rating;
+    this.numOfEp = numOfEp;
   }
 
   play() {
@@ -16,3 +16,5 @@ class Netflix {
     alert("skipping");
   }
 }
+
+let bridgerton = new Netflix("bridgeton", "drama");
