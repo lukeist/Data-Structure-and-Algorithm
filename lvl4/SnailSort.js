@@ -18,27 +18,38 @@
 // NOTE 2: The 0x0 (empty matrix) is represented as en empty array inside an array [[]].
 
 snail = function (array) {
-  // enjoy
   let snailArr = [];
-  //   let snailArr = [...array[0]];
+  // first row
+  const firstRow = [...array[0]];
+  snailArr = [...firstRow];
   //   snailArr.push(array[1][array.length - 1]);
 
   // row 1
-  for (let i = 0; i < array.length; i++) {
-    for (let j = 0; j < array[i].length; i++) {
-      snailArr.push(array[i][j]);
-    }
+  // for (let i = 1; i < array.length - 1; i++) {
+  //   for (let j = 0; j < array[i].length; j++) {
+  //     snailArr.push(array[i][j.length - 1]);
+  //   }
+  // }
+  // last row
+
+  // console.log(snailArr);
+  const lastRow = [...array[array.length - 1]];
+
+  for (i = lastRow.length - 1; i > -1; i--) {
+    snailArr.push(lastRow[i]);
   }
+
   console.log(snailArr);
+
+  // console.log(firstRow, lastRow);
 };
 
-let array = [
-  [1, 2, 3],
-  [8, 9, 4],
-  [7, 6, 5],
-];
+// let array = [
+//   [1, 2, 3],
+//   [8, 9, 4],
+//   [7, 6, 5],
+// ];
 
-snail(array);
 // 00 01 02 12 22 21 20 10 11
 // 1 n-0
 // 2 n-1
@@ -46,12 +57,12 @@ snail(array);
 // 4 n-2
 // 5 n-2
 
-// let array2 = [
-//   [1, 2, 3, 4],
-//   [12, 13, 14, 5],
-//   [11, 16, 15, 6],
-//   [10, 9, 8, 7],
-// ];
+let array = [
+  [1, 2, 3, 4],
+  [12, 13, 14, 5],
+  [11, 16, 15, 6],
+  [10, 9, 8, 7],
+];
 
 // 00 01 02 03 13 23 33 32 31 30 20 10 11 12 22 21
 
@@ -62,3 +73,4 @@ snail(array);
 //   5 n-2
 //   6 n-3
 //   7 n-3
+snail(array);
