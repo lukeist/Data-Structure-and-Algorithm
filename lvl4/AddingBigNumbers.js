@@ -1,12 +1,35 @@
 function add(a, b) {
-  let newA = [];
-  let newB = [];
-  // if (a.length > 17 ) {
-  //   for (let i = 0 ; i< a.length/17; i++
+  let totalSum = [];
+  for (let i = a.length, j = b.length; i > 0, j > 0; i = i - 10, j = j - 10) {
+    let strA = a.length < 10 ? a.slice(0, i) : a.slice(i - 10, i);
+    let strB = b.length < 10 ? b.slice(0, j) : b.slice(j - 10, j);
 
-  //let an = BigInt(a) +  BigInt(b)
-  //   console.log((Number(a) + Number(b)).toString()); // Fix me!
-  console.log(+a, +b);
+    let sum = (+strA + +strB).toString(); // sum of 10 characters of strA and 10 characters of strB
+
+    a = a.slice(0, i - 10); // remove 10 characters above out of a and b
+    b = b.slice(0, j - 10);
+
+    totalSum.splice(0, 0, sum); // add sum to array totalSum
+  }
+
+  for (let i = totalSum.length - 1; i > 0; i--) {
+    if (totalSum[i].length > 10) {
+      // if, for example 500 + 500 = 1000, remove the 1, only take the 000 to current array[i] ([000.toString()])
+      let numberRemovedOneAtTheBeginning = totalSum[i].slice(
+        1,
+        totalSum[i].length
+      );
+      totalSum.splice(i, 1, numberRemovedOneAtTheBeginning);
+      // move & add the 1 above to the array index before it: array[i-1] ([(+xxx+1).toString()])
+      let numberBeforeiAddedOne = (+totalSum[i - 1] + 1).toString();
+      totalSum.splice(i - 1, 1, numberBeforeiAddedOne);
+    }
+  }
+  //   console.log(totalSum.join(""));
+  return totalSum.join("");
 }
 
-add("12345678901234567", "0");
+add(
+  "123456789022345678903234567890423",
+  "123456789022345678903234567890423456789052345678906234567890"
+);
