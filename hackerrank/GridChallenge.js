@@ -59,3 +59,35 @@
 // pqrst
 // uvwxy
 // This fulfills the condition since the rows 1, 2, ..., 5 and the columns 1, 2, ..., 5 are all alphabetically sorted.
+
+function gridChallenge(grid) {
+  // Write your code here
+  const abc = "abcdefghijklmnopqrstuvwxyz";
+  for (let i = 0; i < grid.length; i++) {
+    const newValue = grid[i].split("").sort().join("");
+    grid.splice(i, 1, newValue);
+  }
+
+  //   const upToDownArr = [];
+  for (let rowIndex = 0; rowIndex < grid.length; rowIndex++) {
+    // const tempArr = [];
+    for (let colIndex = 0; colIndex < grid[rowIndex].length - 1; colIndex++) {
+      //   tempArr.push(grid[j][i]);
+      //   console.log(grid[j], abc.indexOf(grid[j][i]));
+      //   console.log(grid[j + 1], abc.indexOf(grid[j + 1][i]));
+      if (grid[colIndex][rowIndex] > grid[colIndex + 1][rowIndex]) return "NO";
+      //   console.log(";------------------");
+    }
+    // const newArr = tempArr.join("");
+    // console.log(newArr);
+    // upToDownArr.push(newArr);
+  }
+
+  //   console.log(upToDownArr);
+  //   console.log(grid);
+  //   return "YES";
+  console.log("a" < "b");
+}
+
+let grid = ["ebacd", "fghij", "olmkn", "trpqs", "xywuv"];
+gridChallenge(grid);
