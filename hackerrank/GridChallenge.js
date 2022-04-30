@@ -62,7 +62,6 @@
 
 function gridChallenge(grid) {
   // Write your code here
-  const abc = "abcdefghijklmnopqrstuvwxyz";
   for (let i = 0; i < grid.length; i++) {
     const newValue = grid[i].split("").sort().join("");
     grid.splice(i, 1, newValue);
@@ -85,8 +84,7 @@ function gridChallenge(grid) {
 
   //   console.log(upToDownArr);
   //   console.log(grid);
-  //   return "YES";
-  console.log("a" < "b");
+  return "YES";
 }
 
 let grid = ["ebacd", "fghij", "olmkn", "trpqs", "xywuv"];
