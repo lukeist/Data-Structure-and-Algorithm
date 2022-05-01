@@ -70,38 +70,39 @@
 
 // No person can bribe more than two people, yet it appears person  has done so. It is not possible to achieve the input state.
 
+// function minimumBribes(q) {
+//   let num = 0;
+//   let chaotic = false;
+
+//   for (let i = q.length - 1; i >= 0; i--) {
+//     if (q[i] - i > 3) chaotic = true;
+//     for (let j = q[i] - 2; j < i; j++) {
+//       if (q[j] > q[i]) num++;
+//     }
+//   }
+
+//   if (chaotic) console.log("Too chaotic");
+//   else console.log(num);
+// }
+// let q = [1, 2, 5, 3, 7, 8, 6, 4];
+
 function minimumBribes(q) {
   // Write your code here
-  let numberOfBribes = 0;
-  let qAscending = [...Array(q.length + 1).keys()].slice(1);
-
-  for (const numAtI of q) {
-    const indexOfNumAtIInQ = q.indexOf(numAtI);
-    const indexOfNumAtIInQAscending = qAscending.indexOf(numAtI);
-    // console.log(`loop to index ${i} in q, num at that index in q: ${numAtI}`);
-    // console.log("new array:");
-    // console.log(qAscending.join());
-
-    if (indexOfNumAtIInQ !== indexOfNumAtIInQAscending) {
-      const indexChange = indexOfNumAtIInQAscending - indexOfNumAtIInQ;
-      if (indexChange > 2) {
-        console.log("Too chaotic");
-        return;
-      }
-      numberOfBribes += indexChange;
-
-      qAscending.splice(indexOfNumAtIInQ, 0, numAtI);
-      //   console.log(
-      //     `array after inserting ${numAtI} at index ${indexOfNumAtIInQ}:`
-      //   );
-      //   console.log(qAscending.join());
-
-      const numRemoved = qAscending.splice(qAscending.lastIndexOf(numAtI), 1);
-      //   console.log(`array after removing ${numAtI}:`);
-      //   console.log(qAscending.join(), numRemoved[0]);
+  //   let numberOfBribes = 0;
+  //   let qAscending = [...Array(q.length + 1).keys()].slice(1);
+  //   let qAscending = [...q].sort((a, b) => a - b);
+  let result = 0;
+  for (let i = 0; i < q.length; i++) {
+    if (q[i] - i > 3) {
+      console.log("Too chaotic");
+      return;
     }
+
+    console.log(i);
+    console.log(q[i]);
+    console.log(q[i] - i);
+    console.log("//////////////");
   }
-  console.log(numberOfBribes);
 }
 // let q = [1, 2, 3, 4, 5];
 // let q = [1, 2, 5, 3, 7, 8, 6, 4];
@@ -149,3 +150,38 @@ minimumBribes(q);
 //     }
 //     console.log(numberOfBribes);
 //   }
+
+// function minimumBribes(q) {
+//   // Write your code here
+//   let numberOfBribes = 0;
+//   //   let qAscending = [...Array(q.length + 1).keys()].slice(1);
+//   let qAscending = [...q].sort((a, b) => a - b);
+//   for (const numAtI of q) {
+//     const indexOfNumAtIInQ = q.indexOf(numAtI);
+//     const indexOfNumAtIInQAscending = qAscending.indexOf(numAtI);
+//     // console.log(`loop to index ${i} in q, num at that index in q: ${numAtI}`);
+//     // console.log("new array:");
+//     // console.log(qAscending.join());
+
+//     if (indexOfNumAtIInQ !== indexOfNumAtIInQAscending) {
+//       const indexChange = indexOfNumAtIInQAscending - indexOfNumAtIInQ;
+//       if (indexChange > 2) {
+//         console.log("Too chaotic");
+//         return;
+//       }
+
+//       numberOfBribes += indexChange;
+//       qAscending.splice(indexOfNumAtIInQ, 0, numAtI);
+//       qAscending.splice(qAscending.lastIndexOf(numAtI), 1);
+
+//       //   console.log(
+//       //     `array after inserting ${numAtI} at index ${indexOfNumAtIInQ}:`
+//       //   );
+//       //   console.log(qAscending.join());
+
+//       //   console.log(`array after removing ${numAtI}:`);
+//       //   console.log(qAscending.join(), numRemoved[0]);
+//     }
+//   }
+//   console.log(numberOfBribes);
+// }
