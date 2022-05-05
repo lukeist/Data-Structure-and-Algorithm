@@ -7,7 +7,7 @@ function encodeStr(s, shift) {
   // add prefix
   const firstLetter = s[0].toLowerCase();
   const secondLetter =
-    alphabetLowerCase[alphabetLowerCase.indexOf(firstLetter) + shift];
+    alphabetLowerCase[(alphabetLowerCase.indexOf(firstLetter) + shift) % 26];
   const prefix = firstLetter + secondLetter;
 
   // map through s to s+shift
@@ -33,25 +33,47 @@ function encodeStr(s, shift) {
 
   // split s to 5 strings
   let splitArr = [];
-  let numOfCharInEachArr = 0;
+  let numOfCharInEachOfFirst4Arrays = 0;
   let numOfCharInLastArr = 0;
-
+  let allNumsThatFit5Array = [];
   if (sLength % 5 === 0) {
-    numOfCharInEachArr = sLength / 5;
+    numOfCharInEachOfFirst4Arrays = sLength / 5;
   } else {
-    numOfCharInEachArr = sLength / 4 - (sLength % 5);
-    numOfCharInLastArr = sLength - numOfCharInEachArr;
+    for (let i = sLength % 4; i < sLength / 4; i++) {
+      numOfCharInEachOfFirst4Arrays = (sLength - i) / 4;
+      if (
+        numOfCharInEachOfFirst4Arrays > i &&
+        Number.isInteger(numOfCharInEachOfFirst4Arrays)
+      ) {
+        allNumsThatFit5Array.push(numOfCharInEachOfFirst4Arrays);
+      }
+      //   console.log(sLength, i, numOfCharInEachOfFirst4Arrays);
+    }
+    numOfCharInEachOfFirst4Arrays = Math.min(...allNumsThatFit5Array);
+  }
+  //   console.log(allNumsThatFit5Array, numOfCharInEachOfFirst4Arrays);
+
+  // 18  15
+  // 18  15
+  // 18  15
+  // 18  15
+  // 4   11
+  // 76  71
+
+  //   sLength / numOfCharInEachOfFirst4Arrays > 5
+  //     ? (numOfCharInEachOfFirst4Arrays = sLength / 4)
+  //     : numOfCharInEachOfFirst4Arrays;
+
+  // numOfCharInLastArr = sLength - numOfCharInEachOfFirst4Arrays;
+  for (let i = 0; i < sLength; i += numOfCharInEachOfFirst4Arrays) {
+    splitArr.push(s.slice(i, i + numOfCharInEachOfFirst4Arrays));
   }
 
-  for (let i = 0; i < sLength; i += numOfCharInEachArr) {
-    splitArr.push(s.slice(i, i + numOfCharInEachArr));
-  }
-
-  // console.log(sLength, numOfCharInEachArr, numOfCharInLastArr);
+  // console.log(sLength, numOfCharInEachOfFirst4Arrays, numOfCharInLastArr);
   //   console.log(s);
   //   //   console.log(ss);
+  console.log(s.length, splitArr);
 
-  console.log(sTest.length);
   return splitArr;
 }
 
@@ -85,8 +107,34 @@ function decode(arr) {
   return s;
 }
 
-// const u = "O CAPTAIN! my Captain! our fearful trip is donez";
-const u = "I should have known that you would have a perfect answer for me!!!";
+const u =
+  "I have spread my dreams under your feet; Tread softly because you tread on my dreams. William B Yeats (1865-1939)";
+//   "For you bouquets and ribbon'd wreaths--for you the shores a-crowding;";
+// const u = "O CAPTAIN! my Captain! our fearful trip is done;";
+// const u = "I should have known that you would have a perfect answer for me!!!";
+// const u = "123456789012345";
+encodeStr(u, 25);
+// const arr = [//71
+//   "fgGps zpv cpvrvf", //17
+//   "ut boe sjccpo'e x",//17
+//   "sfbuit--gps zpv u",//17
+//   "if tipsft b-dspxe",//17
+//   "joh;",//3
+// ];
+// const arr = [
+//   "fgGps zpv cpvrv", //15
+//   "fut boe sjccpo'",//15
+//   "e xsfbuit--gps ",//15
+//   "zpv uif tipsft ",//15
+//   "b-dspxejoh;",//11
+// ];
 
-encodeStr(u, 1);
-decode(encodeStr(u, 1));
+const arr = [
+  "ihndefinedH gzud roqdzc l",
+  "x cqdzlr tmcdq xntq edds;",
+  " Sqdzc rneskx adbztrd xnt",
+  " sqdzc nm lx cqdzlr. Vhkk",
+  "hzl A Xdzsr (1865-1939)",
+];
+// decode(encodeStr(u, -1));
+decode(arr);
