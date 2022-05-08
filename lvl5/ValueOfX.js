@@ -2,23 +2,36 @@ function valueOfX(eq) {
   //   eq = eq.split(" ").map((x) => (isNaN(+x) ? x : +x));
   eq = eq.split(" = ");
   eqLeft = eq[0].split(" ");
+  eqLeftCalculation = 1;
   eqRight = eq[1].split(" ");
+  eqRightCalculation = 1;
+
+  if (eqLeft.indexOf("x") > -1) {
+    if (eqLeft[eqLeft.indexOf("x") - 1] === "-") {
+      eqLeftCalculation = 1;
+      eqRightCalculation = -1;
+    } else if (eqLeft[eqLeft.indexOf("x") - 1] !== "-") {
+      eqLeftCalculation = -1;
+    }
+  }
+
+  if (eqRight.indexOf("x") > -1) {
+    if (eqRight[eqRight.indexOf("x") - 1] === "-") {
+      eqRightCalculation = 1;
+      eqLeftCalculation = -1;
+    } else if (eqRight[eqRight.indexOf("x") - 1] !== "-") {
+      eqRightCalculation = -1;
+    }
+  }
+
   let sumArr = [];
 
   const getNumEq = (eqArr, sumArr) => {
-    let equationCalculator = 1;
     let tempArr = [];
-
     for (let i = 0; i < eqArr.length; ++i) {
       if (eqArr[i] === "x") {
-        if (eqArr[i - 1] === "-") {
-          equationCalculator = 1;
-        } else if (eqArr[i - 1] === "+" || eqArr[i - 1] === undefined) {
-          // undefined meaning there's no - or + before x
-          equationCalculator = -1;
-        }
-        if (eqArr[i + 1] === undefined) {
-          //   console.log(eqArr[i + 1]);
+        // if there's only x on this side of equation
+        if (eqArr[i + 1] === undefined || eqArr[i - 2] === undefined) {
           tempArr.push(0);
         }
       }
@@ -26,7 +39,7 @@ function valueOfX(eq) {
       if (eqArr[i] === "-" && eqArr[i + 1] !== "x") {
         tempArr.push(-eqArr[i + 1]);
         eqArr.splice(i + 1, 1);
-      } else if (eqArr[i] === "+") {
+      } else if (eqArr[i] === "+" && eqArr[i + 1] !== "x") {
         tempArr.push(+eqArr[i + 1]);
         eqArr.splice(i + 1, 1);
       }
@@ -34,42 +47,27 @@ function valueOfX(eq) {
       if (!isNaN(+eqArr[i])) {
         tempArr.push(+eqArr[i]);
       }
-
-      //   if (eqArr[i] === "-") {
-      //     if (eqArr[i + 1] === "x") {
-      //       equationCalculator = 1;
-      //     } else {
-      //       tempArr.push(-eqArr[i + 1]);
-      //       eqArr.splice(i + 1, 1);
-      //     }
-      //   } else if (eqArr[i] === "+") {
-      //     if (eqArr[i + 1] === "x") {
-      //       equationCalculator = -1;
-      //     } else {
-      //       tempArr.push(+eqArr[i + 1]);
-      //       eqArr.splice(i + 1, 1);
-      //     }
-      //   }
-      //   if (!isNaN(+eqArr[i])) {
-      //     tempArr.push(+eqArr[i]);
-      //   }
     }
-
-    tempArr = tempArr.map((x) => x * equationCalculator);
-    tempArr = tempArr.reduce((p, c) => p + c, 0);
-    console.log(tempArr);
 
     sumArr.push(tempArr);
   };
 
   getNumEq(eqLeft, sumArr);
   getNumEq(eqRight, sumArr);
-  //   console.log(sumArr);
+  sumArr[0] = sumArr[0]
+    .map((x) => x * eqLeftCalculation)
+    .reduce((p, c) => p + c, 0);
+  sumArr[1] = sumArr[1]
+    .map((x) => x * eqRightCalculation)
+    .reduce((p, c) => p + c, 0);
+  console.log(sumArr);
 
   console.log(sumArr.reduce((p, c) => p + c, 0));
   return sumArr.reduce((p, c) => p + c, 0);
 }
 
-// let eq = "x + 1 = - 9 - 2";
-let eq = "- x = - 1";
+// let eq = "- x + 1 = - 9 - 2";
+// let eq = "- x = - 1";
+// let eq = "10 + x = 77";
+let eq = "+ 123 - 104 = - 42 + x";
 valueOfX(eq);
