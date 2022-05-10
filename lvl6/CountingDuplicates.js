@@ -9,10 +9,7 @@ function duplicateCount(text) {
         value === textArr[i] ? (value = null) : value
       );
     }
-
-    console.log(i, text.lastIndexOf(textArr[i]));
   }
-  console.log(textArr, count);
   return count;
 }
 
