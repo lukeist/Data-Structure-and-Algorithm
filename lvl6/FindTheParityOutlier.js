@@ -3,8 +3,6 @@ function findOutlier(integers) {
   return iFilter.length === 1
     ? iFilter[0]
     : integers.filter((num) => num % 2 === 0)[0];
-  console.log(iFilter);
-  //   return;
 }
 
 findOutlier([2, 4, 0, 100, 4, 11, 2602, 36]);
