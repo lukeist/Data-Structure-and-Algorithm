@@ -8,10 +8,15 @@ function dirReduc(arr) {
   let eastWest = arr.map((v) =>
     v === "EAST" ? (v = 1) : v === "WEST" ? (v = -1) : (v = null)
   );
-  console.log(northSouth, eastWest);
+  // console.log(northSouth, eastWest);
 
   // loop +1 -1 0 search for directions
-
+  // for (let i=0; i<arr.length; i++) {
+  //   northSouth[i]
+  // }
+  const sumNS = northSouth.reduce((p, c) => p + c, 0);
+  const sumEW = eastWest.reduce((p, c) => p + c, 0);
+  console.log(sumNS, sumEW);
   // if direction = -3, loop from back to front to find 3 indexes of -1
 
   // put all -1 into order
