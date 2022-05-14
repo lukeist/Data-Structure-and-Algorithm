@@ -1,70 +1,119 @@
 function dirReduc(arr) {
-  const arrClone = [...arr];
-  const arrMap = arr.map((v) =>
-    //  v === "NORTH" ?  1 : -1
-    {
-      switch (v) {
-        case "NORTH":
-          return 1;
-        // console.log(v);
-        case "SOUTH":
-          return -1;
-        // console.log(v);
-        case "EAST":
-          return 2;
-        // console.log(v);
-        case "WEST":
-          return -2;
-        // console.log(v);
-        default:
-          return v;
-      }
+  // const arrClone = [...arr];
+  // const arrMap = arr.map((v) =>
+  //   //  v === "NORTH" ?  1 : -1
+  //   {
+  //     switch (v) {
+  //       case "NORTH":
+  //         return 1;
+  //       // console.log(v);
+  //       case "SOUTH":
+  //         return -1;
+  //       // console.log(v);
+  //       case "EAST":
+  //         return 2;
+  //       // console.log(v);
+  //       case "WEST":
+  //         return -2;
+  //       // console.log(v);
+  //       default:
+  //         return v;
+  //     }
+  //   }
+  // );
+
+  // // console.log(arr);
+  // for (let i = 0; i < arr.length; i++) {
+  //   // console.log(arrMap[i], arrMap[i + 1]);
+  //   // console.log(arrMap[i - 1], arrMap[i]);
+  //   // console.log(arr[i], arr[i + 1]);
+  //   if (arrMap[i] + arrMap[i + 1] === 0) {
+  //     arrMap[i] = 0;
+  //     arrMap[i + 1] = 0;
+  //     arr[i] = null;
+  //     arr[i + 1] = null;
+  //     // arr.splice(i, 1);
+  //     // arrMap.splice(i, 1);
+  //     // // splice the i + 1 (but now at the position of i because of above)
+  //     // arr.splice(i, 1);
+  //     // arrMap.splice(i, 1);
+  //   }
+  //   if (arrMap[i] + arrMap[i - 1] === 0) {
+  //     // console.log(arr[i - 1], arr[i]);
+  //     // arr.splice(i, 1);
+  //     // arrMap.splice(i, 1);
+  //     // arr.splice(i - 1, 1);
+  //     // arrMap.splice(i - 1, 1);
+  //     // console.log(arr);
+  //   }
+
+  //   // console.log(arr, arrMap, "-----------");
+  // }
+  // console.log(arrMap);
+  let arrToStr = arr.join("");
+  const strNS = "NORTHSOUTH";
+  const strSN = "SOUTHNORTH";
+  const strEW = "EASTWEST";
+  const strWE = "WESTEAST";
+  while (
+    arrToStr.includes(strNS) ||
+    arrToStr.includes(strSN) ||
+    arrToStr.includes(strEW) ||
+    arrToStr.includes(strWE)
+  ) {
+    if (arrToStr.includes(strNS)) {
+      arrToStr = arrToStr.replace(strNS, "");
     }
-  );
-
-  console.log(arr);
-  for (let i = 0; i < arr.length; i++) {
-    // console.log(arrMap[i], arrMap[i + 1]);
-    // console.log(arrMap[i - 1], arrMap[i]);
-    console.log(arr[i], arr[i + 1]);
-    if (arrMap[i] + arrMap[i + 1] === 0) {
-      const test1 = arr.splice(i, 1);
-      arrMap.splice(i, 1);
-
-      const test2 = arr.splice(i + 1, 1);
-      arrMap.splice(i + 1, 1);
-
-      console.log(test1, test2);
-    } else if (arrMap[i] + arrMap[i - 1] === 0) {
-      arr.splice(i, 1);
-      arrMap.splice(i, 1);
-
-      arr.splice(i - 1, 1);
-      arrMap.splice(i - 1, 1);
-
-      // console.log(arr);
+    if (arrToStr.includes(strSN)) {
+      arrToStr = arrToStr.replace(strSN, "");
     }
-
-    console.log(arr, arrMap, "-----------");
+    if (arrToStr.includes(strEW)) {
+      arrToStr = arrToStr.replace(strEW, "");
+    }
+    if (arrToStr.includes(strWE)) {
+      arrToStr = arrToStr.replace(strWE, "");
+    }
   }
-  // console.log(arr);
+  // console.log(arrToStr);
+
+  let arrResult = [];
+  while (arrToStr.length > 0) {
+    if (arrToStr[0] === "N") {
+      arrResult.push("NORTH");
+      arrToStr = arrToStr.slice(5);
+    }
+    if (arrToStr[0] === "S") {
+      arrResult.push("SOUTH");
+      arrToStr = arrToStr.slice(5);
+    }
+    if (arrToStr[0] === "E") {
+      arrResult.push("EAST");
+      arrToStr = arrToStr.slice(4);
+    }
+    if (arrToStr[0] === "W") {
+      arrResult.push("WEST");
+      arrToStr = arrToStr.slice(4);
+    }
+  }
+  console.log(arrResult);
+  return arrResult;
 }
 
+dirReduc([
+  "NORTH",
+  "EAST",
+  "NORTH",
+  "EAST",
+  "WEST",
+  "WEST",
+  "EAST",
+  "EAST",
+  "WEST",
+  "SOUTH",
+  "NORTH",
+]);
+
 // dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]);
-// dirReduc([
-//   "NORTH",
-//   "EAST",
-//   "NORTH",
-//   "EAST",
-//   "WEST",
-//   "WEST",
-//   "EAST",
-//   "EAST",
-//   "WEST",
-//   "SOUTH",
-//   "NORTH",
-// ]);
-dirReduc(["NORTH", "SOUTH", "SOUTH", "EAST", "WEST", "NORTH", "WEST"]);
 // dirReduc([]);
 
 // function dirReduc(arr) {
