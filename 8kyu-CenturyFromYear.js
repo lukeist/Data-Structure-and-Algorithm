@@ -7,3 +7,5 @@ function century(year) {
 }
 
 century(1900);
+
+//better: const century = year => Math.ceil(year/100)
