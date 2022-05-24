@@ -13,10 +13,13 @@ function rowSumOddNumbers(n) {
   // loop from 1++ to n
   //// loop from j = i
 
-  const arr = Array.from(Array(n), (e, i) =>
-    Array.from(Array(i + 1), (f, j) => j)
-  );
-  console.log(arr);
+  let totalNum = 0;
+  for (i = 1; i <= n; i++) {
+    totalNum += i;
+  }
+  return Array.from(Array(totalNum), (e, i) => i * 2 + 1)
+    .splice(-n, n)
+    .reduce((p, c) => p + c, 0);
 }
 
-rowSumOddNumbers(5);
+// better solution : return Math.pow(n,3) or n*n*n
