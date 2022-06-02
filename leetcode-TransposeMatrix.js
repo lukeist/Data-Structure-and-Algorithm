@@ -23,10 +23,12 @@ var transpose = function (matrix) {
   //   return newM;
 
   //better solutoin
+
   console.log(
     matrix[0].map((_, colIndex) => matrix.map((row) => row[colIndex]))
   );
-  return matrix[0].map((_, colIndex) => matrix.map((row) => row[colIndex]));
+  matrix[0].map((_, colIndex) => matrix.map((row) => row[colIndex]));
+  return;
 };
 
 // transpose([
