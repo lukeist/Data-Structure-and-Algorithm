@@ -14,22 +14,28 @@
 // 00 01 02 => 00 10 01 11 ;
 
 var transpose = function (matrix) {
-  // 2 for loops
-  let newM = [];
-  for (let i = 0; i < matrix[0].length; i++) {
-    // push array
-    newM.push(Array.from(Array(matrix.length), (e, j) => (e = matrix[j][i])));
-  }
-  return newM;
-};
+  //   // 2 for loops
+  //   let newM = [];
+  //   for (let i = 0; i < matrix[0].length; i++) {
+  //     // push array
+  //     newM.push(Array.from(Array(matrix.length), (e, j) => (e = matrix[j][i])));
+  //   }
+  //   return newM;
 
-transpose([
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9],
-]);
+  //better solutoin
+  console.log(
+    matrix[0].map((_, colIndex) => matrix.map((row) => row[colIndex]))
+  );
+  return matrix[0].map((_, colIndex) => matrix.map((row) => row[colIndex]));
+};
 
 // transpose([
 //   [1, 2, 3],
 //   [4, 5, 6],
+//   [7, 8, 9],
 // ]);
+
+transpose([
+  [1, 2, 3],
+  [4, 5, 6],
+]);
