@@ -26,14 +26,61 @@
 var uniqueLetterString = function (s) {
   // create substrings from s
   //// split s to array - loop through s
-  const arrSubstrings = [];
-  for (let i = 0; i < s.length; i++) {
+
+  let arrSubstr = Array.from(Array(s.length), (_, i) => {
+    const arrTemp = [];
     for (let j = i + 1; j <= s.length; j++) {
-      const subString = s.substring(i, j);
+      arrTemp.push(s.substring(i, j));
+      //   arrSubstrings.push(subString);
+    }
+    return arrTemp;
+  });
+  //   console.log(arrSubstr);
+
+  ///////
+  for (let i = 0; i < s.length; i++) {}
+
+  //   arrSubstr = arrSubstr.map((a, i) => a[i]);
+  //////////////// 2
+  //   const arrSS = Array.from(Array(s.length), (_, i) => {
+  //     for (let j = i + 1; j <= s.length; j++) {
+  //       arrSubstr.push(s.substring(i, j));
+  //       //   arrSubstrings.push(subString);
+  //     }
+  //     return arrSubstr;
+  //   });
+
+  //////////////// 3
+  //   const arrSS = s.split("").map((_, i, arrS) =>
+  //     //   Array.from(
+  //     //     Array(arrS.length - i),
+  //     //     (e, i) => arrS[arrS.length - i - 1]
+  //     //   )
+
+  //     {
+  //       const arrSubstr = [];
+  //       for (let j = i + 1; j <= arrS.length; j++) {
+  //         arrSubstr.push(s.substring(i, j));
+  //         //   arrSubstrings.push(subString);
+  //       }
+  //       return arrSubstr;
+  //     }
+  //   );
+
+  const arrTest = s
+    .split("")
+    .filter((e, i, arr) => e !== arr[i + 1])
+    .join("");
+  //   .split("");
+  console.log(arrTest);
+
+  const arrSubstrings = [];
+  for (let i = 0; i < arrTest.length; i++) {
+    for (let j = i + 1; j <= arrTest.length; j++) {
+      const subString = arrTest.substring(i, j);
       arrSubstrings.push(subString);
     }
   }
-
   ///////////////////////
   // remove not unique chars
   const countUniqueChars = (str) => {
@@ -56,6 +103,32 @@ var uniqueLetterString = function (s) {
   console.log(arrSubstrings, sumAll);
   return sumAll;
 };
+
+// // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// // working solutoin but O(n^2) time exceeded
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// var uniqueLetterString = function (s) {
+//   // create substrings from s
+//   const arrSubstrings = [];
+//   for (let i = 0; i < s.length; i++) {
+//     for (let j = i + 1; j <= s.length; j++) {
+//       const subString = s.substring(i, j);
+//       arrSubstrings.push(subString);
+//     }
+//   }
+//   // remove not unique chars
+//   const countUniqueChars = (str) => {
+//     const map = {};
+//     // put all char into map
+//     for (c of str) {
+//       map[c] = (map[c] || 0) + 1; // count chars
+//     }
+//     return str.split("").filter((c) => map[c] === 1).length;
+//   };
+//   return arrSubstrings.reduce((p, c) => p + countUniqueChars(c), 0);
+// };
+
+// ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 uniqueLetterString("LEETCODE");
 // uniqueLetterString(
 //     "DELQGVWNZKIJJPSXOVWWIZUXCEGWSQLESNSRBMKZARFPAXSVWQEZDENDAHNNIBHGHTFDLPGDLFXMIYRFNLMXHNPIFUAXINXPXLCTTJNLGGMKJIOEWBECNOFQPVCIKIAZMNGHEHFMCPWSMJTMGVSXTOGCGUYKFMNCGLCBRAFJLJVPIVDOLJBURULPGXBVDCEWXXXLTRMSHPKSPFDGNVOCZWDXJUWVNAREDOKTZMIUDKDQWWWSAEUUDBHMWZELOSBIHMAYJEMGZPMDOOGSCKLVHTGMETHUISCLJKDOQEWGVBULEMUXGTRKGXYFDIZTZWMLOFTCANBGUARNWQEQWGMIKMORVQUZANJNRNPMJWYLVHWKDFLDDBBMILAKGFROEQAMEVONUVHOHGPKLBPNYZFPLXNBCIFENCGIMIDCXIIQJWPVVCOCJTSKSHVMQJNLHSQTEZQTTMOXUSKBMUJEJDBJQNXECJGSZUDENJCPTTSREKHPRIISXMWBUGMTOVOTRKQCFSDOTEFPSVQINYLHXYVZTVAMWGPNKIDLOPGAMWSKDXEPLPPTKUHEKBQAWEBMORRZHBLOGIYLTPMUVBPGOOOIEBJEGTKQKOUURHSEJCMWMGHXYIAOGKJXFAMRLGTPNSLERNOHSDFSSFASUJTFHBDMGBQOKZRBRAZEQQVWFRNUNHBGKRFNBETEDJIWCTUBJDPFRRVNZENGRANELPHSDJLKVHWXAXUTMPWHUQPLTLYQAATEFXHZARFAUDLIUDEHEGGNIYICVARQNRJJKQSLXKZZTFPVJMOXADCIGKUXCVMLPFJGVXMMBEKQXFNXNUWOHCSZSEZWZHDCXPGLROYPMUOBDFLQMTTERGSSGVGOURDWDSEXONCKWHDUOVDHDESNINELLCTURJHGCJWVIPNSISHRWTFSFNRAHJAJNNXKKEMESDWGIYIQQRLUUADAXOUEYURQRVZBCSHXXFLYWFHDZKPHAGYOCTYGZNPALAUZSTOU"
