@@ -7,18 +7,23 @@
 // 1,5,1 --> 15 (1 + 2 + 3 + 4 + 5)
 // 1,5,3  --> 5 (1 + 4)
 //-1, -5, -3 --> -1 -4
-
+// recursive
 const sequenceSum = (begin, end, step) => {
   // if (step > end) return begin;
-  let newBegin = begin + step;
   // let sum = newBegin + step;
   // console.log(begin, newBegin, sum);
-  console.log(sequenceSum(newBegin, end, step));
-
-  if (newBegin > end) return 0;
-  return newBegin + sequenceSum(newBegin, end, step);
+  // console.log(sequenceSum(newBegin, end, step));
+  // if (begin >= end) {
+  //   console.log(sequenceSum(begin, end, step));
+  //   return sequenceSum(begins, end, step);
+  // } else {
+  //   console.log(begin + sequenceSum(begin + step, end, step));
+  //   return begin + sequenceSum(begin + step, end, step);
+  // }
 };
 
+// 1,5,1 --> 15 (1 + 2 + 3 + 4 + 5)
+//
 // ////////////////////////////////////////////////////
 // const sequenceSum = (begin, end, step) => {
 //   let totalSteps = Math.abs(Math.ceil(end / step) - 1);
