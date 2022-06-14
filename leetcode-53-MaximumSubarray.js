@@ -21,8 +21,10 @@ var maxSubArray = function (nums) {
   let arr = [];
   arr[0] = nums[0];
 
+
+
   for (let i = 1; i < nums.length; ++i) {
-    arr[i] = arr[i - 1] + i;
+    sumi= arr[i] = arr[i] + ;
     console.log(arr[i]);
   }
 
@@ -30,20 +32,21 @@ var maxSubArray = function (nums) {
   return maxSum;
 };
 
-// nums[0] =
+
+
 
 maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
 // maxSubArray([1]);
 // maxSubArray([5, 4, -1, 7, 8]);
 
 // 0 1 2 3 4 5 6
-// 0 -
-// 0 1 -
-// 0 1 2
-// 0 1 2 3
-// 0 1 2 3 4
-// 0 1 2 3 4 5
-// 0 1 2 3 4 5 6 -
+// 0 - a
+// 0 1 - b
+// 0 1 2 - c
+// 0 1 2 3 - d
+// 0 1 2 3 4 - e
+// 0 1 2 3 4 5 - f
+// 0 1 2 3 4 5 6 - g
 //   1 -
 //   1 2 -
 //   1 2 3
