@@ -47,12 +47,21 @@ g.right = i;
 //         3
 // => false (structure not the same)
 
-// Recursion
-function compare(a, b) {
-  if (!a && !b) return true;
-  if ((a && !b) || (!a && b) || a.val !== b.val) return false;
+// Recursion 1
+// function compare(a, b) {
+//   if (!a && !b) return true;
+//   if ((a && !b) || (!a && b) || a.val !== b.val) return false;
 
-  return compare(a.left, b.left) && compare(a.right, b.right);
+//   return compare(a.left, b.left) && compare(a.right, b.right);
+// }
+
+// Recursion 2
+function compare(a, b) {
+  if (!a || !b) return a === b;
+
+  return (
+    a.val === b.val && compare(a.left, b.left) && compare(a.right, b.right)
+  );
 }
 
 // // BFS
