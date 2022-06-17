@@ -47,50 +47,90 @@ g.right = i;
 //         3
 // => false (structure not the same)
 
-// DFS
+// Recursion
 function compare(a, b) {
   if (!a && !b) return true;
-  const stackA = [a];
-  const stackB = [b];
+  if ((a && !b) || (!a && b) || a.val !== b.val) return false;
 
-  while (stackA.length > 0 && stackB.length > 0) {
-    const currentA = stackA.pop();
-    const currentB = stackB.pop();
-    if (currentA && !currentB) {
-      console.log(false);
-      return false;
-    }
-    if (!currentA && currentB) {
-      console.log(false);
-      return false;
-    }
-    // if (!currentA && !currentA) {
-    //   console.log(true);
-    //   return true;
-    // }
-
-    if (currentA.val !== currentB.val) {
-      console.log(false);
-      return false;
-    }
-    console.log(currentA.val, currentB.val);
-
-    // console.log(a, b);
-    console.log("---------------------------------");
-
-    currentA.left && stackA.push(currentA.left);
-    currentA.right && stackA.push(currentA.right);
-
-    currentB.left && stackB.push(currentB.left);
-    currentA.right && stackB.push(currentB.right);
-  }
-
-  if (stackA.length !== stackB.length) return false;
-  console.log(true);
-  console.log("---------------------------------");
-
-  return true;
+  return compare(a.left, b.left) && compare(a.right, b.right);
 }
+
+// // BFS
+// function compare(a, b) {
+//   if (!a && !b) return true;
+//   const queueA = [a];
+//   const queueB = [b];
+
+//   while (queueA.length > 0 && queueB.length > 0) {
+//     const currentA = queueA.shift();
+//     const currentB = queueB.shift();
+
+//     console.log(currentA, currentB);
+//     console.log("---------------------");
+
+//     if (currentA && !currentB) return false;
+//     if (!currentA && currentB) return false;
+
+//     if (!currentA && !currentB) continue;
+
+//     if (currentA.val !== currentB.val) return false;
+
+//     queueA.push(currentA.left);
+//     queueA.push(currentA.right);
+
+//     queueB.push(currentB.left);
+//     queueB.push(currentB.right);
+//   }
+
+//   if (queueA.length !== queueB.length) return false;
+
+//   return true;
+// }
+
+// // DFS
+// function compare(a, b) {
+//   if (!a && !b) return true;
+//   const stackA = [a];
+//   const stackB = [b];
+
+//   while (stackA.length > 0 && stackB.length > 0) {
+//     const currentA = stackA.pop();
+//     const currentB = stackB.pop();
+//     if (currentA && !currentB) {
+//       console.log(false);
+//       return false;
+//     }
+//     if (!currentA && currentB) {
+//       console.log(false);
+//       return false;
+//     }
+//     // if (!currentA && !currentA) {
+//     //   console.log(true);
+//     //   return true;
+//     // }
+
+//     if (currentA.val !== currentB.val) {
+//       console.log(false);
+//       return false;
+//     }
+//     console.log(currentA.val, currentB.val);
+
+//     // console.log(a, b);
+//     console.log("---------------------------------");
+
+//     currentA.left && stackA.push(currentA.left);
+//     currentA.right && stackA.push(currentA.right);
+
+//     currentB.left && stackB.push(currentB.left);
+//     currentA.right && stackB.push(currentB.right);
+//   }
+
+//   if (stackA.length !== stackB.length) return false;
+//   console.log(true);
+//   console.log("---------------------------------");
+
+//   return true;
+// }
 
 // compare(a, d);
 
