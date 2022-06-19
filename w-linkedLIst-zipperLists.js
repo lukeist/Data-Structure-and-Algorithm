@@ -5,42 +5,82 @@ class Node {
   }
 }
 
-// recursion
-
-// iteration
+// recursion 1
 const zipperLists = (h1, h2) => {
-  // a ----------> x ----------> b  ----------> y ----------> c  ----------> z
-  // h1   h1.n     h2    h2.n    n1            n2
+  if (!h1 && !h2) return null;
+  if (!h1) return h2;
+  if (!h2) return h1;
 
-  let newList = h1;
-  // let tail = newList;
-  let count = 0;
-  while (h1 && h2) {
-    if (count % 2 === 0) {
-      let n1 = h1.next;
-      h1.next = h2;
-      h1 = n1;
-      // !h2.next && (tail = h2);
-    } else {
-      let n2 = h2.next;
-      h2.next = h1;
-      h2 = n2;
-      // !h1.next && (tail = h1);
-    }
-    count++;
-    // console.log(h1);
-    // console.log(h2);
-    // console.log(tail);
-    // console.log("----------------------", count);
-  }
-  // console.log(tail);
+  const next1 = h1.next; // ---loop 2---> b ---loop 3---> c
+  const next2 = h2.next; // ---loop 2---> y ---loop 3---> z
 
-  // console.log(newList);
-  // console.log(newList.next.next.next);
-  // console.log(newList.next.next.next.next.next.next);
+  h1.next = h2;
+  h2.next = zipperLists(next1, next2);
 
-  return newList;
+  return h1;
 };
+
+// // recursion 2
+// const zipperLists = (h1, h2) => {
+//   const newList = h1;
+//   let count = 0;
+//   wire(h1, h2, count);
+//   console.log(newList);
+//   return newList;
+// };
+
+// const wire = (h1, h2, count) => {
+//   if (!h1 || !h2) return;
+
+//   if (count % 2 === 0) {
+//     let n1 = h1.next;
+//     h1.next = h2;
+//     h1 = n1;
+//   } else {
+//     let n2 = h2.next;
+//     h2.next = h1;
+//     h2 = n2;
+//   }
+//   console.log(count);
+//   count++;
+
+//   return wire(h1, h2, count);
+// };
+
+// // iteration
+// const zipperLists = (h1, h2) => {
+//   // a ----------> x ----------> b  ----------> y ----------> c  ----------> z
+//   // h1   h1.n     h2    h2.n    n1            n2
+
+//   let newList = h1;
+//   // let tail = newList;
+//   let count = 0;
+//   while (h1 && h2) {
+//     if (count % 2 === 0) {
+//       let n1 = h1.next;
+//       h1.next = h2;
+//       h1 = n1;
+//       // !h2.next && (tail = h2);
+//     } else {
+//       let n2 = h2.next;
+//       h2.next = h1;
+//       h2 = n2;
+//       // !h1.next && (tail = h1);
+//     }
+//     count++;
+//     // console.log(h1);
+//     // console.log(h2);
+//     // console.log(tail);
+//     // console.log("----------------------", count);
+//   }
+//   // console.log(tail);
+
+//   // console.log(newList);
+//   // console.log(newList.next.next.next);
+//   // console.log(newList.next.next.next.next.next.next);
+
+//   return newList;
+// };
 // s -> 1 -> t -> 2 -> 3 -> 4
 
 // const a = new Node("a");
