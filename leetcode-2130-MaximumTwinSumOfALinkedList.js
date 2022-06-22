@@ -9,34 +9,24 @@ function ListNode(val, next) {
 // r: max
 
 // e:
-
-// BFS
+// reverse ll & check max of 2 ll until the mid
 var pairSum = function (head) {
-  //   const map = {};
-  const allValues = [];
-  const queue = [head];
+  // reverse ll
 
-  while (queue.length > 0) {
-    const current = queue.shift();
-
-    if (current) {
-      allValues.push(current.val);
-      queue.push(current.next);
-    }
+  // <------------  A ------------ B ------------> C  ------------> null
+  //                                t             c              n
+  let current = head.next;
+  let tail = null;
+  while (next) {
+    head.next = tail;
+    tail = head;
+    head = current;
+    current = current.next;
   }
 
-  let max = -Infinity;
+  head.next = tail;
 
-  //   console.log(allValues);
-  const allValuesLength = allValues.length;
-  for (let i = 0; i < allValues.length / 2; i++) {
-    const twinI = allValuesLength - 1 - i;
-    allValues[i] = allValues[i] + allValues[twinI];
-  }
-
-  console.log(allValues);
-  console.log(Math.max(...allValues));
-  return Math.max(...allValues);
+  console.log(head);
 };
 
 const a = new ListNode(5);
@@ -49,3 +39,32 @@ b.next = c;
 c.next = d;
 
 pairSum(a);
+
+// // BFS
+// var pairSum = function (head) {
+//     //   const map = {};
+//     const allValues = [];
+//     const queue = [head];
+
+//     while (queue.length > 0) {
+//       const head = queue.shift();
+
+//       if (head) {
+//         allValues.push(head.val);
+//         queue.push(head.next);
+//       }
+//     }
+
+//     let max = -Infinity;
+
+//     //   console.log(allValues);
+//     const allValuesLength = allValues.length;
+//     for (let i = 0; i < allValues.length / 2; i++) {
+//       const twinI = allValuesLength - 1 - i;
+//       allValues[i] = allValues[i] + allValues[twinI];
+//     }
+
+//     console.log(allValues);
+//     console.log(Math.max(...allValues));
+//     return Math.max(...allValues);
+//   };
