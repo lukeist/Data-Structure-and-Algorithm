@@ -14,20 +14,36 @@ var pairSum = function (head) {
   // reverse ll
 
   // <------------  A ------------ B ------------> C  ------------> null
-  //                                t             c              n
-  let current = head.next;
+  //               t              h
   let tail = null;
-  while (next) {
-    head.next = tail;
-    tail = head;
-    head = current;
-    current = current.next;
-  }
+  const reverse = (head) => {
+    if (!head) return;
 
-  head.next = tail;
+    return reverse(head.next);
+  };
 
-  console.log(head);
+  console.log(reverse(head));
 };
+
+// // reverse ll & check max of 2 ll until the mid
+// var pairSum = function (head) {
+//     // reverse ll
+
+//     // <------------  A ------------ B ------------> C  ------------> null
+//     //                                t             c              n
+//     let current = head.next;
+//     let tail = null;
+//     while (next) {
+//       head.next = tail;
+//       tail = head;
+//       head = current;
+//       current = current.next;
+//     }
+
+//     head.next = tail;
+
+//     console.log(head);
+//   };
 
 const a = new ListNode(5);
 const b = new ListNode(4);
