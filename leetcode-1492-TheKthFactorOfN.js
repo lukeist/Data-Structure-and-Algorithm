@@ -18,29 +18,45 @@
 // Input: n = 4, k = 4
 // Output: -1
 // Explanation: Factors list is [1, 2, 4], there is only 3 factors. We should return -1.
-
+/////////////////////////////////////// NOT FINISHED ///////////////////////////////////////
 var kthFactor = function (n, k) {
   // find all factors of n => arr
   //// loop form 1 to n /2
-  let arrI = [];
   for (let i = 1; i <= Math.sqrt(n); i++) {
-    if (n % i === 0) arrI.push(i);
+    n % i === 0 && k--;
+    if (n % i === 0 && k === 0) return i;
   }
-  // sort arr
-  const secondPartOfI = arrI.map((num) => n / num).reverse();
-  //   console.log(arrI.concat(secondPartOfI));
 
-  // return arr[k] or -1
-  //   console.log(arrI, arrI[arrI.length - 1], secondPartOfI, secondPartOfI[0]);
-
-  arrI =
-    arrI[arrI.length - 1] === secondPartOfI[0]
-      ? arrI.concat(secondPartOfI.slice(1))
-      : arrI.concat(secondPartOfI);
-  console.log(arrI[k - 1] ? arrI[k - 1] : -1);
-
-  return arrI[k - 1] ? arrI[k - 1] : -1;
+  for (let i = Math.floor(Math.sqrt(n)); i >= 1; i--) {
+    n % (n / i) === 0 && k--;
+    if (n % (n / i) === 0 && k === 0) return n / i;
+  }
+  return -1;
 };
 
 // kthFactor(12, 3);
 kthFactor(4, 4);
+kthFactor(24, 6);
+
+// var kthFactor = function (n, k) {
+//     // find all factors of n => arr
+//     //// loop form 1 to n /2
+//     let arrI = [];
+//     for (let i = 1; i <= Math.sqrt(n); i++) {
+//       if (n % i === 0) arrI.push(i);
+//     }
+//     // sort arr
+//     const secondPartOfI = arrI.map((num) => n / num).reverse();
+//     //   console.log(arrI.concat(secondPartOfI));
+
+//     // return arr[k] or -1
+//     //   console.log(arrI, arrI[arrI.length - 1], secondPartOfI, secondPartOfI[0]);
+
+//     arrI =
+//       arrI[arrI.length - 1] === secondPartOfI[0]
+//         ? arrI.concat(secondPartOfI.slice(1))
+//         : arrI.concat(secondPartOfI);
+//     console.log(arrI[k - 1] ? arrI[k - 1] : -1);
+
+//     return arrI[k - 1] ? arrI[k - 1] : -1;
+//   };
