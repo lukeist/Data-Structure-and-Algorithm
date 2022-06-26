@@ -20,28 +20,8 @@
 // [1,5] [3,8] => i[1] > j[0]
 //                i[0] < j[0]
 
-// const merge = (intervals) => {
-//   intervals.sort((a, b) => a[0] - b[0]);
-
-//   let prev = intervals[0];
-//   const result = [prev];
-
-//   for (let interval of intervals) {
-//     let startI = interval[0];
-//     let endI = interval[1];
-//     let end = prev[1];
-
-//     if (startI <= end) {
-//       end = Math.max(end, endI);
-//     } else {
-//       result.push(interval);
-//       prev = interval;
-//     }
-//     console.log(result);
-//   }
-//   console.log(result);
-// };
-
+// 987890-fdcxv09opi[;'-
+// =]7=-[0p;'oL?>']] nl/;'p[-0987867t5yrgfvbn mhj,k.lo;p['-0=
 // merge([
 //   [2, 3],
 //   [4, 6],
@@ -73,12 +53,12 @@
 //   [2, 3],
 //   [1, 4],
 // ]);
-// merge([
-//   [1, 3],
-//   [2, 6],
-//   [8, 10],
-//   [15, 18],
-// ]);
+merge([
+  [1, 3],
+  [2, 6],
+  [8, 10],
+  [15, 18],
+]);
 
 // => [[1,6],[8,10],[15,18]]
 // 1 3
@@ -93,34 +73,34 @@
 // // [[1,5]]
 
 // O(n^2)
-const merge = (intervals) => {
-  intervals.sort((a, b) => a[0] - b[0]);
+// const merge = (intervals) => {
+//     intervals.sort((a, b) => a[0] - b[0]);
 
-  for (i = 0; i < intervals.length; i++) {
-    for (j = 0; j < intervals.length; j++) {
-      if (i === j) continue;
+//     for (i = 0; i < intervals.length; i++) {
+//       for (j = 0; j < intervals.length; j++) {
+//         if (i === j) continue;
 
-      let intervalI = intervals[i];
-      let intervalJ = intervals[j];
+//         let intervalI = intervals[i];
+//         let intervalJ = intervals[j];
 
-      if (intervalI[0] <= intervalJ[0] && intervalI[1] >= intervalJ[0]) {
-        if (intervalI[1] <= intervalJ[1]) {
-          intervalJ[0] = intervalI[0];
+//         if (intervalI[0] <= intervalJ[0] && intervalI[1] >= intervalJ[0]) {
+//           if (intervalI[1] <= intervalJ[1]) {
+//             intervalJ[0] = intervalI[0];
 
-          intervalI[0] = "x";
-          intervalI[1] = "x";
-        } else {
-          intervalJ[0] = intervalI[0];
-          intervalJ[1] = intervalI[1];
+//             intervalI[0] = "x";
+//             intervalI[1] = "x";
+//           } else {
+//             intervalJ[0] = intervalI[0];
+//             intervalJ[1] = intervalI[1];
 
-          intervalI[0] = "x";
-          intervalI[1] = "x";
-        }
-      }
+//             intervalI[0] = "x";
+//             intervalI[1] = "x";
+//           }
+//         }
 
-      console.log(intervals);
-    }
-  }
-  //   console.log(intervals.filter(([a, b]) => a !== 'x' && b !== 'x'));
-  return intervals.filter(([a, b]) => a !== "x" && b !== "x");
-};
+//         console.log(intervals);
+//       }
+//     }
+//     //   console.log(intervals.filter(([a, b]) => a !== 'x' && b !== 'x'));
+//     return intervals.filter(([a, b]) => a !== "x" && b !== "x");
+//   };
