@@ -15,25 +15,9 @@
 // Example 3:
 // Input: nums = [5,4,-1,7,8]
 // Output: 23
+
 // Time Limit Exceeded
-var maxSubArray = function (nums) {
-  let maxSum = -Infinity;
-  let arr = [];
-  arr[0] = nums[0];
-
-
-
-  for (let i = 1; i < nums.length; ++i) {
-    sumi= arr[i] = arr[i] + ;
-    console.log(arr[i]);
-  }
-
-  console.log(arr);
-  return maxSum;
-};
-
-
-
+var maxSubArray = function (nums) {};
 
 maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
 // maxSubArray([1]);
@@ -81,3 +65,18 @@ maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
 //     console.log(maxSum);
 //     return maxSum;
 //   };
+
+// // Time Limit Exceeded
+// var maxSubArray = function (nums) {
+//   let maxSum = -Infinity;
+//   let arr = [];
+//   arr[0] = nums[0];
+
+//   for (let i = 1; i < nums.length; ++i) {
+//     sumi= arr[i] = arr[i] + ;
+//     console.log(arr[i]);
+//   }
+
+//   console.log(arr);
+//   return maxSum;
+// };
