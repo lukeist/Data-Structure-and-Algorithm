@@ -1,8 +1,15 @@
 // https://leetcode.com/problems/maximum-subarray/
 
 // p: array of ints
+// define func: f(n)
 // r: num
 // e:
+// base cases:
+// [1]        => max = 1                                          => 1
+// [1,2]      => max = (1,2,1+2)                                  => 2+1, 2
+// [1,2,3]    => max = (1,2,3,1+2,2+3,1+2+3)                      => 3, 3+2, 3+2+1
+// [1,2,3,4]  => max = (1,2,3,4,1+2,2+3,3+4,1+2+3,2+3+4,1+2+3+4)  => 4, 4+3, 4+3+2, 4+3+2+1
+
 // Example 1:
 // Input: nums = [-2,1,-3,4,-1,2,1,-5,4]
 // Output: 6
@@ -16,12 +23,34 @@
 // Input: nums = [5,4,-1,7,8]
 // Output: 23
 
-// Time Limit Exceeded
-var maxSubArray = function (nums) {};
+//   -Infinity
+//     /   \
+// -Infinity -2
+//         /   \
+//      -2       1
+//             /   \
+//            1     -3
+//                 /   \
+//               1       1
 
-maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
-// maxSubArray([1]);
-// maxSubArray([5, 4, -1, 7, 8]);
+//
+var maxSubArray = function (nums) {
+  let maxSum = nums[0];
+  let curSum = 0;
+
+  for (let num of nums) {
+    console.log(curSum);
+    if (curSum < 0) curSum = 0;
+    curSum += num;
+    maxSum = Math.max(curSum, maxSum);
+  }
+  // console.log(maxSum);
+  return maxSum;
+};
+
+maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]); //6
+maxSubArray([1]); //1
+maxSubArray([5, 4, -1, 7, 8]); //23
 
 // 0 1 2 3 4 5 6
 // 0 - a
@@ -78,5 +107,22 @@ maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]);
 //   }
 
 //   console.log(arr);
+//   return maxSum;
+// };
+// // Time Limit Exceeded: DP 2 for loops
+// var maxSubArray = function (nums) {
+//   let maxSum = -Infinity;
+
+//   for (let i = 0; i < nums.length; i++) {
+//     let arr = nums.slice(0, i + 1);
+
+//     // console.log(arr);
+//     for (let j = arr.length - 2; j >= 0; j--) {
+//       arr[j] += arr[j + 1];
+//       // console.log(j);
+//     }
+//     maxSum = Math.max(maxSum, Math.max(...arr));
+//   }
+//   console.log(maxSum);
 //   return maxSum;
 // };
