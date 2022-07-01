@@ -11,17 +11,25 @@ class Node {
 // p: root of bi-tree
 // r: boolean
 
-// dfs: recursion
+// dfs: recursion : better
 const treeIncludes = (root, target) => {
   if (!root) return false;
-
   if (root.val === target) return true;
 
-  if (treeIncludes(root.right, target)) return true;
-  if (treeIncludes(root.left, target)) return true;
-
-  return false;
+  return treeIncludes(root.right, target) || treeIncludes(root.left, target);
 };
+
+// // dfs: recursion: ok
+// const treeIncludes = (root, target) => {
+//   if (!root) return false;
+
+//   if (root.val === target) return true;
+
+//   if (treeIncludes(root.right, target)) return true;
+//   if (treeIncludes(root.left, target)) return true;
+
+//   return false;
+// };
 
 const a = new Node("a");
 const b = new Node("b");
