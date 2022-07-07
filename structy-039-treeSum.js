@@ -9,11 +9,23 @@ class Node {
 }
 
 // DFS: recursion
-const treeSum = (root, sum = 0) => {
-  if (!root) return sum;
+const treeSum = (root) => {
+  if (!root) return 0;
 
-  return sum + treeSum(root.right, sum) + treeSum(root.left, sum);
+  return root.val + treeSum(root.right) + treeSum(root.left);
 };
+
+// WRONG:
+// const treeSum = (root, sum = 0) => {
+//   if (!root) return 0;
+
+//   sum += root.val;
+
+//   treeSum(root.right, sum);
+//   treeSum(root.left, sum);
+
+//   return sum;
+// };
 
 // // DFS: iteration
 // const treeSum = (root) => {
@@ -45,6 +57,8 @@ a.right = c;
 b.left = d;
 b.right = e;
 c.right = f;
+
+console.log(treeSum(a));
 
 // // BFS:
 // const treeSum = (root) => {
