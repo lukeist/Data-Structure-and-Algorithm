@@ -14,11 +14,9 @@ class Node {
 const linkedListFind = (head, target) => {
   if (!head) return false;
 
-  if (head === target) return true;
+  if (head.val === target) return true;
 
-  if (linkedListFind(head.next, target)) return true;
-
-  return false;
+  return linkedListFind(head.next, target);
 };
 
 const a = new Node("a");
