@@ -10,7 +10,7 @@ class Node {
 // p: head ll, num/str
 // r: boolean
 
-// dfs recursion
+// dfs recursion: time O(n) because of nodes- space O(n) because of call stacks
 const linkedListFind = (head, target) => {
   if (!head) return false;
 
@@ -32,7 +32,7 @@ c.next = d;
 
 console.log(linkedListFind(a, "c")); // true
 
-// // bfs
+// // bfs time O(n) because of nodes- space O(1) because of constant numbers of nodes
 // const linkedListFind = (head, target) => {
 //     const queue = [head];
 
