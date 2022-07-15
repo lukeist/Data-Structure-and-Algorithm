@@ -7,28 +7,56 @@ const connectedComponentsCount = (graph) => {
   let visited = new Set();
 
   for (let node in graph) {
-    // console.log(visited);
-    if (!visited.has(node)) {
-      const queue = [node];
+    // console.log(node, visited);
+    if (visited.has(node)) continue;
 
-      while (queue.length > 0) {
-        let current = queue.shift();
+    if (!visited.has(node.toString())) {
+      console.log(node);
+      const stack = [node.toString()];
+
+      while (stack.length > 0) {
+        let current = stack.pop();
 
         for (let neighbor of graph[current]) {
-          if (!visited.has(neighbor)) {
-            visited.add(neighbor);
-            queue.push(neighbor);
+          if (!visited.has(neighbor.toString())) {
+            visited.add(neighbor.toString());
+            stack.push(neighbor.toString());
           }
         }
-        console.log(queue);
       }
-    }
 
-    if (visited.has(node)) continue;
+      count++;
+      //   console.log(node, visited);
+    }
+    // if (visited.has(node)) continue;
   }
 
   return count;
 };
+
+//////////////////////
+// // dfs recursion
+// const connectedComponentsCount = (graph) => {
+//     const visited = new Set();
+//     let count = 0;
+
+//     for (let node in graph) {
+//       if (checkPath(graph, node, visited) === true) count++;
+//     }
+//     return count;
+//   };
+
+//   const checkPath = (graph, current, visited) => {
+//     if (visited.has(current.toString())) return false;
+
+//     visited.add(current.toString());
+
+//     for (let neighbor of graph[current]) {
+//       checkPath(graph, neighbor, visited);
+//     }
+
+//     return true;
+//   };
 
 console.log(
   connectedComponentsCount({
@@ -50,23 +78,23 @@ console.log(
 //     for (let node in graph) {
 //       // loop  thru all nodes
 //       if (!visited.has(node)) {
-//         const queue = [node];
+//         const stack = [node];
 
-//         while (queue.length > 0) {
-//           let current = queue.shift();
+//         while (stack.length > 0) {
+//           let current = stack.shift();
 //           // console.log(graph[current]);
 
 //           for (let neighbor of graph[current]) {
 //             if (!visited.has(neighbor)) {
-//               queue.push(neighbor);
+//               stack.push(neighbor);
 //               visited.add(neighbor);
 //               // console.log(neighbor);
 //             }
 //           }
 //         }
 
-//         //   console.log(queue, visited);
-//         queue.length === 0 && count++;
+//         //   console.log(stack, visited);
+//         stack.length === 0 && count++;
 //       }
 //       console.log(visited);
 //     }

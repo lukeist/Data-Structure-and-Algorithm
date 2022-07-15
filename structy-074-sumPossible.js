@@ -4,7 +4,15 @@
 // r: boolean
 
 // e: sumPossible(8, [5, 12, 4]); // -> true, 4 + 4
+//                    3   3
+
 // sumPossible(15, [6, 2, 10, 19]); // -> false
+//                  9  7
+//                  9  5
+//                  9  3
+//                  9  1
+//                  3
+
 // e: sumPossible(13, [5, 12, 4]); // -> true, 4 + 4 + 5
 
 // base cases: 5 x 1
