@@ -18,7 +18,26 @@
 // base cases: 5 x 1
 //  amount <= num
 
-const sumPossible = (amount, numbers) => {};
+// recursion
+const sumPossible = (amount, numbers, memo = {}) => {
+  if (amount === 0) return true;
+  if (amount < 0) return false;
+
+  if (amount.toString() in memo) return memo[amount];
+
+  for (let num of numbers) {
+    if (sumPossible(amount - num, numbers, memo)) {
+      //   memo[amount - num] = true;
+      memo[amount] = true;
+
+      console.log(memo);
+      return true;
+    }
+  }
+
+  memo[amount] = false;
+  return false;
+};
 
 // not so clean
 // const sumPossible = (amount, numbers, memo = {}) => {
@@ -39,8 +58,8 @@ const sumPossible = (amount, numbers) => {};
 // };
 // console.log(sumPossible(13, [5, 12, 4])); // -> true, 4 + 4 + 5
 // console.log(sumPossible(4, [1, 2, 3])); // -> true
-// console.log(sumPossible(8, [5, 12, 4])); // -> true // -> true, 4 + 4
-console.log(sumPossible(15, [6, 2, 10, 19])); // -> false
+console.log(sumPossible(8, [5, 12, 4])); // -> true // -> true, 4 + 4
+// console.log(sumPossible(15, [6, 2, 10, 19])); // -> false
 
 // const sumPossible = (amount, numbers) => {
 //     if (amount === 0) return true;
