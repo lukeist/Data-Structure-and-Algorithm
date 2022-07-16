@@ -18,18 +18,37 @@
 // base cases: 5 x 1
 //  amount <= num
 
-const sumPossible = (amount, numbers) => {
-  //   // amount % num === 0
-  //   for (let num of numbers) {
-  //     if (amount % num === 0) return true;
-  //   }
-  // amount % num !== 0
+const sumPossible = (amount, numbers) => {};
 
-  let rest = amount;
+// not so clean
+// const sumPossible = (amount, numbers, memo = {}) => {
+//   if (amount === 0) return true;
+//   if (amount < 0) return false;
 
-  for (let num of numbers) {
-    if (num === 1) return true;
-    // if (num > amount) return false;
-    if (amount % num === 0) return true;
-  }
-};
+//   for (let num of numbers) {
+//     const newAmount = amount - num;
+//     if (!(newAmount in memo)) {
+//       memo[newAmount] = sumPossible(newAmount, numbers, memo);
+//     }
+
+//     if (memo[newAmount]) return true;
+//   }
+
+//   //   console.log(memo);
+//   return false;
+// };
+// console.log(sumPossible(13, [5, 12, 4])); // -> true, 4 + 4 + 5
+// console.log(sumPossible(4, [1, 2, 3])); // -> true
+// console.log(sumPossible(8, [5, 12, 4])); // -> true // -> true, 4 + 4
+console.log(sumPossible(15, [6, 2, 10, 19])); // -> false
+
+// const sumPossible = (amount, numbers) => {
+//     if (amount === 0) return true;
+//     if (amount < 0) return false;
+
+//     for (let num of numbers) {
+//       if (sumPossible(amount - num, numbers)) return true;
+//     }
+
+//     return false;
+//   };
