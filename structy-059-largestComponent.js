@@ -5,41 +5,68 @@
 // // dfs recursion
 const largestComponent = (graph) => {
   const visited = new Set();
-  let count = { max: 0 };
+  // let count = { max: 0 };
   let max = -Infinity;
 
   for (const current in graph) {
-    // explore(graph, current, visited, count);
-    if (explore(graph, current, visited, count)) {
-      //   console.log(count);
-      max = Math.max(count["max"], max);
-      count["max"] = 0;
-    } else {
-      continue;
-    }
-
-    // console.log(current, explore(graph, current, visited));
+    let count = explore(graph, current, visited);
+    max = Math.max(count, max);
   }
 
   return max;
 };
 
-const explore = (graph, current, visited, count) => {
-  if (visited.has(current.toString())) return false;
+const explore = (graph, current, visited) => {
+  if (visited.has(current.toString())) return 0;
 
-  count["max"]++;
   visited.add(current.toString());
 
-  console.log(count, current, visited);
-  //   count[node] = (count[node] || 0) + 1;
-
+  size = 1;
   for (const neighbor of graph[current]) {
-    // console.log(neighbor, explore(graph, neighbor, visited), visited);
-    explore(graph, neighbor, visited, count);
+    size += explore(graph, neighbor, visited);
   }
 
-  return true;
+  return size;
 };
+
+// // // dfs recursion
+// const largestComponent = (graph) => {
+//   const visited = new Set();
+//   let count = { max: 0 };
+//   let max = -Infinity;
+
+//   for (const current in graph) {
+//     // explore(graph, current, visited, count);
+//     if (explore(graph, current, visited, count)) {
+//       //   console.log(count);
+//       max = Math.max(count["max"], max);
+//       count["max"] = 0;
+//     } else {
+//       continue;
+//     }
+
+//     // console.log(current, explore(graph, current, visited));
+//   }
+
+//   return max;
+// };
+
+// const explore = (graph, current, visited, count) => {
+//   if (visited.has(current.toString())) return false;
+
+//   count["max"]++;
+//   visited.add(current.toString());
+
+//   console.log(count, current, visited);
+//   //   count[node] = (count[node] || 0) + 1;
+
+//   for (const neighbor of graph[current]) {
+//     // console.log(neighbor, explore(graph, neighbor, visited), visited);
+//     explore(graph, neighbor, visited, count);
+//   }
+
+//   return true;
+// };
 
 // // dfs recursion
 // const largestComponent = (graph) => {
