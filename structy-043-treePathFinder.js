@@ -11,26 +11,61 @@ class Node {
 // p: root of bi tree & val (str/num)
 // r: arr / null
 
-// dfs recusion 2
-const pathFinder = (root, target, arr = []) => {
+// // dfs recursion better //////////////////////////////////////////////////// but have no idea why it works
+const pathFinder = (root, target) => {
   if (!root) return null;
-  if (root.val === target) arr.push(target);
+  if (root.val === target) return [root.val];
 
-  if (pathFinder(root.right, target, arr)) {
-    arr.push(root.val);
-    root.val = target;
-  }
-  if (pathFinder(root.left, target, arr)) {
-    arr.push(root.val);
-    root.val = target;
-  }
-  //   pathFinder(root.right, target, arr).includes(target) && arr.push(root.val);
-  //   pathFinder(root.left, target, arr).includes(target) && arr.push(root.val);
+  const rightPath = pathFinder(root.right, target);
+  const leftPath = pathFinder(root.left, target);
 
-  return arr;
+  if (rightPath) rightPath.unshift(root.val);
+  if (leftPath) leftPath.unshift(root.val);
+
+  console.log(leftPath || rightPath);
+  return leftPath || rightPath;
 };
 
-// // dfs recursion 1
+// ///////////////////////////// alvin's solution
+// const pathFinder = (root, target) => {
+//   if (!root) return null;
+//   if (root.val === target) return [root.val];
+
+//   const rightPath = pathFinder(root.right, target);
+//   if (rightPath) {
+//     rightPath.unshift(root.val);
+//     return rightPath;
+//   }
+
+//   const leftPath = pathFinder(root.left, target);
+//   if (leftPath) {
+//     leftPath.unshift(root.val);
+//     return leftPath;
+//   }
+
+//   return null;
+// };
+
+// // dfs recusion 2 NOT WORKING
+// const pathFinder = (root, target, arr = []) => {
+//   if (!root) return null;
+//   if (root.val === target) arr.push(target);
+
+//   if (pathFinder(root.right, target, arr)) {
+//     arr.push(root.val);
+//     root.val = target;
+//   }
+//   if (pathFinder(root.left, target, arr)) {
+//     arr.push(root.val);
+//     root.val = target;
+//   }
+//   //   pathFinder(root.right, target, arr).includes(target) && arr.push(root.val);
+//   //   pathFinder(root.left, target, arr).includes(target) && arr.push(root.val);
+
+//   return arr;
+// };
+
+// // dfs recursion 1 - WORKING
 // const pathFinder = (root, target) => {
 //   const arr = [];
 
