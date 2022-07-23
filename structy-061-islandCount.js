@@ -3,6 +3,7 @@
 // p: grid
 // r: num
 
+// alvin's nested for loop + dfs
 const islandCount = (grid) => {
   const m = grid.length;
   const n = grid[0].length;
