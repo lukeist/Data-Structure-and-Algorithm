@@ -10,6 +10,14 @@
 // DP recursion
 const countPaths = (grid) => {};
 
+const explore = (grid, y, x) => {
+  if (y === 0 && x === 0) return 1;
+
+  explore(y + 1, x);
+  explore(y, x + 1);
+  return;
+};
+
 // // DP https://www.youtube.com/watch?v=YcrXBDAeTCs&t=1223s
 // const countPaths = (grid) => {
 //   const m = grid.length - 1;
