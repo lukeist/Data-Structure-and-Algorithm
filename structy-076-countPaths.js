@@ -7,16 +7,40 @@
 // const lastX = grid[0].length - 1;
 // const lastY = grid.length - 1;
 
-// DP recursion
-const countPaths = (grid) => {};
+// DP recursion memoization
+const countPaths = (grid, y = 0, x = 0, memo = {}) => {
+  const m = grid.length;
+  const n = grid[0].length;
+  const current = y + "," + x;
 
-const explore = (grid, y, x) => {
-  if (y === 0 && x === 0) return 1;
+  if (y === m || x === n || grid[y][x] === "X") return 0;
 
-  explore(y + 1, x);
-  explore(y, x + 1);
-  return;
+  if (y === m - 1 && x === n - 1) return 1;
+
+  if (current in memo) return memo[current];
+
+  memo[current] =
+    countPaths(grid, y + 1, x, memo) + countPaths(grid, y, x + 1, memo);
+
+  return memo[current];
 };
+
+// // DP recursion memoization
+// const countPaths = (
+//   grid,
+//   y = grid.length - 1,
+//   x = grid[0].length - 1,
+//   memo = {}
+// ) => {
+//   if (y < 0 || x < 0 || grid[y][x] === "X") return 0;
+//   if (y === 0 && x === 0) return 1;
+//   const current = y + "," + x;
+//   if (current in memo) return memo[current];
+//   memo[current] =
+//     countPaths(grid, y - 1, x, memo) + countPaths(grid, y, x - 1, memo);
+
+//   return memo[current];
+// };
 
 // // DP https://www.youtube.com/watch?v=YcrXBDAeTCs&t=1223s
 // const countPaths = (grid) => {
