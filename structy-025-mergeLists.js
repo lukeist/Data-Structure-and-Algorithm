@@ -10,30 +10,47 @@ class Node {
 // p: 2 heads of ll
 // r: 1 head of ll
 
-// Alvin's iteration
+// Alvin's recursion
 const mergeLists = (head1, head2) => {
-  let head = new Node(null);
+  if (!head1 && !head2) return null;
+  if (!head1) return head2;
+  if (!head2) return head1;
 
-  let t = head;
-  let c1 = head1;
-  let c2 = head2;
-
-  while (c1 && c2) {
-    if (c1.val < c2.val) {
-      t.next = c1;
-      c1 = c1.next;
-    } else {
-      t.next = c2;
-      c2 = c2.next;
-    }
-    t = t.next;
+  if (head1.val < head2.val) {
+    const n1 = head1.next;
+    head1.next = mergeLists(n1, head2);
+    return head1;
+  } else {
+    const n2 = head2.next;
+    head2.next = mergeLists(head1, n2);
+    return head2;
   }
-
-  c1 && (t.next = c1);
-  c2 && (t.next = c2);
-
-  return head.next;
 };
+
+// // Alvin's iteration
+// const mergeLists = (head1, head2) => {
+//   let head = new Node(null);
+
+//   let t = head;
+//   let c1 = head1;
+//   let c2 = head2;
+
+//   while (c1 && c2) {
+//     if (c1.val < c2.val) {
+//       t.next = c1;
+//       c1 = c1.next;
+//     } else {
+//       t.next = c2;
+//       c2 = c2.next;
+//     }
+//     t = t.next;
+//   }
+
+//   c1 && (t.next = c1);
+//   c2 && (t.next = c2);
+
+//   return head.next;
+// };
 
 // // recursion WRONG
 // const mergeLists = (head1, head2) => {
