@@ -8,19 +8,30 @@ class Node {
 
 // p: root of bi tree & (num)
 // r: num+
-
-// dfs recursion
+/ dfs alvins recursion
 const treeValueCount = (root, target) => {
   if (!root) return 0;
-  if (root.val !== target) root.val = 0;
-  if (root.val === target) root.val = 1;
+  const match = root.val !== target ? 0 : 1;
 
   return (
-    root.val +
+    match +
     treeValueCount(root.right, target) +
     treeValueCount(root.left, target)
   );
 };
+
+// // dfs recursion
+// const treeValueCount = (root, target) => {
+//   if (!root) return 0;
+//   if (root.val !== target) root.val = 0;
+//   if (root.val === target) root.val = 1;
+
+//   return (
+//     root.val +
+//     treeValueCount(root.right, target) +
+//     treeValueCount(root.left, target)
+//   );
+// };
 
 const a = new Node(12);
 const b = new Node(6);
