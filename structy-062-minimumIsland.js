@@ -1,0 +1,3 @@
+const minimumIsland = (grid) => {
+  // todo
+};
