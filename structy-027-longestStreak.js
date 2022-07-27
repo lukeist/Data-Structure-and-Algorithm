@@ -10,47 +10,30 @@ class Node {
 // p: head of ll
 // r: num
 
-// recursion
-const longestStreak = (head, lastVal = head.val, max = -Infinity) => {
+// iteration
+const longestStreak = (head) => {
   if (!head) return 0;
+
+  let lastVal = head.val;
+  let current = head;
+  let max = -Infinity;
   let count = 0;
 
-  if (lastVal !== head.val) {
-    count = 1;
-    lastVal = head.val;
-  } else {
-    count = 1 + longestStreak(head.next, lastVal, max);
-    console.log(count);
+  while (current) {
+    if (lastVal === current.val) {
+      count++;
+    } else {
+      count = 1;
+    }
+
+    max = Math.max(max, count);
+
+    lastVal = current.val;
+    current = current.next;
   }
-  max = Math.max(max, count);
 
   return max;
 };
-
-// // iteration
-// const longestStreak = (head) => {
-//   if (!head) return 0;
-
-//   let lastVal = head.val;
-//   let current = head;
-//   let max = -Infinity;
-//   let count = 0;
-
-//   while (current) {
-//     if (lastVal === current.val) {
-//       count++;
-//     } else {
-//       count = 1;
-//     }
-
-//     max = Math.max(max, count);
-
-//     lastVal = current.val;
-//     current = current.next;
-//   }
-
-//   return max;
-// };
 
 const a = new Node(9);
 const b = new Node(9);
@@ -85,3 +68,20 @@ console.log(longestStreak(a)); // 3
 // // 3 -> 3 -> 3 -> 3 -> 9 -> 9
 
 // console.log(longestStreak(a)); // 4
+
+// // recursion NOT WORKING
+// const longestStreak = (head, lastVal = head.val, max = -Infinity) => {
+//     if (!head) return 0;
+//     let count = 0;
+
+//     if (lastVal !== head.val) {
+//       count = 1;
+//       lastVal = head.val;
+//     } else {
+//       count = 1 + longestStreak(head.next, lastVal, max);
+//       console.log(count);
+//     }
+//     max = Math.max(max, count);
+
+//     return max;
+//   };
