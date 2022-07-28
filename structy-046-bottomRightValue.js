@@ -11,17 +11,24 @@ class Node {
 // p: root of bi tree
 // r: val(num/str)
 
-// dfs recursion
+// bfs CHECKING ROW BY ROW
 const bottomRightValue = (root) => {
-  if (!root) return -1;
+  const queue = [root];
+  let val;
 
-  const left = bottomRightValue(root.left);
-  const right = bottomRightValue(root.right);
+  while (queue.length > 0) {
+    const current = queue.shift();
 
-  return 1 + Math.max(left, right);
+    val = current.val;
+
+    current.left && queue.push(current.left);
+    current.right && queue.push(current.right);
+  }
+
+  return val;
 };
 
-// // dfs iteration
+// // dfs iteration NOT WORKING -
 // const bottomRightValue = (root) => {
 //   const stack = [root];
 //   const allVal = [];
