@@ -3,27 +3,73 @@
 // p: graph
 // r: num+
 
-// bfs
+// dfs: recursion: WITH MEMOIZATION
 const longestPath = (graph) => {
   let max = -Infinity;
+  const memo = {};
 
-  for (let node in graph) {
-    let distance = 0;
-    const queue = [[node, distance]];
-
-    while (queue.length > 0) {
-      const [current, distance] = queue.shift();
-
-      for (const neighbor of graph[current]) {
-        queue.push([neighbor, distance + 1]);
-      }
-
-      max = Math.max(distance, max);
-    }
+  for (const node in graph) {
+    node in memo
+      ? (max = Math.max(memo[node], max))
+      : (max = Math.max(explore(graph, node, memo), max));
   }
 
   return max;
 };
+
+const explore = (graph, node, memo) => {
+  if (graph[node].length === 0) return 0;
+
+  let max = -Infinity;
+  for (const neighbor of graph[node]) {
+    max = Math.max(1 + explore(graph, neighbor, memo), max);
+  }
+
+  memo[node] = max;
+  return memo[node];
+};
+
+// // dfs: recursion: WITHOUT MEMOIZATION
+// const longestPath = (graph) => {
+//   let max = -Infinity;
+
+//   for (const node in graph) {
+//     max = Math.max(explore(graph, node), max);
+//   }
+
+//   return max;
+// };
+
+// const explore = (graph, node) => {
+//   if (graph[node].length === 0) return 0;
+
+//   let max = -Infinity;
+//   for (const neighbor of graph[node]) {
+//     max = Math.max(1 + explore(graph, neighbor), max);
+//   }
+//   return max;
+// };
+
+// // bfs
+// const longestPath = (graph) => {
+//   let max = -Infinity;
+
+//   for (let node in graph) {
+//     const queue = [[node, 0]];
+
+//     while (queue.length > 0) {
+//       const [current, distance] = queue.shift();
+
+//       for (const neighbor of graph[current]) {
+//         queue.push([neighbor, distance + 1]);
+//       }
+
+//       max = Math.max(distance, max);
+//     }
+//   }
+
+//   return max;
+// };
 
 // const longestPath = (graph) => {
 //   const map = {};
