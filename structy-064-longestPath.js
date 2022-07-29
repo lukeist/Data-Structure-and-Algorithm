@@ -17,6 +17,7 @@ const longestPath = (graph) => {
       for (const neighbor of graph[current]) {
         queue.push([neighbor, distance + 1]);
       }
+
       max = Math.max(distance, max);
     }
   }

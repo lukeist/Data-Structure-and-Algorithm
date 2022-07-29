@@ -24,10 +24,6 @@ const allTreePaths = (root) => {
     arr.unshift(root.val);
   }
 
-  //   console.log(left, right);
-
-  //   console.log([...left, ...right]);
-
   return arrs;
 };
 
