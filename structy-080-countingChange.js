@@ -7,21 +7,26 @@
 
 //
 const countingChange = (amount, coins) => {
-  if (amount === 0) return 1;
-  //   if (amount !== 0) return 0;
-
-  let count = 0;
-  for (const coin of coins) {
-    for (let i = 0; i <= amount; i++) {
-      count = countingChange(amount - coin * i, coins);
-      console.log(amount);
-    }
-  }
-
   return count;
 };
 
 console.log(countingChange(4, [1, 2, 3])); // -> 4
+
+// //
+// const countingChange = (amount, coins) => {
+//     if (amount === 0) return 1;
+//     //   if (amount !== 0) return 0;
+
+//     //   let count = 0;
+//     //   for (const coin of coins) {
+//     //     for (let i = 0; i <= amount; i++) {
+//     //       count = countingChange(amount - coin * i, coins);
+//     //       console.log(amount);
+//     //     }
+//     //   }
+
+//     return count;
+//   };
 
 // // working solution but not good
 // const countingChange = (amount, coins) => {
