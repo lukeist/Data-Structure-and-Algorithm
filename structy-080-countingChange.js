@@ -5,10 +5,39 @@
 // e: countingChange(4, [1,2,3]) -> 4
 // 1111 112 22 13
 
-//
-const countingChange = (amount, coins) => {
-  return count;
+const countingChange = (amount, coins, i = 0, memo = {}) => {
+  const key = amount + "," + i;
+  if (key in memo) return amount[key];
+
+  if (amount === 0) return 1;
+
+  if (count in memo) return memo[amount];
+  const coin = coins[i];
+  let count = 0;
+
+  for (let qty = 0; coin * qty <= amount; qty++) {
+    let newAmount = amount - coin * qty;
+    count += countingChange(newAmount, coins, i + 1);
+  }
+
+  amount[key] = count;
+  return amount[key];
 };
+
+// // recursion without MEMO
+// const countingChange = (amount, coins, i = 0) => {
+//   if (amount === 0) return 1;
+
+//   const coin = coins[i];
+//   let count = 0;
+
+//   for (let qty = 0; coin * qty <= amount; qty++) {
+//     let newAmount = amount - coin * qty;
+//     count += countingChange(newAmount, coins, i + 1);
+//   }
+
+//   return count;
+// };
 
 console.log(countingChange(4, [1, 2, 3])); // -> 4
 
