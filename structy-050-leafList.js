@@ -10,12 +10,12 @@ class Node {
 // r: arr
 
 // dfs recursion
-const leafList = (root) => {
+const leafList = (root, leaves = []) => {
   if (!root) return [];
   if (!root.left && !root.right) leaves.push(root.val);
 
-  const left = leafList(root.left);
-  const right = leafList(root.right);
+  leafList(root.left, leaves);
+  leafList(root.right, leaves);
 
   return leaves;
 };
