@@ -17,44 +17,65 @@ class Node {
 // null ->  3 -> 7 -> 5 -> 7
 //  h            t    c
 
-// iteration not working yet
+// iteration best
 const addLists = (head1, head2) => {
   const head = new Node(null);
 
   let tail = head;
-
   let cur1 = head1;
   let cur2 = head2;
   let carry = 0;
 
-  // console.log(carry);
-
-  while (cur1 || cur2) {
-    let cur = new Node(null);
-
+  while (cur1 || cur2 || carry === 1) {
     let cur1Val = cur1 ? cur1.val : 0;
     let cur2Val = cur2 ? cur2.val : 0;
-    let curVal = cur1Val + cur2Val + carry;
+    let sum = cur1Val + cur2Val + carry;
 
-    if (curVal >= 10) {
-      cur.val = curVal - 10;
-      carry = 1;
-    } else {
-      cur.val = curVal;
-      carry = 0;
-    }
+    carry = sum >= 10 ? 1 : 0;
+
+    let cur = new Node(sum % 10);
 
     tail.next = cur;
     tail = tail.next;
 
-    cur1.next && (cur1 = cur1.next);
-    cur2.next && (cur2 = cur2.next);
+    cur1 && (cur1 = cur1.next);
+    cur2 && (cur2 = cur2.next);
   }
-
-  carry > 0 && (tail.next = new Node(carry));
 
   return head.next;
 };
+
+// // iteration better
+// const addLists = (head1, head2) => {
+//   const head = new Node(null);
+
+//   let tail = head;
+//   let cur1 = head1;
+//   let cur2 = head2;
+//   let carry = 0;
+
+//   // console.log(carry);
+
+//   while (cur1 || cur2) {
+//     let cur1Val = cur1 ? cur1.val : 0;
+//     let cur2Val = cur2 ? cur2.val : 0;
+//     let sum = cur1Val + cur2Val + carry;
+
+//     carry = sum >= 10 ? 1 : 0;
+
+//     let cur = new Node(sum % 10);
+
+//     tail.next = cur;
+//     tail = tail.next;
+
+//     cur1 && (cur1 = cur1.next);
+//     cur2 && (cur2 = cur2.next);
+//   }
+
+//   carry > 0 && (tail.next = new Node(carry));
+
+//   return head.next;
+// };
 
 // // recursion BETTER
 // const addLists = (head1, head2, carry = 0) => {
@@ -184,14 +205,14 @@ const addLists = (head1, head2) => {
 
 //   while (cur1 && cur2) {
 //     let cur = new Node(null);
-//     let curVal = cur1.val + cur2.val + carry;
+//     let sum = cur1.val + cur2.val + carry;
 
-//     if (curVal >= 10) {
+//     if (sum >= 10) {
 //       //
-//       cur.val = curVal - 10;
+//       cur.val = sum - 10;
 //       carry = 1;
 //     } else {
-//       cur.val = curVal;
+//       cur.val = sum;
 //       carry = 0;
 //     }
 
@@ -214,13 +235,13 @@ const addLists = (head1, head2) => {
 
 //   if (cur1) {
 //     while (cur1) {
-//       let curVal = cur1.val + carry;
+//       let sum = cur1.val + carry;
 
-//       if (curVal >= 10) {
-//         cur1.val = curVal - 10;
+//       if (sum >= 10) {
+//         cur1.val = sum - 10;
 //         carry = 1;
 //       } else {
-//         cur1.val = curVal;
+//         cur1.val = sum;
 //         carry = 0;
 //       }
 
@@ -232,13 +253,13 @@ const addLists = (head1, head2) => {
 
 //   if (cur2) {
 //     while (cur2) {
-//       let curVal = cur2.val + carry;
+//       let sum = cur2.val + carry;
 
-//       if (curVal >= 10) {
-//         cur2.val = curVal - 10;
+//       if (sum >= 10) {
+//         cur2.val = sum - 10;
 //         carry = 1;
 //       } else {
-//         cur2.val = curVal;
+//         cur2.val = sum;
 //         carry = 0;
 //       }
 
@@ -256,13 +277,13 @@ const addLists = (head1, head2) => {
 // const findTheRest = (tail, cur, carry) => {
 //   const headR = cur;
 //   while (cur) {
-//     let curVal = cur.val + carry;
+//     let sum = cur.val + carry;
 
-//     if (curVal >= 10) {
-//       cur.val = curVal - 10;
+//     if (sum >= 10) {
+//       cur.val = sum - 10;
 //       carry = 1;
 //     } else {
-//       cur.val = curVal;
+//       cur.val = sum;
 //       carry = 0;
 //     }
 
