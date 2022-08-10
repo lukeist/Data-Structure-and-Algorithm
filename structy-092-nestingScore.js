@@ -24,7 +24,7 @@ const nestingScore = (str) => {
       let curr = stack.pop();
 
       curr === 0 && stack[stack.length - 1]++;
-      curr !== 0 && (stack[stack.length - 1] = curr * 2);
+      curr !== 0 && (stack[stack.length - 1] += curr * 2);
     }
   }
 
@@ -34,7 +34,7 @@ const nestingScore = (str) => {
 // console.log(nestingScore("[][][]")); // -> 3
 // console.log(nestingScore("[[]]")); // -> 2
 console.log(nestingScore("[][[][]][[]]")); // -> 7
-
+//                       |1 4
 // NOT WORKING
 // const nestingScore = (str) => {
 //   const stack = [];
