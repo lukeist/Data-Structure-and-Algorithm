@@ -31,6 +31,14 @@ const middleValue = (head) => {
   return c1.val;
 };
 
+// if (!a || !b) do something
+//// a === false | b === true > do s/
+//// a === true | b === false > do s/
+//// a === false | b === false > do s/
+
+// if (!(!a || !b)) do something
+//// a === false | b === true > do s/
+
 // // two pointers: time O(n) space O(1)
 // const middleValue = (head) => {
 //   let c1 = head;
