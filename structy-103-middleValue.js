@@ -18,20 +18,33 @@ class Node {
 //                 c1
 //                                c2
 
-// two pointers: time O(n) space O(1)
+// two pointers: time O(n) space O(1) BETTER
 const middleValue = (head) => {
   let c1 = head;
   let c2 = head;
 
-  while (c2) {
-    if (!c2.next) return c1.val;
-
+  while (!(!c2 || !c2.next)) {
     c1 = c1.next;
     c2 = c2.next.next;
   }
 
-  return c1.next.val;
+  return c1.val;
 };
+
+// // two pointers: time O(n) space O(1)
+// const middleValue = (head) => {
+//   let c1 = head;
+//   let c2 = head;
+
+//   while (c2) {
+//     if (!c2.next) return c1.val;
+
+//     c1 = c1.next;
+//     c2 = c2.next.next;
+//   }
+
+//   return c1.next.val;
+// };
 // time O(n) space O(n)
 // const middleValue = (head) => {
 //   let cur = head;
