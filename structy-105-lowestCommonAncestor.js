@@ -9,34 +9,49 @@ class Node {
 // p: root & 2 vals
 // r: val (num/str)
 const lowestCommonAncestor = (root, v1, v2) => {
-  const first = explore(root, v1)[0];
-  const second = explore(root, v2)[0];
+  //   const first = explore(root, v1)[0];
+  //   const second = explore(root, v2)[0];
+  const pathV1 = findPath(root, v1);
+  const pathV2 = findPath(root, v2);
 
   let i = 0;
   let val;
 
-  while (first[i] === second[i]) {
-    val = first[i];
+  while (pathV1[i] === pathV2[i]) {
+    val = pathV1[i];
     i++;
   }
 
   return val;
 };
 
-const explore = (root, v) => {
-  if (!root) return [];
-  if (root.val === v) return [[v]];
+const findPath = (root, v) => {
+  if (!root) return null;
+  if (root.val === v) return [v];
 
-  const left = explore(root.left, v);
-  const right = explore(root.right, v);
+  const left = findPath(root.left, v);
+  const right = findPath(root.right, v);
 
-  // const arrs = [...left, ...right]
-  const arrs = left.concat(right);
+  left && left.unshift(root.val);
+  right && right.unshift(root.val);
 
-  arrs.forEach((arr) => arr.unshift(root.val));
-
-  return arrs;
+  return left || right;
 };
+
+// const explore = (root, v) => {
+//   if (!root) return [];
+//   if (root.val === v) return [[v]];
+
+//   const left = explore(root.left, v);
+//   const right = explore(root.right, v);
+
+//   // const arrs = [...left, ...right]
+//   const arrs = left.concat(right);
+
+//   arrs.forEach((arr) => arr.unshift(root.val));
+
+//   return arrs;
+// };
 
 // const explore = (root, v1, v2) => {
 //   if (!root) return [];
