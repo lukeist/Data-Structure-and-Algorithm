@@ -11,22 +11,35 @@ class Node {
 // p: root of bi search tree
 // r: boolean
 
-// dfs recursion
+// dfs recursion better
 const binarySearchTreeIncludes = (root, target) => {
   if (!root) return false;
 
   if (root.val === target) return true;
 
-  const left = binarySearchTreeIncludes(root.left, target);
-  const right = binarySearchTreeIncludes(root.right, target);
-
-  target < root.val ? left : right;
-
-  if (left) return true;
-  if (right) return true;
-
-  return false;
+  if (target < root.val) {
+    return binarySearchTreeIncludes(root.left, target);
+  } else {
+    return binarySearchTreeIncludes(root.right, target);
+  }
 };
+
+// // dfs recursion
+// const binarySearchTreeIncludes = (root, target) => {
+//   if (!root) return false;
+
+//   if (root.val === target) return true;
+
+//   const left = binarySearchTreeIncludes(root.left, target);
+//   const right = binarySearchTreeIncludes(root.right, target);
+
+//   target < root.val ? left : right;
+
+//   if (left) return true;
+//   if (right) return true;
+
+//   return false;
+// };
 
 // // dfs iteration
 // const binarySearchTreeIncludes = (root, target) => {
