@@ -24,8 +24,6 @@ const canColor = (graph) => {
 };
 
 const explore = (graph, node, map, color) => {
-  console.log(map, node, c, color);
-
   if (node in map) return map[node] === color;
 
   map[node] = color;
