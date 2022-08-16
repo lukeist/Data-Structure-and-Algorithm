@@ -36,11 +36,11 @@ const rareRouting = (n, roads) => {
   const graph = buildGraph(roads);
   const visited = new Set();
 
-  if (!explore(graph, visited, 0, 0)) return false;
+  //   if (!explore(graph, visited, 0, 0)) return false;
+  //   if (visited.size !== n) return false;
+  //   return true;
 
-  if (visited.size !== n) return false;
-
-  return true;
+  return explore(graph, visited, 0, 0) && visited.size === n;
 };
 
 const explore = (graph, visited, preC, curC) => {
@@ -48,9 +48,10 @@ const explore = (graph, visited, preC, curC) => {
   visited.add(curC);
 
   for (const neiC of graph[curC]) {
-    if (neiC !== preC) {
-      if (!explore(graph, visited, curC, neiC)) return false;
-    }
+    // if (neiC !== preC) {
+    //   if (!explore(graph, visited, curC, neiC)) return false;
+    // }
+    if (neiC !== preC && !explore(graph, visited, curC, neiC)) return false;
   }
 
   return true;
