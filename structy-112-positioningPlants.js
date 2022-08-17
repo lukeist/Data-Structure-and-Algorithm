@@ -24,14 +24,11 @@ const positioningPlants = (costs) => {
     prevM = Math.min(...costs[i - 1]);
     prevP = costs[i - 1].indexOf(prevM);
 
-    let min = -Infinity;
-
     for (let j = 0; j < costs[0].length; j++) {
       j !== prevP ? (costs[i][j] += prevM) : (costs[i][j] = Infinity);
     }
   }
 
-  //   return arr[arr.length - 1];
   return Math.min(...costs[costs.length - 1]);
 };
 
