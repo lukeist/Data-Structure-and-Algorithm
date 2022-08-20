@@ -5,32 +5,71 @@
 
 // costs[i][j] xxx cost[i+1][j]
 
-const positioningPlants = (costs) => {
-  let prevM;
-  let prevP;
+// recurions W memo
+const positioningPlants = (
+  costs,
+  pos = 0,
+  prevType = null,
+  min = Infinity,
+  memo = {}
+) => {
+  if (pos === costs.length) return 0;
 
-  for (let j = 0; j < costs[0].length; j++) {
-    let min = Infinity;
+  const prev = pos + "," + prevType;
+  if (prev in memo) return memo[prev];
 
-    for (let i = 0; i < costs[0].length; i++) {
-      i !== j && (min = Math.min(costs[1][j] + costs[0][i], min));
-    }
-
-    costs[1][j] = min;
+  for (let i = 0; i < costs[0].length; i++) {
+    const costAtI = costs[pos][i];
+    i !== prevType &&
+      (min = Math.min(
+        min,
+        costAtI + positioningPlants(costs, pos + 1, i, min, memo)
+      ));
   }
 
-  // main func
-  for (let i = 2; i < costs.length; i++) {
-    prevM = Math.min(...costs[i - 1]);
-    prevP = costs[i - 1].indexOf(prevM);
-
-    for (let j = 0; j < costs[0].length; j++) {
-      j !== prevP ? (costs[i][j] += prevM) : (costs[i][j] = Infinity);
-    }
-  }
-
-  return Math.min(...costs[costs.length - 1]);
+  memo[prev] = min;
+  return min;
 };
+
+// recurions WO memo
+// const positioningPlants = (costs, pos = 0, prevType = null, min = Infinity) => {
+//   if (pos === costs.length) return 0;
+
+//   for (let i = 0; i < costs[0].length; i++) {
+//     const costAtI = costs[pos][i];
+//     i !== prevType && (min = Math.min(min, costAtI + positioningPlants(costs, pos + 1, i, min)));
+//   }
+
+//   return min;
+// }
+
+// iteration
+// const positioningPlants = (costs) => {
+//   let prevM;
+//   let prevP;
+
+//   for (let j = 0; j < costs[0].length; j++) {
+//     let min = Infinity;
+
+//     for (let i = 0; i < costs[0].length; i++) {
+//       i !== j && (min = Math.min(costs[1][j] + costs[0][i], min));
+//     }
+
+//     costs[1][j] = min;
+//   }
+
+//   // main func
+//   for (let i = 2; i < costs.length; i++) {
+//     prevM = Math.min(...costs[i - 1]);
+//     prevP = costs[i - 1].indexOf(prevM);
+
+//     for (let j = 0; j < costs[0].length; j++) {
+//       j !== prevP ? (costs[i][j] += prevM) : (costs[i][j] = Infinity);
+//     }
+//   }
+
+//   return Math.min(...costs[costs.length - 1]);
+// };
 
 console.log(
   positioningPlants([
