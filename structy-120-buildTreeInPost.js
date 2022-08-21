@@ -62,10 +62,9 @@ const buildTreeInPost = (inOrder, postOrder) => {
     leftInOrder.length,
     leftInOrder.length + rightInOrder.length
   );
-  console.log(leftPostOrder, rightPostOrder);
 
-  //   root.left = buildTreeInPost(leftInOrder, leftPostOrder);
-  //   root.right = buildTreeInPost(rightInOrder, rightPostOrder);
+  root.left = buildTreeInPost(leftInOrder, leftPostOrder);
+  root.right = buildTreeInPost(rightInOrder, rightPostOrder);
 
   return root;
 };
