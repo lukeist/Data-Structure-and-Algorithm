@@ -2,8 +2,8 @@
 
 // p: obj & str
 // r: str
-// /////////////////// ///////////////// recursion
-const tokenTransform = (s, tokens) => {
+// // /////////////////// ///////////////// recursion W memo
+const tokenTransform = (s, tokens, memo = {}) => {
   if (s.indexOf("$") === -1) return s;
 
   let newS = "";
@@ -19,7 +19,14 @@ const tokenTransform = (s, tokens) => {
       j++;
     } else {
       const nei = s.slice(i, j + 1);
-      newS += tokenTransform(tokens[nei], tokens);
+
+      if (nei in memo) {
+        newS += memo[nei];
+      } else {
+        memo[nei] = tokenTransform(tokens[nei], tokens);
+        newS += memo[nei];
+      }
+
       i = j + 1;
       j = i + 1;
     }
@@ -27,6 +34,31 @@ const tokenTransform = (s, tokens) => {
 
   return newS;
 };
+// // /////////////////// ///////////////// recursion WO memo
+// const tokenTransform = (s, tokens) => {
+//   if (s.indexOf("$") === -1) return s;
+
+//   let newS = "";
+//   let i = 0;
+//   let j = 1;
+
+//   while (i < s.length) {
+//     if (s[i] !== "$") {
+//       newS += s[i];
+//       i++;
+//       j = i + 1;
+//     } else if (s[j] !== "$") {
+//       j++;
+//     } else {
+//       const nei = s.slice(i, j + 1);
+//       newS += tokenTransform(tokens[nei], tokens);
+//       i = j + 1;
+//       j = i + 1;
+//     }
+//   }
+
+//   return newS;
+// };
 
 // const converter = (tokens, key) => {
 //   if (tokens[key].indexOf("$") === -1) return tokens[key];
