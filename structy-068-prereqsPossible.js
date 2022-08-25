@@ -8,32 +8,17 @@ const prereqsPossible = (numCourses, prereqs) => {
   const visited = new Set();
 
   for (const node in graph) {
-    if (checkCycle(graph, node, visited, new Set())) return graph;
+    if (checkCycle(graph, node, visited, new Set())) return false;
   }
 
-  return false;
+  return true;
 };
-// {
-//   '0': [ 1, 2 ],
-//   '1': [ 0, 3 ],
-//   '2': [ 3, 0 ],
-//   '3': [ 2, 1 ],
-//   '4': [ 5 ],
-//   '5': [ 4 ]
-// }
-// visited:   0 1 2 3
-// visiting:  4 5
-// 0 --> 1
-// |     |
-// 2 --> 3
-// 4 --> 5
 
 const checkCycle = (graph, node, visited, visiting) => {
   if (visited.has(+node)) return false;
   if (visiting.has(+node)) return true;
   visiting.add(+node);
 
-  console.log(node, visited, visiting);
   for (const nei of graph[+node]) {
     if (checkCycle(graph, nei, visited, visiting)) return true;
   }
@@ -59,6 +44,13 @@ const buildGraph = (edges) => {
   return graph;
 };
 
+// { '0': [ 1, 2 ], '1': [ 3 ], '2': [ 3 ], '3': [], '4': [ 5 ], '5': [] }
+// visited:   0 1 2 3
+// visiting:  4 5
+// 0 --> 1
+// |     |
+// 2 --> 3
+// 4 --> 5
 const numCourses = 6;
 const prereqs = [
   [0, 1],
