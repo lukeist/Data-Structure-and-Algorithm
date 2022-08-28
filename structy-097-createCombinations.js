@@ -2,6 +2,10 @@
 
 // p: arr, num
 // r: 2d arr
+// n = length of items
+// k = target length
+// Time: ~O(n choose k) https://en.wikipedia.org/wiki/Binomial_coefficient
+// Space: ~O(n choose k)
 
 const createCombinations = (items, k) => {
   if (k === 0) return [[]];
