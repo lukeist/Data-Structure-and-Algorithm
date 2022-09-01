@@ -24,7 +24,8 @@ const uncompress = (s) => {
 // 33n12e2z
 //    j
 
-// // O(s.length) O(resultS.length)
+// // O(m x n) O(m x n) m: num of groups, n: max num for any group => right
+// // O(s.length) O(resultS.length) => wrong
 // const uncompress = (s) => {
 //   let resultS = "";
 //   let num = "";
