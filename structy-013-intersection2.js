@@ -17,20 +17,20 @@ const intersection = (a, b) => {
   return ab;
 };
 
-// hash map
-const intersection = (a, b) => {
-  const map = {};
-  const ab = [];
+// // hash map
+// const intersection = (a, b) => {
+//   const map = {};
+//   const ab = [];
 
-  for (let num of a) {
-    map[num] = false;
-  }
+//   for (let num of a) {
+//     map[num] = false;
+//   }
 
-  for (let num of b) {
-    if (num in map) ab.push(num);
-  }
+//   for (let num of b) {
+//     if (num in map) ab.push(num);
+//   }
 
-  return ab;
-};
+//   return ab;
+// };
 
 console.log(intersection([4, 2, 1, 6], [3, 6, 9, 2, 10])); // -> [2,6]
