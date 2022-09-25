@@ -13,7 +13,7 @@ const minChange = (amount, coins) => {
   return min === Infinity ? -1 : min;
 };
 
-// recursion W memo O(coins.length x amount) O(coins.length x amount)
+// recursion W memo O(coins.length x amount) O(amount)
 const findMin = (amount, coins, memo = {}) => {
   if (amount < 0) return Infinity;
   if (amount === 0) return 0;
@@ -30,7 +30,7 @@ const findMin = (amount, coins, memo = {}) => {
   return min;
 };
 
-// // recursion WO memo O(coins.length^amount) O(coins.length^amount)
+// // recursion WO memo O(coins.length^amount) O(amount) ?
 // const findMin = (amount, coins) => {
 //   if (amount < 0) return Infinity;
 //   if (amount === 0) return 0;
