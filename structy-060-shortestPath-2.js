@@ -7,7 +7,7 @@
 //  \  |
 //    z
 
-// bfs O(edges) O(nodes)
+// bfs O(edges) O(edges)
 const shortestPath = (edges, nodeA, nodeB) => {
   const graph = buildGraph(edges);
   const visited = new Set();
