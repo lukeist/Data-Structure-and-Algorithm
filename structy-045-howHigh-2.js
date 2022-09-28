@@ -13,10 +13,11 @@
 const howHigh = (node) => {
   if (!node) return -1;
 
-  let left = howHigh(node.left) + 1;
-  let right = howHigh(node.right) + 1;
-
-  return Math.max(left, right);
+  //   let left = howHigh(node.left) + 1;
+  //   let right = howHigh(node.right) + 1;
+  let left = howHigh(node.left);
+  let right = howHigh(node.right);
+  return 1 + Math.max(left, right);
 };
 
 //      a
