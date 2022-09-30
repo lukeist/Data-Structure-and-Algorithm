@@ -16,9 +16,10 @@
 
 // recursive W memo: O(n * sqrt(n)) O(n)
 const summingSquares = (n, memo = {}) => {
-  if (n in memo) return memo[n];
   // if (n < 0) return Infinity;
   if (n === 0) return 0;
+  if (n in memo) return memo[n];
+
   let min = Infinity;
 
   for (let i = 1; i <= Math.sqrt(n); i++) {
