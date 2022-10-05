@@ -20,27 +20,35 @@
 //          |
 //          6
 
-// iterative O(edges) O(nodes)
+// dfs recursive O(edges) O(nodes)
 const semestersRequired = (numCourses, prereqs) => {
   if (prereqs.length === 0) return 1;
-
   const graph = buildGraph(prereqs);
-  let max = -Infinity;
+  const sems = {};
 
   for (let c in graph) {
-    const stack = [[c, 1]];
-
-    while (stack.length > 0) {
-      const [node, sems] = stack.pop();
-      max = Math.max(max, sems);
-
-      for (let nei of graph[node]) {
-        stack.push([nei, sems + 1]);
-      }
-    }
+    graph[c].length === 0 && (sems[c] = 1);
   }
 
-  return max;
+  for (let c in graph) {
+    explore(graph, c, sems);
+  }
+
+  // console.log(graph);
+  // console.log(sems);
+  return Math.max(...Object.values(sems));
+};
+
+const explore = (graph, node, sems) => {
+  if (node in sems) return sems[node];
+
+  let max = -Infinity;
+  for (let nei of graph[node]) {
+    max = Math.max(max, explore(graph, nei, sems));
+  }
+
+  sems[node] = max + 1;
+  return max + 1;
 };
 
 const buildGraph = (edges) => {
@@ -56,6 +64,43 @@ const buildGraph = (edges) => {
 
   return graph;
 };
+
+// // iterative O(edges) O(nodes)
+// const semestersRequired = (numCourses, prereqs) => {
+//   if (prereqs.length === 0) return 1;
+
+//   const graph = buildGraph(prereqs);
+//   let max = -Infinity;
+
+//   for (let c in graph) {
+//     const stack = [[c, 1]];
+
+//     while (stack.length > 0) {
+//       const [node, sems] = stack.pop();
+//       max = Math.max(max, sems);
+
+//       for (let nei of graph[node]) {
+//         stack.push([nei, sems + 1]);
+//       }
+//     }
+//   }
+
+//   return max;
+// };
+
+// const buildGraph = (edges) => {
+//   const graph = {};
+
+//   for (let edge of edges) {
+//     const [a, b] = edge;
+//     !(a in graph) && (graph[a] = []);
+//     !(b in graph) && (graph[b] = []);
+
+//     graph[a].push(b);
+//   }
+
+//   return graph;
+// };
 
 ///////////////////////////////////////////
 // // dfs recursive O(edges) O(nodes)
@@ -98,6 +143,14 @@ const buildGraph = (edges) => {
 //   return count;
 // };
 
+const numCourses = 6;
+const prereqs = [
+  [1, 2],
+  [2, 4],
+  [3, 5],
+  [0, 5],
+];
+
 // const numCourses = 7;
 // const prereqs = [
 //   [4, 3],
@@ -108,13 +161,13 @@ const buildGraph = (edges) => {
 //   [5, 6],
 // ]; // -> 5
 
-const numCourses = 5;
-const prereqs = [
-  [1, 0],
-  [3, 4],
-  [1, 2],
-  [3, 2],
-]; // -> 2
+// const numCourses = 5;
+// const prereqs = [
+//   [1, 0],
+//   [3, 4],
+//   [1, 2],
+//   [3, 2],
+// ]; // -> 2
 
 //          1(1) -> 0(0)
 //          |
