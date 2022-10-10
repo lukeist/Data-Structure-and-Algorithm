@@ -214,7 +214,7 @@ const users = [
     name: "Employee #3",
     customerId: 1,
     // when this user started
-    activatedon: new Date("2021-11-04"),
+    activatedOn: new Date("2021-11-04"),
     // last day to bill for user
     // should bill up to and including this date
     // since user had some access on this date
@@ -225,7 +225,7 @@ const users = [
     name: "Employee #4",
     customerId: 1,
     // when this user started
-    activatedon: new Date("2021-12-04"),
+    activatedOn: new Date("2021-12-04"),
     // hasn't been deactivated yet
     deactivatedOn: null,
   },
