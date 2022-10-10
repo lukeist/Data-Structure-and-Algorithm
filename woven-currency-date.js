@@ -72,18 +72,79 @@
 //  *     },
 //  *   ]
 //  */
+// console.log(monthlyCharge("2018-10", plan, users)); // 0
 
 function monthlyCharge(month, subscription, users) {
-  for (let user of users) {
-    // console.log(user.activatedon.toISOString().slice(0, 10));
-    // let dateYYYYMMDD = user.activatedon.toISOString().slice(0, 10);
+  const lastMonthFirstDay = new Date(month);
+  const monthFirstDay = nextDay(lastDayOfMonth(lastMonthFirstDay));
+  const nextMonthFirstDay = nextDay(lastDayOfMonth(monthFirstDay));
+  const milisecPerDay = 1000 * 60 * 60 * 24;
 
-    // dateYYYYMMDD = dateYYYYMMDD.replaceAll("-", ", ");
-    console.log(firstDayOfMonth(user.activatedon));
+  let total = 0;
+
+  // 1. Calculate a daily rate for the subscription tier
+  const { monthlyPriceInCents } = subscription;
+  const dailyRate = (monthlyPriceInCents * 12) / 365;
+
+  // 2. For each day of the month, identify which users had an active subscription on that day
+  const usersOnThisMonth = users.filter((user) =>
+    user.activatedOn === undefined
+      ? user.activatedon < nextMonthFirstDay
+      : user.activatedOn < nextMonthFirstDay
+  );
+
+  // 3. Multiply the number of active users for the day by the daily rate to calculate the total for the day
+  for (let user of usersOnThisMonth) {
+    const { activatedon, activatedOn, deactivatedon, deactivatedOn } = user;
+
+    let activated = activatedOn === undefined ? activatedon : activatedOn;
+    let deactivated =
+      deactivatedOn === undefined ? deactivatedon : deactivatedOn;
+
+    !deactivated && (deactivated = Infinity);
+
+    // console.log(activated <= monthFirstDay && nextMonthFirstDay <= deactivated);
+    // console.log(monthFirstDay < activated && nextMonthFirstDay <= deactivated);
+    // console.log(monthFirstDay < activated && deactivated < nextMonthFirstDay);
+    // console.log(activated <= monthFirstDay && deactivated < nextMonthFirstDay);
+
+    // ----------o----------|----------|----------x----------   = monthlyPriceInCents
+    //        active       currM     nextM      deactive
+
+    activated <= monthFirstDay &&
+      nextMonthFirstDay <= deactivated &&
+      (total += monthlyPriceInCents);
+
+    // ----------|----------o----------|----------x----------   = (nextM - active) * dailyRate
+    //         currM      active     nextM      deactive
+
+    monthFirstDay < activated &&
+      nextMonthFirstDay <= deactivated &&
+      (total +=
+        (Math.round(nextMonthFirstDay - activated) / milisecPerDay) *
+        dailyRate);
+
+    // ----------|----------o----------x----------|----------   = (deactive - active) * dailyRate
+    //         currM      active     deactive   nextM
+
+    monthFirstDay < activated &&
+      deactivated < nextMonthFirstDay &&
+      (total +=
+        (Math.round(deactivated - activated) / milisecPerDay) * dailyRate);
+
+    // ----------o----------|----------x----------|----------   = (deactive - currM) * dailyRate
+    //        active       currM    deactive     nextM
+
+    activated <= monthFirstDay &&
+      deactivated < nextMonthFirstDay &&
+      (total +=
+        (Math.round(deactivated - monthFirstDay) / milisecPerDay) * dailyRate);
+
+    // console.log(user.id, "-------------------");
   }
-  // console.log(firstDayOfMonth(new Date("2019-01-01")));
-  // console.log(lastDayOfMonth(new Date("2019-01-01")));
-  // console.log(nextDay(new Date("2019-01-01")));
+
+  // 4. Return the running total for the month at the end
+  return Math.round(total);
 }
 
 /*******************
@@ -152,23 +213,19 @@ const users = [
     id: 3,
     name: "Employee #3",
     customerId: 1,
-
     // when this user started
-    activatedOn: new Date("2021-11-04"),
-
+    activatedon: new Date("2021-11-04"),
     // last day to bill for user
     // should bill up to and including this date
     // since user had some access on this date
-    deactivatedOn: new Date("2022-04-10"),
+    deactivatedon: new Date("2022-04-10"),
   },
   {
     id: 4,
     name: "Employee #4",
     customerId: 1,
-
     // when this user started
-    activatedOn: new Date("2021-12-04"),
-
+    activatedon: new Date("2021-12-04"),
     // hasn't been deactivated yet
     deactivatedOn: null,
   },
@@ -181,10 +238,10 @@ const plan = {
 };
 
 // works when no users are active
-console.log(monthlyCharge("2018-10", plan, users)); // 0
+// console.log(monthlyCharge("2018-10", plan, users)); // 0
 
 // // works when the active users are active the entire month
-// console.log(monthlyCharge("2020-12", plan, users)); // 2 (users) * 5000, 1
+console.log(monthlyCharge("2021-12", plan, users)); // 2 (users) * 5000, 1
 
 // describe("monthlyCharge", function () {
 //   it("works when no users are active", function () {
