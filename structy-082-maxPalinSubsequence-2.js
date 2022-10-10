@@ -25,8 +25,7 @@ const maxPalinSubsequence = (str, i = 0, j = str.length - 1, memo = {}) => {
 
   let count = 0;
   if (str[i] === str[j]) {
-    count += 2;
-    count += maxPalinSubsequence(str, i + 1, j - 1, memo);
+    count = 2 + maxPalinSubsequence(str, i + 1, j - 1, memo);
   } else {
     let wFirst = maxPalinSubsequence(str, i + 1, j, memo);
     let wLast = maxPalinSubsequence(str, i, j - 1, memo);
