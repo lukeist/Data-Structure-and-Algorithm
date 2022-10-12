@@ -2,14 +2,8 @@
 // p: obj
 // r: obj
 // e:
-// var group = {
-//     A: 20,
-//     B: 15,
-//     C: 10
-// }
 
-// splitTheBill(group) // returns {A: 5, B: 0, C: -5}
-
+// O(n) O(1)
 function splitTheBill(group) {
   let sum = 0;
   let numOfF = 0;
@@ -28,11 +22,21 @@ function splitTheBill(group) {
   return group;
 }
 
+// O(n) O(n)
 // const splitTheBill = (x) => {
-//   let vals = Object.values(x),
-//     avg = vals.reduce((s, v) => s + v) / vals.length;
+//   let vals = Object.values(x);
+//   console.log(vals);
+//   let avg = vals.reduce((s, v) => s + v) / vals.length;
 //   return Object.keys(x).reduce(
 //     (y, v) => ((y[v] = +(x[v] - avg).toFixed(2)), y),
 //     {}
 //   );
 // };
+
+var group = {
+  A: 20,
+  B: 15,
+  C: 10,
+};
+
+splitTheBill(group); // returns {A: 5, B: 0, C: -5}
