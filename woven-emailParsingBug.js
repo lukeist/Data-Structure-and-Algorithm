@@ -1,3 +1,5 @@
+// Fix a bug around email parsing and explain the fix
+
 // Fix a bug in email host identification
 // When a user signs up for our system, we want to identify if they are using a common email host provider such as Gmail or Outlook. We have some integrations built with these platforms that allow us to customize some of our email campaigns. One of your teammates took a first try at writing a function to do this yesterday, and asked you to finish it up today.
 
@@ -64,3 +66,23 @@ function isCommonEmailHost(email) {
 //   })
 
 console.log(isCommonEmailHost("test@gmail.com"));
+
+// Task #372: Detect common email host providers
+
+// Hey teammates,
+
+// I’ve just discovered a bug in our code. It was because the condition in the loop was not right. Unless the desired common host is at the last index of  `commonHosts`, it will always return `false`.
+
+// Here is why:
+// - The loop started and went through each item in `commonHosts`.
+// - The loop found the desired common host, we have `match = true`.
+// - However, the loop didn't stop there. It continued to the next `i` since we had `i++`.
+// - Every loop after that, `match = false` because, of course, it's not the host you're looking for.
+// -  At the end, `match` is still `false` and we return it.
+
+// I made a quick fix by modifying the condition: Looping through `commonHosts`, whenever we found the host, we return `true` right away and stop the loop/function. If we found nothing after looping, we return `false`.
+
+// Please have a look at it and let me know if there are any problems. I look forward to your feedback.
+
+// Cheers,
+// Luan
