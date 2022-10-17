@@ -2,40 +2,40 @@
 
 class NamedOne {
   constructor(first, last) {
-    this.first = first;
-    this.last = last;
-    this.full = first + " " + last;
+    this.firstName = first;
+    this.lastName = last;
   }
 
-  get firstName() {
-    return this.first;
+  get fullName() {
+    return this.firstName + " " + this.lastName;
   }
 
-  first(name) {
-    this.first = name;
-    return this.first;
-  }
+  set fullName(full) {
+    const arr = full.split(" ");
 
-  lastName(name) {
-    this.last = name;
-    return this.last;
-  }
+    if (arr.length === 2) {
+      this.firstName = arr[0];
+      this.lastName = arr[1];
 
-  fullName(name) {
-    let nameArr = name.split(" ");
-    if (nameArr.length < 2) return this.full;
-
-    this.first = nameArr[0];
-    this.last = nameArr[1];
-
-    return this.first + " " + this.last;
+      return this.firstName + " " + this.lastName;
+    }
   }
 }
 
 var namedOne = new NamedOne("Naomi", "Wang");
+
+console.log(namedOne);
 console.log(namedOne.firstName);
 console.log(namedOne.lastName);
 console.log(namedOne.fullName);
 
 namedOne.firstName = "john";
+namedOne.lastName = "doe";
+
+namedOne.fullName = "mari dann";
+namedOne.fullName = "mari_dann";
+
+console.log(namedOne);
 console.log(namedOne.firstName);
+console.log(namedOne.lastName);
+console.log(namedOne.fullName);
