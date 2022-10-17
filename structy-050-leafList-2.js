@@ -16,14 +16,11 @@ class Node {
 const leafList = (root, result = []) => {
   if (!root) return [];
 
-  //   const result = [];
-
   const left = leafList(root.left, result);
   const right = leafList(root.right, result);
 
   left.length === 0 && right.length === 0 && result.push(root.val);
 
-  //   console.log(left, right, result);
   return result;
 };
 
