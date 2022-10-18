@@ -22,6 +22,8 @@
 //   [3, 0],
 // ];
 // prereqsPossible(numCourses, prereqs); // -> false
+
+// O(edges) O(nodes)
 const prereqsPossible = (numCourses, prereqs) => {
   const graph = buildGraph(prereqs);
   const visited = new Set();
