@@ -59,6 +59,10 @@
 // The provided automated tests are solely for your feedback. We will not evaluate whether the automated tests pass and you are not required to fix the issue to get full credit.
 
 ///
+
+// 1. put in try / catch to see the errors
+// 2.
+
 class CreateUserProfile {
   static beforeCreate(email) {
     try {
