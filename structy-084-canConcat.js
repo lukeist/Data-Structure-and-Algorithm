@@ -6,8 +6,8 @@
 //
 // canConcat("oneisnone", ["on", "e", "is", "n"]); // -> true
 
-// s= s.length n = words.length
-// recursive W memo O(n *s) O(n)
+//
+// recursive W memo O(n*s) O(n) s=s.len n=words.len
 const canConcat = (s, words, memo = {}) => {
   if (s.length === 0) return true;
   if (s in memo) return memo[s];
