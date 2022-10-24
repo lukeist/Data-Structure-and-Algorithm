@@ -11,6 +11,39 @@
 
 // p: head of ll
 // r: boolean
+// 2 pointers O(n) O(1)
+const linkedListCycle = (head) => {
+  let slow = head;
+  let fast = head;
+  let firstMeet = true;
+
+  while (fast && fast.next) {
+    if (slow.val === fast.val && !firstMeet) return true;
+
+    slow = slow.next;
+    fast = fast.next.next;
+    firstMeet = false;
+  }
+
+  return false;
+};
+
+// // 2 pointers O(n) O(1)
+// const linkedListCycle = (head) => {
+//   if (!head || !head.next) return false;
+//   let slow = head;
+//   let fast = head.next;
+
+//   while (slow && fast) {
+//     if (slow.val === fast.val) return true;
+
+//     slow = slow.next;
+//     if (!fast.next) {return false;}
+//     else fast = fast.next.next;
+//   }
+
+//   return false;
+// }
 
 // recursive O(n) O(n)
 const linkedListCycle = (head, visited = new Set()) => {
