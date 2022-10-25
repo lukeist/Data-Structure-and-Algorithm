@@ -21,9 +21,7 @@ const leftyNodes = (root, level = 0, result = []) => {
   return result;
 };
 
-// const explore
-
-// // iterative O(nodes) O(nodes)
+// // no hashmap iterative O(nodes) O(nodes)
 // const leftyNodes = (root) => {
 //   if (!root) return [];
 //   const queue = [[root, 0]]
@@ -64,7 +62,3 @@ const leftyNodes = (root, level = 0, result = []) => {
 
 //   return result;
 // };
-
-module.exports = {
-  leftyNodes,
-};
