@@ -14,6 +14,7 @@
 //2 --  3
 // -> false
 
+// recursive O(n^2) O(n)
 const rareRouting = (n, roads) => {
   const graph = buildGraph(roads);
   const visited = new Set();
