@@ -28,6 +28,7 @@ const maxIncreasingSubseq = (numbers) => {
   }
 
   let max = -Infinity;
+
   for (const key in map) {
     max = Math.max(max, map[key]);
   }
