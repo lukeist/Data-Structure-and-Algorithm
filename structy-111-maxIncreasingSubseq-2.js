@@ -79,7 +79,6 @@ const maxIncreasingSubseq = (numbers) => {
     max !== map[num] && (map[num] = max + 1);
   }
 
-  console.log(map);
   let max = -Infinity;
   for (let key in map) {
     max = Math.max(max, map[key]);
