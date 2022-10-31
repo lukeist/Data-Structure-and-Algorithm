@@ -11,40 +11,71 @@
 
 // p: grid [[],[]]
 // r: int +/-1
-// bfs iterative O(r x c) O(r x c)
-const shortestPath = (area) => {
-  const queue = [[0, 0, 0]];
 
-  while (queue.length > 0) {
-    const [y, x, distance] = queue.shift();
-    if (area[y][x] === 9) return distance;
+//  dfs recursive O(r x c) O(r x c)
+const shortestPath = (area, y = 0, x = 0, visited = new Set(), d = 0) => {
+  const boundY = 0 <= y && y < area.length;
+  const boundX = 0 <= x && x < area[0].length;
+  if (!boundY || !boundX) return 0;
 
-    const deltas = [
-      [y + 1, x],
-      [y - 1, x],
-      [y, x + 1],
-      [y, x - 1],
-    ];
+  const yx = y + "," + x;
+  if (visited.has(yx)) return 0;
+  visited.add(yx);
 
-    for (let delta of deltas) {
-      const [neiY, neiX] = delta;
-      const boundY = 0 <= neiY && neiY < area.length;
-      const boundX = 0 <= neiX && neiX < area[0].length;
+  if (area[y][x] === 0) return 0;
+  if (area[y][x] === 9) return d;
 
-      boundY &&
-        boundX &&
-        area[neiY][neiX] !== 0 &&
-        queue.push([neiY, neiX, distance + 1]);
-    }
-  }
-
-  return -1;
+  const n = shortestPath(area, y + 1, x, visited, d + 1);
+  const s = shortestPath(area, y - 1, x, visited, d + 1);
+  const w = shortestPath(area, y, x + 1, visited, d + 1);
+  const e = shortestPath(area, y, x - 1, visited, d + 1);
+  //   console.log(y, x, n, s, w, e);
+  return Math.max(n, s, w, e);
 };
 
+// // bfs iterative O(r x c) O(r x c)
+// const shortestPath = (area) => {
+//   const queue = [[0, 0, 0]];
+
+//   while (queue.length > 0) {
+//     const [y, x, distance] = queue.shift();
+//     if (area[y][x] === 9) return distance;
+
+//     const deltas = [
+//       [y + 1, x],
+//       [y - 1, x],
+//       [y, x + 1],
+//       [y, x - 1],
+//     ];
+
+//     for (let delta of deltas) {
+//       const [neiY, neiX] = delta;
+//       const boundY = 0 <= neiY && neiY < area.length;
+//       const boundX = 0 <= neiX && neiX < area[0].length;
+
+//       boundY &&
+//         boundX &&
+//         area[neiY][neiX] !== 0 &&
+//         queue.push([neiY, neiX, distance + 1]);
+//     }
+//   }
+
+//   return -1;
+// };
+
+// const area = [
+//   [1, 0, 0],
+//   [1, 0, 0],
+//   [1, 9, 1],
+// ];
+
 const area = [
-  [1, 0, 0],
-  [1, 0, 0],
-  [1, 9, 1],
+  [1, 0, 1, 1, 1, 1],
+  [1, 1, 1, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1],
+  [1, 0, 0, 0, 1, 0],
+  [1, 0, 0, 0, 1, 0],
+  [9, 1, 1, 1, 1, 1],
 ];
 
 console.log(shortestPath(area));
