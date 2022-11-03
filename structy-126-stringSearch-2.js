@@ -20,6 +20,15 @@ const stringSearch = (grid, s) => {
   return false;
 };
 
+// worst case: string = 'ssssssssss..'
+//  grid = [
+//   [s, s, s, s, s],
+//   [s, s, s, s, s],
+//   [s, s, s, s, s],
+//   [s, s, s, s, s],
+//   [s, s, s, s, s],
+// ];
+//  ==> O(3^rc) O(rc)
 const explore = (grid, y, x, s, i, visited) => {
   console.log(visited);
 
