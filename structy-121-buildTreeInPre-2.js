@@ -15,10 +15,10 @@ class Node {
 //            x
 //           /
 //          z
-//         i
+//    m    x                   n
 // [ 't', 'u', 's', 'q', 'r', 'p' ],
 // [ 'u', 't', 's', 'r', 'q', 'p' ]
-//         i
+//         i                   j
 //                    u
 //                  /   \
 //                t     s
@@ -27,30 +27,94 @@ class Node {
 //                        / \
 //                      q     p
 
+// buildTreeInPre(
+//                               i
+//   [ 'd', 'b', 'g', 'e', 'h', 'a', 'c', 'f' ],
+//   [ 'a', 'b', 'd', 'e', 'g', 'h', 'c', 'f' ]
+// );
+// //       a
+// //    /    \
+// //   b      c
+// //  / \      \
+// // d   e      f
+// //    / \
+// //    g  h
+
+//      lf                  ll   x5   rf   rl
+//   [ 'd', 'b', 'g', 'e', 'h', 'a', 'c', 'f' ],
+//     x0    lf                  ll   rf   rl
+//   [ 'a', 'b', 'd', 'e', 'g', 'h', 'c', 'f' ]
+//
+//        m
+// ["z", "y", "x"],
+//
+// ["y", "z", "x"]
+
 const buildTreeInPre = (
   inOrder,
   preOrder,
-  indexIn = inOrder.indexOf(
-    preOrder[0],
-    (firstIn = 0),
-    (lastIn = inOrder.length - 1),
-    (firstPre = 0),
-    (lastPre = preOrder.length - 1)
-  )
+  inOrderStart = 0,
+  inOrderEnd = inOrder.length - 1,
+  preOrderStart = 0,
+  preOrderEnd = preOrder.length - 1
 ) => {
-  const root = new Node(preOrder[indexIn]);
-
-  const leftInLen = indexIn;
-  const rightInLen = inOrder.length - indexIn;
-
-  //   const leftPreLen = leftInLen.length + 1);
-  //   const rightPre = preOrder.slice(leftIn.length + 1);
-
-  root.left = buildTreeInPre(inOrder, preOrder);
-  root.right = buildTreeInPre(inOrder, rightPre);
-
+  if (inOrderEnd < inOrderStart) return null;
+  const value = preOrder[preOrderStart];
+  const root = new Node(value);
+  const mid = inOrder.indexOf(value);
+  const leftSize = mid - inOrderStart;
+  root.left = buildTreeInPre(
+    inOrder,
+    preOrder,
+    inOrderStart,
+    mid - 1,
+    preOrderStart + 1,
+    preOrderStart + leftSize
+  );
+  root.right = buildTreeInPre(
+    inOrder,
+    preOrder,
+    mid + 1,
+    inOrderEnd,
+    preOrderStart + leftSize + 1,
+    preOrderEnd
+  );
   return root;
 };
+
+// const buildTreeInPre = (
+//   inOrder,
+//   preOrder,
+//   firstIn = 0,
+//   lastIn = inOrder.length - 1,
+//   firstPre = 0,
+//   lastPre = preOrder.length - 1
+// ) => {
+//   if (firstIn > lastIn) return null;
+//   if (firstPre > lastPre) return null;
+
+//   const root = new Node(preOrder[firstPre]);
+//   const mid = inOrder.indexOf(root.val);
+
+//   root.left = buildTreeInPre(
+//     inOrder,
+//     preOrder,
+//     0, // 0
+//     mid - 1, // 0
+//     firstPre + 1, // 0 + 1
+//     firstPre + mid // 0 + 1
+//   );
+//   root.right = buildTreeInPre(
+//     inOrder,
+//     preOrder,
+//     mid + 1, // 1 + 1
+//     lastIn, // 2
+//     firstPre + mid + 1, // 0 + 1 + 1
+//     lastPre // 2
+//   );
+
+//   return root;
+// };
 
 //
 // const buildTreeInPre = (inOrder, preOrder) => {
