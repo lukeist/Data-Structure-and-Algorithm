@@ -1,3 +1,101 @@
+// p: grid
+// r: +int / -1
+// // const area = [
+// //   [1, 0, 0],
+// //   [1, 0, 0],
+// //   [1, 9, 1],
+// // ];
+
+// identify problem type: graph + dynamic programing;
+// mention how to approach (dfs/bfs)
+
+// // recursive:
+const shortestPath = (area) => {
+  return Math.min(_shortestPath(area));
+};
+
+const _shortestPath = (graph, y = 0, x = 0, visited = {}, count = 0) => {
+  console.log(visited, count);
+
+  const boundY = 0 <= y && y < graph.length;
+  const boundX = 0 <= x && x < graph[0].length;
+  if (!boundY || !boundX || graph[y][x] === 0) return Infinity;
+  if (graph[y][x] === 9) {
+    console.log(count);
+    return count;
+  }
+
+  const yx = y + "," + x;
+  if (yx in visited) return visited[yx];
+  visited[yx] = count;
+
+  shortestPath(graph, y + 1, x, visited, count + 1);
+  shortestPath(graph, y - 1, x, visited, count + 1);
+  shortestPath(graph, y, x + 1, visited, count + 1);
+  shortestPath(graph, y, x - 1, visited, count + 1);
+
+  return -1;
+};
+// // iterative
+// const shortestPath = (area) => {
+//   const queue = [[0, 0, 0]];
+//   const visited = new Set();
+//   while (queue.length > 0) {
+//     const [y, x, distance] = queue.shift();
+//     const yx = y + "," + x;
+
+//     if (area[y][x] === 9) return distance;
+//     visited.add(yx);
+
+//     const deltas = [
+//       [y + 1, x],
+//       [y - 1, x],
+//       [y, x + 1],
+//       [y, x - 1],
+//     ];
+
+//     for (let delta of deltas) {
+//       const [neiY, neiX] = delta;
+//       const boundY = 0 <= neiY && neiY < area.length;
+//       const boundX = 0 <= neiX && neiX < area[0].length;
+//       const neiYX = neiY + "," + neiX;
+
+//       boundY &&
+//         boundX &&
+//         !visited.has(neiYX) &&
+//         area[neiY][neiX] !== 0 &&
+//         queue.push([neiY, neiX, distance + 1]);
+//     }
+//   }
+
+//   return -1;
+// };
+
+// const area = [
+//   [1, 0, 0],
+//   [1, 0, 0],
+//   [1, 9, 1],
+// ];
+
+const area = [
+  [1, 0, 1, 1, 1, 1],
+  [1, 1, 1, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1],
+  [1, 0, 0, 0, 1, 0],
+  [1, 0, 0, 0, 9, 0],
+  [1, 1, 1, 1, 1, 1],
+];
+
+// const area = [
+//   [1, 1, 1, 0, 0],
+//   [1, 1, 1, 9, 0],
+//   [1, 1, 1, 0, 0],
+//   [1, 1, 1, 0, 0],
+//   [1, 1, 1, 0, 0],
+// ];
+
+console.log(shortestPath(area));
+
 // // Amazon Fresh is a grocery delivery service that offers consumers the option of purchasing their groceries online and having them delivered on schedule. The Amazon Fresh team is planning a route for a delivery truck to deliver customer orders in the city of Techlandia. The planner will create a delivery area for each order to effectively plan the route. The area is abstracted as a grid. Not all locations are accessible by road. The truck only needs to make a single delivery.
 // // Write an algorithm to determine the minimum distance required for the truck to deliver the order.
 // // Assumptions: Some places in the delivery area cannot be accessed by the driver, as there are no roads in those locations. The delivery area can be represented as a two-dimensional grid of integers, where each integer represents one cell. The truck must start from the top-left corner of the area, which is always accessible and can move, one cell up, down, left, or right at a time. The truck must navigate around the areas without roads and cannot leave the area. The accessible areas are represented as 1, areas without roads are represented by O and the order destination is represented by 9.
@@ -78,4 +176,11 @@
 //   [9, 1, 1, 1, 1, 1],
 // ];
 
+// const area = [
+//   [1, 1, 1, 0, 0],
+//   [1, 1, 1, 9, 0],
+//   [1, 1, 1, 0, 0],
+//   [1, 1, 1, 0, 0],
+//   [1, 1, 1, 0, 0],
+// ];
 // console.log(shortestPath(area));
