@@ -23,6 +23,7 @@ const decompressBraces = (str) => {
 };
 
 console.log(decompressBraces("2{q}3{tu}v"));
+// worst case 9{9{9{9{ab}}}} => 2 x 9 x 9 x 9 x 9
 //
 //
 //
