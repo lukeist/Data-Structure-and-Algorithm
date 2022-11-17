@@ -50,7 +50,8 @@
 //   // }
 // };
 
-// SIMPLY SORTING
+// SIMPLY SORTING O(nlogn) O(n) https://stackoverflow.com/questions/57763205/what-is-array-prototype-sort-time-complexity
+//
 const findRes = (allLocations, numRestaurants) => {
   if (!allLocations.length || !numRestaurants) return [[]];
 
