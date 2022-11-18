@@ -10,32 +10,31 @@
 // mention how to approach (dfs/bfs)
 
 // // recursive:
-const shortestPath = (area) => {
-  return Math.min(_shortestPath(area));
-};
+// const shortestPath = (area) => {
 
-const _shortestPath = (graph, y = 0, x = 0, visited = {}, count = 0) => {
-  console.log(visited, count);
+//   return Math.min(_shortestPath(area));
+// };
 
-  const boundY = 0 <= y && y < graph.length;
-  const boundX = 0 <= x && x < graph[0].length;
-  if (!boundY || !boundX || graph[y][x] === 0) return Infinity;
-  if (graph[y][x] === 9) {
-    console.log(count);
-    return count;
-  }
+// const _shortestPath = (graph, y = 0, x = 0, visited = {}, count = 0) => {
+//   const boundY = 0 <= y && y < graph.length;
+//   const boundX = 0 <= x && x < graph[0].length;
+//   if (!boundY || !boundX || graph[y][x] === 0) return Infinity;
+//   if (graph[y][x] === 9) {
+//     console.log(count);
+//     return count;
+//   }
 
-  const yx = y + "," + x;
-  if (yx in visited) return visited[yx];
-  visited[yx] = count;
+//   const yx = y + "," + x;
+//   if (yx in visited) return visited[yx];
+//   visited[yx] = count;
 
-  shortestPath(graph, y + 1, x, visited, count + 1);
-  shortestPath(graph, y - 1, x, visited, count + 1);
-  shortestPath(graph, y, x + 1, visited, count + 1);
-  shortestPath(graph, y, x - 1, visited, count + 1);
+//   _shortestPath(graph, y + 1, x, visited, count + 1);
+//   _shortestPath(graph, y - 1, x, visited, count + 1);
+//   _shortestPath(graph, y, x + 1, visited, count + 1);
+//   _shortestPath(graph, y, x - 1, visited, count + 1);
 
-  return -1;
-};
+//   return -1;
+// };
 // // iterative
 // const shortestPath = (area) => {
 //   const queue = [[0, 0, 0]];

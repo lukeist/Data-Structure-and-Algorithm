@@ -50,12 +50,21 @@
 
 // console.log(maxIncreasingSubseq([4, 18, 20, 10, 12, 15, 19]));
 // console.log(maxIncreasingSubseq([12, 9, 2, 5, 4, 32, 90, 20]));
+// {
+// 4 : 1
+// 18: 2
+// 20: 3
+// 10: 2
+// 12: 3
 
-// not working
+//
+// }
+
+// [4, 18, 20, 10, 12, 3, 15, 19]
 
 //////////////////
 const maxIncreasingSubseq = (numbers) => {
-  const map = {};
+  const map = {}; // arr[1,...] not working bcause of [42, 50, 51, 60, 55, 70, 4, 5, 70]
   map[numbers[0]] = 1;
 
   for (let i = 1; i < numbers.length; i++) {
@@ -63,11 +72,10 @@ const maxIncreasingSubseq = (numbers) => {
     let num = numbers[i];
 
     for (let key in map) {
+      // if num >= key: max = the greatest number next to num
       if (num >= +key) {
-        // if num >= key: max = the greatest number next to num
         max = Math.max(max, map[key]);
       } else {
-        console.log(num, key, max);
         // if num < key:
         //// if num < all keys: max = 0;
         //// if num < some keys: max = max of key before the current key
