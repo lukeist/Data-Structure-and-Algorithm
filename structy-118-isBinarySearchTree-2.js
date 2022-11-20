@@ -31,24 +31,42 @@ class Node {
     this.right = null;
   }
 }
-const isBinarySearchTree = (root) => {
-  console.log(values);
 
-  for (let i = 1; i < values.length; i++) {
-    if (values[i - 1] > values[i]) return false;
+const isBinarySearchTree = (root) => {
+  const arr = [];
+  getArr(root, arr);
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i - 1] > arr[i]) return false;
   }
 
   return true;
 };
 
-const explore = (root) => {
-  if (!root) return [];
+const getArr = (root, arr) => {
+  if (!root) return;
 
-  const left = explore(root.left);
-  const right = explore(root.right);
-
-  return [...left, root.val, ...right];
+  getArr(root.left, arr);
+  arr.push(root.val);
+  getArr(root.right, arr);
 };
+// const isBinarySearchTree = (root) => {
+//   console.log(values);
+
+//   for (let i = 1; i < values.length; i++) {
+//     if (values[i - 1] > values[i]) return false;
+//   }
+
+//   return true;
+// };
+
+// const explore = (root) => {
+//   if (!root) return [];
+
+//   const left = explore(root.left);
+//   const right = explore(root.right);
+
+//   return [...left, root.val, ...right];
+// };
 
 const a = new Node(12);
 const b = new Node(5);
