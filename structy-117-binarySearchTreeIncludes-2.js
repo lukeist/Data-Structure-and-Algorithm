@@ -21,9 +21,10 @@ const binarySearchTreeIncludes = (root, target) => {
   //   if (left || right) return true;
   //   return false;
 
-  if (target < root.val) {
-    return binarySearchTreeIncludes(root.left, target);
-  } else return binarySearchTreeIncludes(root.right, target);
+  const left = binarySearchTreeIncludes(root.left, target);
+  const right = binarySearchTreeIncludes(root.right, target);
+
+  return target < root.val ? left : right;
 };
 
 // // iteration O(logn) O(n)
