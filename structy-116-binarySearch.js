@@ -1,25 +1,36 @@
 // p: arr & num
 // r: +num/-1
+const binarySearch = (nums, target) => {
+  let s = 0,
+    e = nums.length - 1;
 
-// better:
-const binarySearch = (numbers, target) => {
-  let lo = 0;
-  let hi = numbers.length - 1;
-
-  while (lo <= hi) {
-    const mid = Math.floor((lo + hi) / 2);
-
-    if (numbers[mid] === target) {
-      return mid;
-    } else if (target < numbers[mid]) {
-      hi = mid - 1;
-    } else {
-      lo = mid + 1;
-    }
+  while (s <= e) {
+    let m = Math.floor((s + e) / 2);
+    if (nums[m] === target) return m;
+    nums[m] < target ? (s = m + 1) : (e = m - 1);
   }
 
   return -1;
 };
+// // better:
+// const binarySearch = (numbers, target) => {
+//   let lo = 0;
+//   let hi = numbers.length - 1;
+
+//   while (lo <= hi) {
+//     const mid = Math.floor((lo + hi) / 2);
+
+//     if (numbers[mid] === target) {
+//       return mid;
+//     } else if (target < numbers[mid]) {
+//       hi = mid - 1;
+//     } else {
+//       lo = mid + 1;
+//     }
+//   }
+
+//   return -1;
+// };
 
 // const binarySearch = (numbers, target) => {
 //   // 0 1 2 3
