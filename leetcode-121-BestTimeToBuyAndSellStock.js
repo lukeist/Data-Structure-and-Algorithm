@@ -16,29 +16,51 @@
 // Output: 0
 // Explanation: In this case, no transactions are done and the max profit = 0.
 
+var maxProfit = function (prices) {
+  let maxProfit = 0;
+  let min = Infinity;
+  for (let i = 1; i < prices.length; i++) {
+    min = Math.min(min, prices[i - 1]);
+    maxProfit = Math.max(maxProfit, prices[i] - min);
+  }
+
+  return maxProfit;
+};
+
+// var maxProfit = function(prices) {
+//   let arr = [0];
+//   let min = Infinity;
+//   for (let i = 1; i < prices.length; i++) {
+//       min = Math.min(min, prices[i - 1])
+//       arr[i] = prices[i] - min;
+//   }
+
+//   return Math.max(...arr);
+// };
+
 // Constraints:
 
 // 1 <= prices.length <= 105
 // 0 <= prices[i] <= 104
 
-var maxProfit = function (prices) {
-  let leftPrice = prices[0];
-  let rightPrice = prices[1];
-  let profit = 0;
+// var maxProfit = function (prices) {
+//   let leftPrice = prices[0];
+//   let rightPrice = prices[1];
+//   let profit = 0;
 
-  for (let i = 0; i < prices.length; ++i) {
-    console.log(leftPrice, rightPrice, profit);
+//   for (let i = 0; i < prices.length; ++i) {
+//     console.log(leftPrice, rightPrice, profit);
 
-    if (leftPrice < rightPrice) {
-      profit = Math.max(profit, rightPrice - leftPrice);
-    } else {
-      leftPrice = rightPrice;
-    }
-    rightPrice = prices[i + 1];
-  }
-  console.log(profit);
-  return profit;
-};
+//     if (leftPrice < rightPrice) {
+//       profit = Math.max(profit, rightPrice - leftPrice);
+//     } else {
+//       leftPrice = rightPrice;
+//     }
+//     rightPrice = prices[i + 1];
+//   }
+//   console.log(profit);
+//   return profit;
+// };
 
 // maxProfit([7, 1, 5, 3, 6, 4]);
 // maxProfit([7, 6, 4, 3, 1]);
