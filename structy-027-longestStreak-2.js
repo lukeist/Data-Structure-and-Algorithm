@@ -5,6 +5,23 @@ class Node {
   }
 }
 
+const longestStreak = (head) => {
+  if (!head) return 0;
+  let c = head;
+  let t = null;
+  let count = 1;
+  let max = -Infinity;
+
+  while (c) {
+    t !== c.val ? (count = 1) : count++;
+    max = Math.max(max, count);
+    t = c.val;
+    c = c.next;
+  }
+
+  return max;
+};
+
 // p: head of ll
 // r: num
 
@@ -16,28 +33,28 @@ class Node {
 //      9 -> 9 -> 1 -> 9 -> 9 -> 9
 //                               p   c
 
-const longestStreak = (head) => {
-  if (!head) return 0;
+// const longestStreak = (head) => {
+//   if (!head) return 0;
 
-  let curStreak = 0;
-  // let maxStreak = 0;
-  let max = -Infinity;
-  let curr = head;
-  let preV = null;
+//   let curStreak = 0;
+//   // let maxStreak = 0;
+//   let max = -Infinity;
+//   let curr = head;
+//   let preV = null;
 
-  while (curr) {
-    curr.val === preV ? curStreak++ : (curStreak = 1);
+//   while (curr) {
+//     curr.val === preV ? curStreak++ : (curStreak = 1);
 
-    // maxStreak < curStreak && (maxStreak = curStreak);
-    max = Math.max(max, curStreak);
+//     // maxStreak < curStreak && (maxStreak = curStreak);
+//     max = Math.max(max, curStreak);
 
-    preV = curr.val;
-    curr = curr.next;
-  }
+//     preV = curr.val;
+//     curr = curr.next;
+//   }
 
-  // return maxStreak;
-  return max;
-};
+//   // return maxStreak;
+//   return max;
+// };
 
 // const longestStreak = (head) => {
 //   let curStreak = 0;

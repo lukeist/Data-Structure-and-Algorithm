@@ -35,7 +35,7 @@
 
 //   return -1;
 // };
-// // iterative
+// // // iterative
 // const shortestPath = (area) => {
 //   const queue = [[0, 0, 0]];
 //   const visited = new Set();
@@ -46,12 +46,7 @@
 //     if (area[y][x] === 9) return distance;
 //     visited.add(yx);
 
-//     const deltas = [
-//       [y + 1, x],
-//       [y - 1, x],
-//       [y, x + 1],
-//       [y, x - 1],
-//     ];
+//     const deltas = [ [y + 1, x], [y - 1, x], [y, x + 1], [y, x - 1] ];
 
 //     for (let delta of deltas) {
 //       const [neiY, neiX] = delta;
@@ -93,7 +88,7 @@ const area = [
 //   [1, 1, 1, 0, 0],
 // ];
 
-console.log(shortestPath(area));
+// console.log(shortestPath(area));
 
 // // Amazon Fresh is a grocery delivery service that offers consumers the option of purchasing their groceries online and having them delivered on schedule. The Amazon Fresh team is planning a route for a delivery truck to deliver customer orders in the city of Techlandia. The planner will create a delivery area for each order to effectively plan the route. The area is abstracted as a grid. Not all locations are accessible by road. The truck only needs to make a single delivery.
 // // Write an algorithm to determine the minimum distance required for the truck to deliver the order.
@@ -109,26 +104,26 @@ console.log(shortestPath(area));
 // // p: grid [[],[]]
 // // r: int +/-1
 
-// //  dfs recursive O(r x c) O(r x c)
-// const shortestPath = (area, y = 0, x = 0, visited = new Set(), d = 0) => {
-//   const boundY = 0 <= y && y < area.length;
-//   const boundX = 0 <= x && x < area[0].length;
-//   if (!boundY || !boundX) return 0;
+//  dfs recursive O(r x c) O(r x c)
+const shortestPath = (area, y = 0, x = 0, visited = new Set(), d = 0) => {
+  const boundY = 0 <= y && y < area.length;
+  const boundX = 0 <= x && x < area[0].length;
+  if (!boundY || !boundX) return 0;
 
-//   const yx = y + "," + x;
-//   if (visited.has(yx)) return 0;
-//   visited.add(yx);
+  const yx = y + "," + x;
+  if (visited.has(yx)) return 0;
+  visited.add(yx);
 
-//   if (area[y][x] === 0) return 0;
-//   if (area[y][x] === 9) return d;
+  if (area[y][x] === 0) return 0;
+  if (area[y][x] === 9) return d;
 
-//   const n = shortestPath(area, y + 1, x, visited, d + 1);
-//   const s = shortestPath(area, y - 1, x, visited, d + 1);
-//   const w = shortestPath(area, y, x + 1, visited, d + 1);
-//   const e = shortestPath(area, y, x - 1, visited, d + 1);
-//   //   console.log(y, x, n, s, w, e);
-//   return Math.max(n, s, w, e);
-// };
+  const n = shortestPath(area, y + 1, x, visited, d + 1);
+  const s = shortestPath(area, y - 1, x, visited, d + 1);
+  const w = shortestPath(area, y, x + 1, visited, d + 1);
+  const e = shortestPath(area, y, x - 1, visited, d + 1);
+  //   console.log(y, x, n, s, w, e);
+  return Math.max(n, s, w, e);
+};
 
 // // // bfs iterative O(r x c) O(r x c)
 // // const shortestPath = (area) => {
@@ -166,20 +161,21 @@ console.log(shortestPath(area));
 // //   [1, 9, 1],
 // // ];
 
-// const area = [
-//   [1, 0, 1, 1, 1, 1],
-//   [1, 1, 1, 0, 0, 1],
-//   [1, 0, 1, 1, 1, 1],
-//   [1, 0, 0, 0, 1, 0],
-//   [1, 0, 0, 0, 1, 0],
-//   [9, 1, 1, 1, 1, 1],
-// ];
+const area1 = [
+  [1, 0, 1, 1, 1, 1],
+  [1, 1, 1, 0, 0, 1],
+  [1, 0, 1, 1, 1, 1],
+  [1, 0, 0, 0, 1, 0],
+  [1, 0, 0, 0, 1, 0],
+  [1, 1, 1, 9, 1, 1],
+];
 
-// const area = [
-//   [1, 1, 1, 0, 0],
-//   [1, 1, 1, 9, 0],
-//   [1, 1, 1, 0, 0],
-//   [1, 1, 1, 0, 0],
-//   [1, 1, 1, 0, 0],
-// ];
-// console.log(shortestPath(area));
+const area2 = [
+  [1, 1, 1, 0, 0],
+  [1, 1, 1, 9, 0],
+  [1, 1, 1, 0, 0],
+  [1, 1, 1, 0, 0],
+  [1, 1, 1, 0, 0],
+];
+console.log(shortestPath(area1));
+console.log(shortestPath(area2));
