@@ -20,28 +20,66 @@
 // Explanation: s is an empty string "" after removing non-alphanumeric characters.
 // Since an empty string reads the same forward and backward, it is a palindrome.
 
-// Runtime: 89 ms, faster than 66.51% of JavaScript online submissions for Valid Palindrome.
+// recursive O(n) O(n)
 var isPalindrome = function (s) {
-  if (s === " ") return true;
-
   const alpha = "abcdefghijklmnopqrstuvwxyz0123456789";
-
-  // convert to lowercase and remove non-alphanumeric chars
-  let arrS = s
+  const arr = s
     .toLowerCase()
     .split("")
     .filter((c) => alpha.includes(c));
+  if (!_isPalindrome(arr, 0, arr.length - 1)) return false;
 
-  for (let i = 0, j = arrS.length - 1; i <= j; i++, j--) {
-    // console.log(arrS[i], arrS[j]);
-    if (arrS[i] !== arrS[j]) return false;
-  }
   return true;
 };
 
-isPalindrome("A man, a plan, a canal: Panama");
-isPalindrome("race a car");
-isPalindrome("0P");
+var _isPalindrome = function (arr, i, j) {
+  if (i > j) return true;
+  if (arr[i] !== arr[j]) return false;
+  if (!_isPalindrome(arr, i + 1, j - 1)) return false;
+
+  return true;
+};
+
+// iterative O(n) O(n)
+// var isPalindrome = function(s) {
+//     let alpha = 'abcdefghijklmnopqrstuvwxyz0123456789';
+//     let str = ''
+//     for (let c of s) {
+//         alpha.includes(c.toLowerCase()) && (str += c.toLowerCase());
+//     }
+
+//     let i = 0, j = str.length - 1;
+//     while (i < j) {
+//         if (str[i] !== str[j]) return false
+//         i++;
+//         j--;
+//     }
+
+//     return true;
+// };
+
+// // Runtime: 89 ms, faster than 66.51% of JavaScript online submissions for Valid Palindrome.
+// var isPalindrome = function (s) {
+//   if (s === " ") return true;
+
+//   const alpha = "abcdefghijklmnopqrstuvwxyz0123456789";
+
+//   // convert to lowercase and remove non-alphanumeric chars
+//   let arrS = s
+//     .toLowerCase()
+//     .split("")
+//     .filter((c) => alpha.includes(c));
+
+//   for (let i = 0, j = arrS.length - 1; i <= j; i++, j--) {
+//     // console.log(arrS[i], arrS[j]);
+//     if (arrS[i] !== arrS[j]) return false;
+//   }
+//   return true;
+// };
+
+// isPalindrome("A man, a plan, a canal: Panama");
+// isPalindrome("race a car");
+// isPalindrome("0P");
 
 // // Runtime: 97 ms, faster than 55.15% of JavaScript online submissions for Valid Palindrome.
 // var isPalindrome = function (s) {
