@@ -1,3 +1,9 @@
+//                          i
+// 12, 9, 2, 5, 4, 32, 90, 20  90
+//              j
+//  1  1  1  2  2   3   4   3   4
+//
+
 // iteration O(n^2) O(n)
 const maxIncreasingSubseq = (nums) => {
   const arr = nums.map((num) => 1);
