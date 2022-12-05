@@ -8,6 +8,22 @@
 // //   [ 'b', 'c' ]
 // // ]
 
+const createCombinations = (arr, k) => {
+  if (arr.length === k) return [arr];
+  if (k === 0) return [[]];
+
+  const first = arr[0];
+  const aWOf = arr.slice(1);
+  const aLeft = createCombinations(aWOf, k - 1);
+  const aRight = createCombinations(aWOf, k);
+
+  for (let a of aLeft) {
+    a.push(first);
+  }
+
+  return [...aLeft, ...aRight];
+};
+
 //                            ["a", "b", "c", "d"] 3
 // a                        /                               \
 // [bc][bd][cd]       ["b", "c", "d"] 2                     ["b", "c", "d"] 3
@@ -28,26 +44,26 @@
 //                                /
 //                              []
 
-const createCombinations = (items, k) => {
-  if (items.length < k) return [];
-  if (k === 0) return [[]];
+// const createCombinations = (items, k) => {
+//   if (items.length < k) return [];
+//   if (k === 0) return [[]];
 
-  const firstE = items[0];
-  const itemsWOfirstE = items.slice(1);
+//   const firstE = items[0];
+//   const itemsWOfirstE = items.slice(1);
 
-  const left = createCombinations(itemsWOfirstE, k - 1);
-  const right =
-    itemsWOfirstE.length === k
-      ? [itemsWOfirstE]
-      : createCombinations(itemsWOfirstE, k);
-  console.log(left, right);
+//   const left = createCombinations(itemsWOfirstE, k - 1);
+//   const right =
+//     itemsWOfirstE.length === k
+//       ? [itemsWOfirstE]
+//       : createCombinations(itemsWOfirstE, k);
+//   console.log(left, right);
 
-  for (let l of left) {
-    l.push(firstE);
-  }
+//   for (let l of left) {
+//     l.push(firstE);
+//   }
 
-  return [...left, ...right];
-};
+//   return [...left, ...right];
+// };
 
 console.log(createCombinations(["a", "b", "c"], 3)); // ->)
 // console.log(createCombinations([1, 28, 94], 3)); // ->
