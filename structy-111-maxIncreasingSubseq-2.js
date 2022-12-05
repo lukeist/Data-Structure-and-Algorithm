@@ -1,3 +1,17 @@
+// iteration O(n^2) O(n)
+const maxIncreasingSubseq = (nums) => {
+  const arr = nums.map((num) => 1);
+
+  for (let i = 1; i < nums.length; i++) {
+    for (let j = 0; j < i; j++) {
+      console.log(i, j);
+      nums[j] < nums[i] && arr[j] >= arr[i] && (arr[i] = arr[j] + 1);
+    }
+  }
+
+  return Math.max(...arr);
+};
+
 // p: arr
 // r: num
 // [4]
@@ -62,38 +76,38 @@
 
 // [4, 18, 20, 10, 12, 3, 15, 19]
 
-//////////////////
-const maxIncreasingSubseq = (numbers) => {
-  const map = {}; // arr[1,...] not working bcause of [42, 50, 51, 60, 55, 70, 4, 5, 70]
-  map[numbers[0]] = 1;
+// //////////////////
+// const maxIncreasingSubseq = (numbers) => {
+//   const map = {}; // arr[1,...] not working bcause of [42, 50, 51, 60, 55, 70, 4, 5, 70]
+//   map[numbers[0]] = 1;
 
-  for (let i = 1; i < numbers.length; i++) {
-    let max = -Infinity;
-    let num = numbers[i];
+//   for (let i = 1; i < numbers.length; i++) {
+//     let max = -Infinity;
+//     let num = numbers[i];
 
-    for (let key in map) {
-      // if num >= key: max = the greatest number next to num
-      if (num >= +key) {
-        max = Math.max(max, map[key]);
-      } else {
-        // if num < key:
-        //// if num < all keys: max = 0;
-        //// if num < some keys: max = max of key before the current key
-        max = Math.max(max, 0);
-      }
-    }
-    //                             [1,  2,  3,  4,  4,  5,  1, 2, 6];
-    // if key === max -> keep max, [42, 50, 51, 60, 55, 70, 4, 5, 70] else:
-    max !== map[num] && (map[num] = max + 1);
-  }
+//     for (let key in map) {
+//       // if num >= key: max = the greatest number next to num
+//       if (num >= +key) {
+//         max = Math.max(max, map[key]);
+//       } else {
+//         // if num < key:
+//         //// if num < all keys: max = 0;
+//         //// if num < some keys: max = max of key before the current key
+//         max = Math.max(max, 0);
+//       }
+//     }
+//     //                             [1,  2,  3,  4,  4,  5,  1, 2, 6];
+//     // if key === max -> keep max, [42, 50, 51, 60, 55, 70, 4, 5, 70] else:
+//     max !== map[num] && (map[num] = max + 1);
+//   }
 
-  let max = -Infinity;
-  for (let key in map) {
-    max = Math.max(max, map[key]);
-  }
+//   let max = -Infinity;
+//   for (let key in map) {
+//     max = Math.max(max, map[key]);
+//   }
 
-  return max;
-};
+//   return max;
+// };
 
 // console.log(maxIncreasingSubseq([42, 50, 51, 60, 55, 70, 4, 5, 70]));
 //                              [1,  2,  3,  4,  4,  5,  1, 2, 6];
