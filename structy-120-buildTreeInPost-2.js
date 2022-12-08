@@ -15,26 +15,23 @@ class Node {
 //    /    \
 //   y      z
 
-const buildTreeInPost = (inOrder, postOrder) => {
-  if (!inOrder.length || !postOrder.length) return null;
+const buildTreeInPost = (
+  i,
+  p,
+  iS = 0,
+  iE = i.length - 1,
+  pS = 0,
+  pE = p.length - 1
+) => {
+  if (iS > iE || pS > pE) return null;
 
-  const indexRootPo = postOrder.length - 1;
-  const indexRPo = indexRootPo - 1;
-  const rootVal = postOrder[indexRootPo];
-  const indexRootIn = inOrder.indexOf(rootVal);
-  const rightLen = inOrder.length - 1 - indexRootIn;
-  const indexLPo = indexRPo - rightLen;
+  const rootVal = p[pE];
+  const indexRootI = i.indexOf(rootVal);
+  const rightLen = iE - indexRootI;
 
   const root = new Node(rootVal);
-  // console.log(root);
-  root.left = buildTreeInPost(
-    inOrder.slice(0, indexRootIn),
-    postOrder.slice(0, indexLPo + 1)
-  );
-  root.right = buildTreeInPost(
-    inOrder.slice(indexRootIn + 1),
-    postOrder.slice(indexLPo + 1, indexRootPo)
-  );
+  root.left = buildTreeInPost(i, p, iS, indexRootI - 1, pS, pE - rightLen - 1);
+  root.right = buildTreeInPost(i, p, indexRootI + 1, iE, pE - rightLen, pE - 1);
 
   return root;
 };
@@ -67,6 +64,29 @@ console.log(
 // //    / \
 // //    g  h
 
+// const buildTreeInPost = (inOrder, postOrder) => {
+//   if (!inOrder.length || !postOrder.length) return null;
+
+//   const indexRootPo = postOrder.length - 1;
+//   const indexRPo = indexRootPo - 1;
+//   const rootVal = postOrder[indexRootPo];
+//   const indexRootIn = inOrder.indexOf(rootVal);
+//   const rightLen = inOrder.length - 1 - indexRootIn;
+//   const indexLPo = indexRPo - rightLen;
+
+//   const root = new Node(rootVal);
+//   // console.log(root);
+//   root.left = buildTreeInPost(
+//     inOrder.slice(0, indexRootIn),
+//     postOrder.slice(0, indexLPo + 1)
+//   );
+//   root.right = buildTreeInPost(
+//     inOrder.slice(indexRootIn + 1),
+//     postOrder.slice(indexLPo + 1, indexRootPo)
+//   );
+
+//   return root;
+// };
 // // recu O(n^2) O(n^2)
 // const buildTreeInPost = (inOrder, postOrder) => {
 //   if (inOrder.length === 0 || postOrder.length === 0) return null;
