@@ -5,9 +5,9 @@
 //      this.right = null
 //    }
 
-// const burn = (A, B) => {
-//   return _findB(A, B) + _findO(A, B) - 1;
-// };
+const burn = (A, B) => {
+  return _findB(A, B) + _findO(A, B) - 1;
+};
 
 //  Tree :      12
 //             / \
@@ -30,26 +30,25 @@
 //                        /  \
 //                      10    11
 
-//
 // dfs recusrive O(n) O(n)
-// const _findB = (root, leaf) => {
-//   if (!root) return Infinity;
-//   if (root.val === leaf) return 0;
+const _findB = (root, leaf) => {
+  if (!root) return Infinity;
+  if (root.val === leaf) return 0;
 
-//   const left = _findB(root.left, leaf);
-//   const right = _findB(root.right, leaf);
+  const left = _findB(root.left, leaf);
+  const right = _findB(root.right, leaf);
 
-//   return 1 + Math.min(left, right);
-// };
+  return 1 + Math.min(left, right);
+};
 
-// const _findO = (root, leaf) => {
-//   if (!root) return 0;
-//   if (root.val === leaf) return -Infinity;
-//   const left = _findO(root.left, leaf);
-//   const right = _findO(root.right, leaf);
+const _findO = (root, leaf) => {
+  if (!root) return 0;
+  if (root.val === leaf) return -Infinity;
+  const left = _findO(root.left, leaf);
+  const right = _findO(root.right, leaf);
 
-//   return 1 + Math.max(left, right);
-// };
+  return 1 + Math.max(left, right);
+};
 
 // const burn = function (root, B) {
 //   // Initialize the minimum burning time and current burning time to zero
@@ -90,47 +89,47 @@
 //   return min_time;
 // };
 
-const burn = function (root, B) {
-  // Initialize the minimum burning time and current burning time to zero
-  let min_time = 0;
-  let cur_time = 1;
+// const burn = function (root, B) {
+//   // Initialize the minimum burning time and current burning time to zero
+//   let min_time = 0;
+//   let cur_time = 1;
 
-  // Create a stack to store the nodes for the iterative DFS
-  const stack = [];
+//   // Create a stack to store the nodes for the iterative DFS
+//   const stack = [];
 
-  // Push the root node to the stack
-  stack.push(root);
+//   // Push the root node to the stack
+//   stack.push(root);
 
-  // Continue the iterative DFS while the stack is not empty
-  while (stack.length > 0) {
-    // Pop the top node from the stack
-    const node = stack.pop();
+//   // Continue the iterative DFS while the stack is not empty
+//   while (stack.length > 0) {
+//     // Pop the top node from the stack
+//     const node = stack.pop();
 
-    // If the current node is the leaf node that we are looking for,
-    // update the minimum burning time and break out of the loop
-    if (node.val == B) {
-      min_time = cur_time;
-      break;
-    }
+//     // If the current node is the leaf node that we are looking for,
+//     // update the minimum burning time and break out of the loop
+//     if (node.val == B) {
+//       min_time = cur_time;
+//       break;
+//     }
 
-    // If the current node has a right child, push it to the stack
-    // and increment the current burning time by one
-    if (node.right) {
-      stack.push(node.right);
-      cur_time += 1;
-    }
+//     // If the current node has a right child, push it to the stack
+//     // and increment the current burning time by one
+//     if (node.right) {
+//       stack.push(node.right);
+//       cur_time += 1;
+//     }
 
-    // If the current node has a left child, push it to the stack
-    // and increment the current burning time by one
-    if (node.left) {
-      stack.push(node.left);
-      cur_time += 1;
-    }
-  }
+//     // If the current node has a left child, push it to the stack
+//     // and increment the current burning time by one
+//     if (node.left) {
+//       stack.push(node.left);
+//       cur_time += 1;
+//     }
+//   }
 
-  // Return the minimum time required to burn the entire tree
-  return min_time;
-};
+//   // Return the minimum time required to burn the entire tree
+//   return min_time;
+// };
 
 class Node {
   constructor(val) {
