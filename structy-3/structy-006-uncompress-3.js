@@ -3,6 +3,8 @@
 // e:
 // 2c3a1t -> ccaaat
 // s:
+// time O(nxm)
+// space O(nxm)
 const uncompress = (s) => {
   let nums = "123456789";
   let r = "";
