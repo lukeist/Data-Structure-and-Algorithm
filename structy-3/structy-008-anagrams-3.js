@@ -10,6 +10,7 @@ const anagrams = (s1, s2) => {
   }
 
   for (let c of s2) {
+    if (!(c in m)) return false;
     m[c]--;
   }
 
