@@ -11,12 +11,12 @@
 //
 
 const lowestCommonAncestor = (root, val1, val2) => {
-  const a1 = getA(root, val1);
-  const a2 = getA(root, val2);
-  console.log(a1, a2, val1, val2);
+  const a1 = getA(root, val1).reverse();
+  const a2 = getA(root, val2).reverse();
+
   let val;
   let i = 0;
-  while (i < Math.min(a1.length, a2.length)) {
+  while (a1[i] === a2[i] && i < Math.min(a1.length, a2.length)) {
     val = a1[i];
     i++;
   }
@@ -25,13 +25,19 @@ const lowestCommonAncestor = (root, val1, val2) => {
 };
 
 const getA = (root, val) => {
-  if (!root) return [];
+  if (!root) return null;
   if (root.val === val) return [val];
   const left = getA(root.left, val);
   const right = getA(root.right, val);
-  if (left.length > 0) return [root.val, ...left];
-  if (right.length > 0) return [root.val, ...right];
-  return [];
+  if (left) {
+    left.push(root.val);
+    return left;
+  }
+  if (right) {
+    right.push(root.val);
+    return right;
+  }
+  return null;
 };
 
 class Node {
