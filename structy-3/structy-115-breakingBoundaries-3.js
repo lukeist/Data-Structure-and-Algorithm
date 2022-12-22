@@ -24,7 +24,3 @@ const breakingBoundaries = (m, n, k, y, x, memo = {}) => {
   memo[kyx] = no + so + we + ea;
   return memo[kyx];
 };
-
-module.exports = {
-  breakingBoundaries,
-};
