@@ -1,63 +1,68 @@
-// https://leetcode.com/problems/search-suggestions-system/
-// 2 p: arr ; str
-// r: arr of arr
+class TrieNode {
+  constructor() {
+    this.isWord = false;
+    this.children = new Array(26).fill(null);
+  }
+}
 
-// e:
-// Example 1:
-
-// Input: products = ["mobile","mouse","moneypot","monitor","mousepad"], searchWord = "mouse"
-// Output: [
-// ["mobile","moneypot","monitor"],
-// ["mobile","moneypot","monitor"],
-// ["mouse","mousepad"],
-// ["mouse","mousepad"],
-// ["mouse","mousepad"]
-// ]
-// Explanation: products sorted lexicographically = ["mobile","moneypot","monitor","mouse","mousepad"]
-// After typing m and mo all products match and we show user ["mobile","moneypot","monitor"]
-// After typing mou, mous and mouse the system suggests ["mouse","mousepad"]
-// Example 2:
-
-// Input: products = ["havana"], searchWord = "havana"
-// Output: [["havana"],["havana"],["havana"],["havana"],["havana"],["havana"]]
-// Example 3:
-
-// Input: products = ["bags","baggage","banner","box","cloths"], searchWord = "bags"
-// Output: [["baggage","bags","banner"],["baggage","bags","banner"],["baggage","bags"],["bags"]]
-
-var suggestedProducts = function (products, searchWord) {
-  let searchWordLength = searchWord.length;
-  const result = [];
-  products.sort();
-  for (let i = 1; i <= searchWordLength; i++) {
-    // slice each str from 0 to searchWordLength => match?
-    const productsFiltered = products.filter(
-      (str) => str.slice(0, i) === searchWord.slice(0, i)
-    );
-
-    // productsFiltered.sort();
-
-    result.push(
-      productsFiltered.slice(0, 3)
-      //   productsFiltered.length === 0
-      //     ? []
-      //     : productsFiltered.length >= 3
-      //     ? [productsFiltered[0], productsFiltered[1], productsFiltered[2]]
-      //     : productsFiltered.length === 2
-      //     ? [productsFiltered[0], productsFiltered[1]]
-      //     : [productsFiltered[0]]
-    );
+class Trie {
+  constructor() {
+    this.root = new TrieNode();
+    this.alphabet = "abcdefghijklmnopqrstuvwxyz";
   }
 
-  console.log(result);
+  insert(word) {
+    let c = this.root;
+    const a = this.alphabet;
+    for (let w of word) {
+      const i = a.indexOf(w);
+      !c.children[i] && (c.children[i] = new TrieNode());
+      c = c.children[i];
+    }
+    c.isWord = true;
+  }
+
+  dfsWithPrefix(c, word, result) {
+    if (result.length === 3) return;
+    c.isWord && result.push(word);
+    let a = this.alphabet;
+    for (let i = 0; i < a.length; i++) {
+      if (c.children[i]) {
+        this.dfsWithPrefix(c.children[i], word + a[i], result);
+      }
+    }
+  }
+
+  getWordsStartWith(prefix) {
+    let c = this.root;
+    let a = this.alphabet;
+    let result = [];
+
+    for (let p of prefix) {
+      const i = a.indexOf(p);
+      if (!c.children[i]) return result; // prefix of searchWord is not in trie => return [];
+      c = c.children[i]; // prefix of searchWord is in trie => set current node to this position => get to the last char of prefix (because all the ones before are already in results);
+    }
+    this.dfsWithPrefix(c, prefix, result);
+    return result;
+  }
+}
+
+const suggestedProducts = (products, searchWord) => {
+  const trie = new Trie();
+  const result = [];
+  let prefix = "";
+
+  for (let p of products) {
+    trie.insert(p);
+  }
+  for (let c of searchWord) {
+    prefix += c;
+    result.push(trie.getWordsStartWith(prefix));
+  }
   return result;
 };
 
-// suggestedProducts(
-//   ["mobile", "mouse", "moneypot", "monitor", "mousepad"],
-//   "mouse"
-// );
-
-// suggestedProducts(["havana"], "havana");
-suggestedProducts(["havana"], "tatiana");
-// suggestedProducts(["bags", "baggage", "banner", "box", "cloths"], "bags");
+const products = ["mobile", "mouse", "moneypot", "monitor", "mousepad"];
+const searchWord = "mouse";
+console.log(suggestedProducts(products, searchWord));
