@@ -1,3 +1,12 @@
+// Time complexity : O(M) to build the trie where M is total number of characters in products
+// For each prefix we find its representative node in O(len(prefix))
+// and dfs to find at most 3 words which is an O(1) operation.
+// Thus the overall complexity is dominated by the time required to build the trie.
+
+// In Java there is an additional complexity of O(m^2) due to Strings being immutable, here m is the length of searchWord.
+// Space complexity : O(26n)=O(n). Here n is the number of nodes in the trie.
+// 26 is the alphabet size. Space required for output is O(m) where m is the length of the search word.
+
 class TrieNode {
   constructor() {
     this.isWord = false;
@@ -22,17 +31,6 @@ class Trie {
     c.isWord = true;
   }
 
-  dfsWithPrefix(c, word, result) {
-    if (result.length === 3) return;
-    c.isWord && result.push(word);
-    let a = this.alphabet;
-    for (let i = 0; i < a.length; i++) {
-      if (c.children[i]) {
-        this.dfsWithPrefix(c.children[i], word + a[i], result);
-      }
-    }
-  }
-
   getWordsStartWith(prefix) {
     let c = this.root;
     let a = this.alphabet;
@@ -45,6 +43,17 @@ class Trie {
     }
     this.dfsWithPrefix(c, prefix, result);
     return result;
+  }
+
+  dfsWithPrefix(c, word, result) {
+    if (result.length === 3) return;
+    c.isWord && result.push(word);
+    let a = this.alphabet;
+    for (let i = 0; i < a.length; i++) {
+      if (c.children[i]) {
+        this.dfsWithPrefix(c.children[i], word + a[i], result);
+      }
+    }
   }
 }
 
