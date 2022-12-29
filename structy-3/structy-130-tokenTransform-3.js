@@ -8,6 +8,14 @@
 //          i
 // Walk the $ANIMAL$ in the $LOCATION$!
 //                 j
+
+// WORST CASE:
+// {
+//    $A$: $B$$B$$B$$B$, * 4
+//    $B$: $C$$C$$C$$C$, * 4
+//    $C$: $D$$D$$D$$D$, * 4
+//    $D$: z
+// }
 const tokenTransform = (s, tokens) => {
   let r = "";
   let i = 0,
