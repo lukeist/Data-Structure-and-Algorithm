@@ -5,51 +5,40 @@
 // ["O", "O", "O"],
 // ["O", "O", "O"],
 // f(y,x) = f(y-1,x) + f(y,x-1)
-// const countPaths = (g) => {
-//   const grid = g.map((a) => []);
+const countPaths = (grid) => {
+  const g = grid.map((a) => []);
 
-//   for (let i = 0; i < g.length; i++) {
-//     for (let j = 0; j < g[0].length; j++) {
-//       if (g[i][j] === "X") {
-//         grid[i][j] = 0;
-//         continue;
-//       }
+  for (let y = 0; y < grid.length; y++) {
+    for (let x = 0; x < grid[0].length; x++) {
+      if (grid[y][x] === "X") {
+        g[y][x] = 0;
+        continue;
+      }
+      y === 0 && x === 0 && (g[y][x] = 1);
+      y !== 0 && x === 0 && (g[y][x] = g[y - 1][x]);
+      y === 0 && x !== 0 && (g[y][x] = g[y][x - 1]);
+      y !== 0 && x !== 0 && (g[y][x] = g[y - 1][x] + g[y][x - 1]);
+    }
+  }
 
-//       i === 0 && j === 0 && (grid[i][j] = 1);
-//       i === 0 && j !== 0 && (grid[i][j] = grid[i][j - 1]);
-//       i !== 0 && j === 0 && (grid[i][j] = grid[i - 1][j]);
-//       i !== 0 && j !== 0 && (grid[i][j] = grid[i - 1][j] + grid[i][j - 1]);
-
-//       //   if (i === 0 && j === 0) {
-//       //     grid[i][j] = 1;
-//       //   } else if (i === 0) {
-//       //     grid[i][j] = grid[i][j - 1];
-//       //   } else if (j === 0) {
-//       //     grid[i][j] = grid[i - 1][j];
-//       //   } else {
-//       //     grid[i][j] = grid[i - 1][j] + grid[i][j - 1];
-//       //   }
-//     }
-//   }
-
-//   return grid[grid.length - 1][grid[0].length - 1];
-// };
-
-const countPaths = (
-  grid,
-  y = grid.length - 1,
-  x = grid[0].length - 1,
-  memo = {}
-) => {
-  const yx = y + "," + x;
-  if (yx in memo) return memo[yx];
-  if (y === 0 && x === 0) return 1;
-  if (y < 0 || x < 0 || grid[y][x] === "X") return 0;
-
-  memo[yx] =
-    countPaths(grid, y - 1, x, memo) + countPaths(grid, y, x - 1, memo);
-  return memo[yx];
+  return g[g.length - 1][g[0].length - 1];
 };
+
+// const countPaths = (
+//   grid,
+//   y = grid.length - 1,
+//   x = grid[0].length - 1,
+//   memo = {}
+// ) => {
+//   const yx = y + "," + x;
+//   if (yx in memo) return memo[yx];
+//   if (y === 0 && x === 0) return 1;
+//   if (y < 0 || x < 0 || grid[y][x] === "X") return 0;
+
+//   memo[yx] =
+//     countPaths(grid, y - 1, x, memo) + countPaths(grid, y, x - 1, memo);
+//   return memo[yx];
+// };
 
 const grid = [
   ["O", "O", "X"],
