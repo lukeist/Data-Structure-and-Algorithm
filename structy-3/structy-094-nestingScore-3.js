@@ -17,6 +17,5 @@ const nestingScore = (str) => {
       }
     }
   }
-
   return stack[0];
 };
