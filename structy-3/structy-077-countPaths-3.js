@@ -5,6 +5,7 @@
 // ["O", "O", "O"],
 // ["O", "O", "O"],
 // f(y,x) = f(y-1,x) + f(y,x-1)
+
 const countPaths = (grid) => {
   const g = grid.map((a) => []);
 
