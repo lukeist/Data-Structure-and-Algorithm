@@ -23,6 +23,10 @@
 //              |       |       |       |     |        |
 //             qabsc   qabtc  qabuc     rabsc  rabtc   rabuc
 //
+
+// n = length of the string, m = length of largest parenthetical group
+// Time: ~O(m^n)
+// Space: ~O(m^n)
 // const parentheticalPossibilities = (s) => {
 //   if (!s) return [""];
 
