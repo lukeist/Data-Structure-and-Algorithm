@@ -1,35 +1,50 @@
-const positioningPlants = (costs) => {
-  const arr = costs.map((a) => []);
-  arr[0] = costs[0];
+const positioningPlants = (costs, y = 0, x = null, memo = {}) => {
+  const yx = y + "," + x;
+  if (yx in memo) return memo[yx];
+  if (y === costs.length) return 0;
 
+  let min = Infinity;
   for (let i = 0; i < costs[0].length; i++) {
-    arr[0][i] = costs[0][i];
+    if (i === x) continue;
+    min = Math.min(min, costs[y][i] + positioningPlants(costs, y + 1, i, memo));
   }
 
-  for (let i = 1; i < costs.length; i++) {
-    let fMin = Math.min(...arr[i - 1]);
-    let sMin = Infinity;
-
-    // [6, 3, 20, 3],
-    let count = 1;
-    for (let j = 0; j < costs[0].length; j++) {
-      if (count === 1 && arr[i - 1][j] === fMin) {
-        count++;
-        continue;
-      }
-
-      sMin = Math.min(sMin, arr[i - 1][j]);
-    }
-
-    for (let j = 0; j < costs[0].length; j++) {
-      arr[i - 1][j] !== fMin
-        ? (arr[i][j] = costs[i][j] + fMin)
-        : (arr[i][j] = costs[i][j] + sMin);
-    }
-  }
-
-  return Math.min(...arr[arr.length - 1]);
+  memo[yx] = min;
+  return min;
 };
+
+// const positioningPlants = (costs) => {
+//   const arr = costs.map((a) => []);
+//   arr[0] = costs[0];
+
+//   for (let i = 0; i < costs[0].length; i++) {
+//     arr[0][i] = costs[0][i];
+//   }
+
+//   for (let i = 1; i < costs.length; i++) {
+//     let fMin = Math.min(...arr[i - 1]);
+//     let sMin = Infinity;
+
+//     // [6, 3, 20, 3],
+//     let count = 1;
+//     for (let j = 0; j < costs[0].length; j++) {
+//       if (count === 1 && arr[i - 1][j] === fMin) {
+//         count++;
+//         continue;
+//       }
+
+//       sMin = Math.min(sMin, arr[i - 1][j]);
+//     }
+
+//     for (let j = 0; j < costs[0].length; j++) {
+//       arr[i - 1][j] !== fMin
+//         ? (arr[i][j] = costs[i][j] + fMin)
+//         : (arr[i][j] = costs[i][j] + sMin);
+//     }
+//   }
+
+//   return Math.min(...arr[arr.length - 1]);
+// };
 
 // function positioningPlants(costs) {
 //   const n = costs.length;
