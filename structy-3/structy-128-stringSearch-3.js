@@ -1,3 +1,29 @@
+const stringSearch = (grid, s) => {
+  for (let i = 0; i < grid.length; i++) {
+    for (let j = 0; j < grid[0].length; j++) {
+      if (explore(grid, 0, s, i, j, new Set())) return true;
+    }
+  }
+  return false;
+};
+
+const explore = (grid, i, s, y, x, visited) => {
+  const yx = y + "," + x;
+  const boundY = 0 <= y && y < grid.length;
+  const boundX = 0 <= x && x < grid[0].length;
+  if (!boundY || !boundX || grid[y][x] !== s[i] || visited.has(yx))
+    return false;
+  if (i === s.length - 1) return true;
+  visited.add(yx);
+
+  const no = explore(grid, i + 1, s, y + 1, x, visited);
+  const so = explore(grid, i + 1, s, y - 1, x, visited);
+  const ea = explore(grid, i + 1, s, y, x + 1, visited);
+  const we = explore(grid, i + 1, s, y, x - 1, visited);
+
+  return no || so || ea || we;
+};
+
 // p: grid, str
 // r: boolean;
 // [
@@ -7,35 +33,35 @@
 //   ['p', 'r', 'x', 'o', 'h'],
 //   ['a', 'a', 'm', 'c', 'm']
 // ];
-// hello => true
-const stringSearch = (grid, s) => {
-  // const visited = new Set();
+// // hello => true
+// const stringSearch = (grid, s) => {
+//   // const visited = new Set();
 
-  for (let i = 0; i < grid.length; i++) {
-    for (let j = 0; j < grid[0].length; j++) {
-      if (s[0] === grid[i][j] && explore(grid, i, j, s, 0)) return true;
-    }
-  }
+//   for (let i = 0; i < grid.length; i++) {
+//     for (let j = 0; j < grid[0].length; j++) {
+//       if (s[0] === grid[i][j] && explore(grid, i, j, s, 0)) return true;
+//     }
+//   }
 
-  return false;
-};
+//   return false;
+// };
 
-const explore = (grid, y, x, s, i, visited = new Set()) => {
-  const boundY = 0 <= y && y < grid.length;
-  const boundX = 0 <= x && x < grid[0].length;
-  if (!boundY || !boundX) return false;
-  if (s[i] !== grid[y][x]) return false;
-  const yx = y + "," + x;
-  if (visited.has(yx)) return false;
-  visited.add(yx);
+// const explore = (grid, y, x, s, i, visited = new Set()) => {
+//   const boundY = 0 <= y && y < grid.length;
+//   const boundX = 0 <= x && x < grid[0].length;
+//   if (!boundY || !boundX) return false;
+//   if (s[i] !== grid[y][x]) return false;
+//   const yx = y + "," + x;
+//   if (visited.has(yx)) return false;
+//   visited.add(yx);
 
-  if (i === s.length - 1 && s[i] === grid[y][x]) return true;
-  if (i === s.length) return false;
+//   if (i === s.length - 1 && s[i] === grid[y][x]) return true;
+//   if (i === s.length) return false;
 
-  const no = explore(grid, y + 1, x, s, i + 1, visited);
-  const so = explore(grid, y - 1, x, s, i + 1, visited);
-  const ea = explore(grid, y, x + 1, s, i + 1, visited);
-  const we = explore(grid, y, x - 1, s, i + 1, visited);
+//   const no = explore(grid, y + 1, x, s, i + 1, visited);
+//   const so = explore(grid, y - 1, x, s, i + 1, visited);
+//   const ea = explore(grid, y, x + 1, s, i + 1, visited);
+//   const we = explore(grid, y, x - 1, s, i + 1, visited);
 
-  return no || so || ea || we;
-};
+//   return no || so || ea || we;
+// };
