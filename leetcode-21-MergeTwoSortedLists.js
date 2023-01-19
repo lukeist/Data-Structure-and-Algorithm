@@ -1,5 +1,32 @@
 // https://leetcode.com/problems/merge-two-sorted-lists/
+class ListNode {
+  constructor(val) {
+    this.next = null;
+    this.val = val;
+  }
+}
 
+var mergeTwoLists = function (list1, list2) {
+  const h = new ListNode(null);
+  let c = h,
+    c1 = list1,
+    c2 = list2;
+
+  while (c1 && c2) {
+    if (c1.val < c2.val) {
+      c.next = c1;
+      c = c1;
+      c1 = c1.next;
+    } else {
+      c.next = c2;
+      c = c2;
+      c2 = c2.next;
+    }
+  }
+
+  c.next = c1 || c2;
+  return h.next;
+};
 // p: 2 arrays
 // r: 1 array
 // e:
@@ -14,46 +41,46 @@
 // Input: list1 = [], list2 = [0]
 // Output: [0]
 
-class ListNode {
-  constructor(val, next) {
-    this.val = val === undefined ? 0 : val;
-    this.next = next === undefined ? null : next;
-  }
-}
+// class ListNode {
+//   constructor(val, next) {
+//     this.val = val === undefined ? 0 : val;
+//     this.next = next === undefined ? null : next;
+//   }
+// }
 
-var mergeTwoLists = function (l1, l2) {
-  let newList = new ListNode();
-  let tail = newList;
+// var mergeTwoLists = function (l1, l2) {
+//   let newList = new ListNode();
+//   let tail = newList;
 
-  // 2 ------ 3
+//   // 2 ------ 3
 
-  // 1 ------ 4
+//   // 1 ------ 4
 
-  // nL ------->  1 --------> 2 --------> 3 --------> 4
-  // 0            T   t.n    T
+//   // nL ------->  1 --------> 2 --------> 3 --------> 4
+//   // 0            T   t.n    T
 
-  while (l1 && l2) {
-    if (l1.val > l2.val) {
-      tail.next = l2;
-      tail = l2;
-      l2 = l2.next;
-    } else {
-      tail.next = l1;
-      tail = l1;
-      l1 = l1.next;
-    }
-  }
+//   while (l1 && l2) {
+//     if (l1.val > l2.val) {
+//       tail.next = l2;
+//       tail = l2;
+//       l2 = l2.next;
+//     } else {
+//       tail.next = l1;
+//       tail = l1;
+//       l1 = l1.next;
+//     }
+//   }
 
-  !l1 && (tail.next = l2);
-  !l2 && (tail.next = l1);
+//   !l1 && (tail.next = l2);
+//   !l2 && (tail.next = l1);
 
-  console.log(l1, l2);
-  // console.log(tail);
-  // console.log(newList);
-  console.log(newList.next.next.next.next);
+//   console.log(l1, l2);
+//   // console.log(tail);
+//   // console.log(newList);
+//   console.log(newList.next.next.next.next);
 
-  return newList;
-};
+//   return newList;
+// };
 
 // l
 // 1 1
