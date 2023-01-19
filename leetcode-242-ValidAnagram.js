@@ -11,8 +11,25 @@
 // Input: s = "rat", t = "car"
 // Output: false
 
+// O(n) O(n)
+var isAnagram = function (s, t) {
+  const map = {};
+  for (let c of s) {
+    map[c] = (map[c] || 0) + 1;
+  }
+  for (let c of t) {
+    if (!(c in map)) return false;
+    map[c]--;
+  }
+  for (let k in map) {
+    if (map[k]) return false;
+  }
+  return true;
+};
+
 // Runtime: 111 ms, faster than 52.78% of JavaScript online submissions for Valid Anagram.
 // Memory Usage: 46.8 MB, less than 31.27% of JavaScript online submissions for Valid Anagram.
+// O(nlog(n)) O(n)
 var isAnagram = function (s, t) {
   if (s.length !== t.length) return false;
 
