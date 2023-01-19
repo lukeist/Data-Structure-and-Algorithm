@@ -16,28 +16,49 @@
 // Input: s = "(]"
 // Output: false
 
-var isValid = function (s) {
-  const map = {
-    "(": ")",
-    "{": "}",
-    "[": "]",
-  }; //
-  const stack = [];
+const map = {
+  "(": ")",
+  "[": "]",
+  "{": "}",
+};
 
-  for (const char of s) {
-    if (char === "(" || char === "{" || char === "[") {
-      stack.push(map[char]);
+var isValid = function (s) {
+  if (s.length % 2) return false;
+
+  const stack = [];
+  for (let c of s) {
+    if (c in map) {
+      stack.push(map[c]);
     } else {
-      let popStack = stack.pop();
-      if (char !== popStack) {
-        console.log(popStack, false);
-        return false;
-      }
+      if (stack[stack.length - 1] !== c) return false;
+      if (stack[stack.length - 1] === c) stack.pop();
     }
   }
-  console.log(stack.length === 0);
   return stack.length === 0;
 };
+
+// var isValid = function (s) {
+//   const map = {
+//     "(": ")",
+//     "{": "}",
+//     "[": "]",
+//   }; //
+//   const stack = [];
+
+//   for (const char of s) {
+//     if (char === "(" || char === "{" || char === "[") {
+//       stack.push(map[char]);
+//     } else {
+//       let popStack = stack.pop();
+//       if (char !== popStack) {
+//         console.log(popStack, false);
+//         return false;
+//       }
+//     }
+//   }
+//   console.log(stack.length === 0);
+//   return stack.length === 0;
+// };
 
 isValid("[({(())}[()])]"); // true []()
 isValid("()"); // true
