@@ -14,37 +14,48 @@
 
 // p: root, root
 // r: boolean;
+var isSubtree = function (root, subRoot) {
+  if (!root) return false;
+  if (root.val === subRoot.val && checkSub(root, subRoot)) return true;
 
+  return isSubtree(root.left, subRoot) || isSubtree(root.right, subRoot);
+};
+
+const checkSub = (r1, r2) => {
+  if (!r1 && !r2) return true;
+  if (!r1 || !r2 || r1.val !== r2.val) return false;
+  return checkSub(r1.left, r2.left) && checkSub(r1.right, r2.right);
+};
 // find subRoot
 // if found, start comparing left && right
 // [l r
 // [l r
 
-var isSubtree = function (root, subRoot) {
-  const stack = [root];
-  while (stack.length > 0) {
-    const current = stack.pop();
-    if (current.val === subRoot.val && compare(current, subRoot)) return true;
+// var isSubtree = function (root, subRoot) {
+//   const stack = [root];
+//   while (stack.length > 0) {
+//     const current = stack.pop();
+//     if (current.val === subRoot.val && compare(current, subRoot)) return true;
 
-    current.left && stack.push(current.left);
-    current.right && stack.push(current.right);
-  }
+//     current.left && stack.push(current.left);
+//     current.right && stack.push(current.right);
+//   }
 
-  return false;
-};
+//   return false;
+// };
 
-// // recursive O(n) O(n)
-const compare = (r1, r2) => {
-  if (!r1 && !r2) return true;
-  if (r1 && !r2) return false;
-  if (!r1 && r2) return false;
-  if (r1.val !== r2.val) return false;
+// // // recursive O(n) O(n)
+// const compare = (r1, r2) => {
+//   if (!r1 && !r2) return true;
+//   if (r1 && !r2) return false;
+//   if (!r1 && r2) return false;
+//   if (r1.val !== r2.val) return false;
 
-  const compareLeft = compare(r1.left, r2.left);
-  const compareRight = compare(r1.right, r2.right);
+//   const compareLeft = compare(r1.left, r2.left);
+//   const compareRight = compare(r1.right, r2.right);
 
-  return compareLeft && compareRight;
-};
+//   return compareLeft && compareRight;
+// };
 
 // iterative
 // const compare = (r1, r2) => {
