@@ -15,6 +15,15 @@
 // Output: 6
 // Explanation: [4,-1,2,1] has the largest sum = 6.
 
+var maxSubArray = function (nums) {
+  let maxSum = nums[0],
+    curSum = nums[0];
+  for (let i = 1; i < nums.length; i++) {
+    curSum = Math.max(nums[i], curSum + nums[i]);
+    maxSum = Math.max(maxSum, curSum);
+  }
+  return maxSum;
+};
 // Example 2:
 // Input: nums = [1]
 // Output: 1
@@ -33,20 +42,20 @@
 //                 /   \
 //               1       1
 
-//
-var maxSubArray = function (nums) {
-  let maxSum = nums[0];
-  let curSum = 0;
+// //
+// var maxSubArray = function (nums) {
+//   let maxSum = nums[0];
+//   let curSum = 0;
 
-  for (let num of nums) {
-    console.log(curSum);
-    if (curSum < 0) curSum = 0;
-    curSum += num;
-    maxSum = Math.max(curSum, maxSum);
-  }
-  // console.log(maxSum);
-  return maxSum;
-};
+//   for (let num of nums) {
+//     console.log(curSum);
+//     if (curSum < 0) curSum = 0;
+//     curSum += num;
+//     maxSum = Math.max(curSum, maxSum);
+//   }
+//   // console.log(maxSum);
+//   return maxSum;
+// };
 
 maxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]); //6
 maxSubArray([1]); //1
