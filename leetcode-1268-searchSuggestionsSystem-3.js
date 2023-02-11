@@ -4,6 +4,17 @@
  * @return {string[][]}
  */
 
+// The time complexity of building a trie for the given problem is O(P),
+// where P is the sum of the lengths of all the strings in the products array.
+// This is because each string in the products array needs to be inserted into
+// the trie and each insertion takes O(L) time, where L is the length of the string.
+
+// The space complexity of the trie solution is O(26^L * P),
+// where L is the length of the longest string in the products array
+// and P is the total number of characters in all the strings in the products array.
+// This is because each node in the trie can have 26 children,
+// one for each letter of the alphabet, and each node requires O(1) space.
+
 // ["mobile","mouse","moneypot","monitor","mousepad"]
 //                                     root
 //                                      |           [-,-,-,-,-,-,-,-,-,-,-,-,*,-,-,-,-,-,-,-,-,-,-,-,-,-,]
