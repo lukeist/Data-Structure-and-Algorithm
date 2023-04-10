@@ -1,3 +1,16 @@
+var isBalanced = function (root) {
+  if (!root) return true;
+  const left = countDepth(root.left);
+  const right = countDepth(root.right);
+  if (Math.abs(left - right) > 1) return false;
+  return isBalanced(root.left) && isBalanced(root.right);
+};
+
+const countDepth = (root) => {
+  if (!root) return 0;
+  return 1 + Math.max(countDepth(root.left), countDepth(root.right));
+};
+
 /**
  * Definition for a binary tree node.
  * function TreeNode(val, left, right) {
@@ -15,21 +28,21 @@
 // Output true
 // Expected false
 
-var isBalanced = function (root) {
-  if (!root) return true;
-  let isBal = true;
+// var isBalanced = function (root) {
+//   if (!root) return true;
+//   let isBal = true;
 
-  function dfs(node) {
-    if (!node) return 0;
-    const left = dfs(node.left);
-    const right = dfs(node.right);
-    if (Math.abs(left - right) > 1) isBal = false;
-    return 1 + Math.max(left, right);
-  }
+//   function dfs(node) {
+//     if (!node) return 0;
+//     const left = dfs(node.left);
+//     const right = dfs(node.right);
+//     if (Math.abs(left - right) > 1) isBal = false;
+//     return 1 + Math.max(left, right);
+//   }
 
-  dfs(root);
-  return isBal;
-};
+//   dfs(root);
+//   return isBal;
+// };
 
 // // chat
 // var isBalanced = function (root) {
