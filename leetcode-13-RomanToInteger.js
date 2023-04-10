@@ -1,3 +1,42 @@
+// const dic = {
+//   'I': 1,
+//   'V': 5,
+//   'X': 10,
+//   'L': 50,
+//   'C': 100,
+//   'D': 500,
+//   'M': 1000,
+// }
+
+// const spe = {
+//   'IV': 4,
+//   'IX': 9,
+//   'XL': 40,
+//   'XC': 90,
+//   'CD': 400,
+//   'CM': 900,
+// }
+
+// var romanToInt = function(s) {
+//   let i = 0, j = 1, count = 0;
+
+//   while (i < s.length) {
+//       let ij = s[i] + s[j];
+
+//       if (ij in spe) {
+//           count += spe[ij];
+//           i += 2;
+//           j += 2;
+//       } else {
+//           count += dic[s[i]];
+//           i++;
+//           j++;
+//       }
+//   }
+
+//   return count;
+// };
+
 const regular = {
   I: 1,
   V: 5,
