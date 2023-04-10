@@ -1,3 +1,23 @@
+var isValid = function (s) {
+  const map = {
+    "(": ")",
+    "[": "]",
+    "{": "}",
+  };
+
+  const stack = [];
+  for (let c of s) {
+    if (c in map) {
+      stack.push(map[c]);
+    } else {
+      if (stack[stack.length - 1] !== c) return false;
+      stack.pop();
+    }
+  }
+
+  return stack.length === 0;
+};
+
 // https://leetcode.com/problems/valid-parentheses/
 
 // p: string
@@ -16,26 +36,26 @@
 // Input: s = "(]"
 // Output: false
 
-const map = {
-  "(": ")",
-  "[": "]",
-  "{": "}",
-};
+// const map = {
+//   "(": ")",
+//   "[": "]",
+//   "{": "}",
+// };
 
-var isValid = function (s) {
-  if (s.length % 2) return false;
+// var isValid = function (s) {
+//   if (s.length % 2) return false;
 
-  const stack = [];
-  for (let c of s) {
-    if (c in map) {
-      stack.push(map[c]);
-    } else {
-      if (stack[stack.length - 1] !== c) return false;
-      if (stack[stack.length - 1] === c) stack.pop();
-    }
-  }
-  return stack.length === 0;
-};
+//   const stack = [];
+//   for (let c of s) {
+//     if (c in map) {
+//       stack.push(map[c]);
+//     } else {
+//       if (stack[stack.length - 1] !== c) return false;
+//       if (stack[stack.length - 1] === c) stack.pop();
+//     }
+//   }
+//   return stack.length === 0;
+// };
 
 // var isValid = function (s) {
 //   const map = {
