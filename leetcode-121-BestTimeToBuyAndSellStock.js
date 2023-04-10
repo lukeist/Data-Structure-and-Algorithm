@@ -1,5 +1,17 @@
 // https://leetcode.com/problems/best-time-to-buy-and-sell-stock/
 
+var maxProfit = function (prices) {
+  let max = 0;
+  let min = Infinity;
+
+  for (let p of prices) {
+    min = Math.min(min, p);
+    max = Math.max(max, p - min);
+  }
+
+  return max;
+};
+
 // p: array
 // num: int +
 // e:
@@ -16,16 +28,16 @@
 // Output: 0
 // Explanation: In this case, no transactions are done and the max profit = 0.
 
-var maxProfit = function (prices) {
-  let maxProfit = 0;
-  let min = Infinity;
-  for (let i = 1; i < prices.length; i++) {
-    min = Math.min(min, prices[i - 1]);
-    maxProfit = Math.max(maxProfit, prices[i] - min);
-  }
+// var maxProfit = function (prices) {
+//   let maxProfit = 0;
+//   let min = Infinity;
+//   for (let i = 1; i < prices.length; i++) {
+//     min = Math.min(min, prices[i - 1]);
+//     maxProfit = Math.max(maxProfit, prices[i] - min);
+//   }
 
-  return maxProfit;
-};
+//   return maxProfit;
+// };
 
 // var maxProfit = function(prices) {
 //   let arr = [0];
