@@ -8,3 +8,16 @@ const hasCycle = (head) => {
   }
   return false;
 };
+
+// var hasCycle = function(head) {
+//   const visited = new Set();
+//   let c = head;
+
+//   while (c) {
+//       if (visited.has(c)) return true;
+//       visited.add(c);
+//       c = c.next;
+//   }
+
+//   return false;
+// };
