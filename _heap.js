@@ -1,17 +1,40 @@
-class MinHeap {
-  constructor() {
-    this.heap = [];
+function maxHeapify(arr, n, i) {
+  let largest = i;
+  const left = 2 * i + 1;
+  const right = 2 * i + 2;
+
+  if (left < n && arr[left] > arr[largest]) {
+    largest = left;
   }
 
-  insert(num) {
-    this.heap.push(num);
-    this.heapifyUp();
-//   }does (3.) mean sorting an exist collection either descending or ascending? what does 'collection' means here? please give a simplest example for (3.)
+  if (right < n && arr[right] > arr[largest]) {
+    largest = right;
+  }
 
-  heapifyUp() {
-    let index = this.heap.length - 1;
-    while (index > 0) {
-      let parentIndex = Math.floor((index - 1) / 2);
-    }
+  if (largest !== i) {
+    [arr[i], arr[largest]] = [arr[largest], arr[i]];
+    maxHeapify(arr, n, largest);
   }
 }
+
+function buildMaxHeap(arr) {
+  const n = arr.length;
+  const leaves = Math.floor(n / 2);
+  for (let i = leaves - 1; i >= 0; i--) {
+    maxHeapify(arr, n, i);
+  }
+}
+
+function heapSort(arr) {
+  const n = arr.length;
+  buildMaxHeap(arr);
+
+  for (let i = n - 1; i > 0; i--) {
+    [arr[0], arr[i]] = [arr[i], arr[0]];
+    maxHeapify(arr, i, 0);
+  }
+}
+
+const arrayToSort = [12, 11, 13, 5, 6, 7];
+heapSort(arrayToSort);
+console.log(arrayToSort);
