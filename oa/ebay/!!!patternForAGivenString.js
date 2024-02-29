@@ -63,4 +63,5 @@ console.log(patternForAGivenString("ababab"));
 console.log(patternForAGivenString("abcababcab"));
 console.log(patternForAGivenString("abcdabcabcdabc"));
 console.log(patternForAGivenString("abcdefg"));
+console.log(patternForAGivenString("abcdefgaa"));
 console.log(patternForAGivenString("aaaaabcaaaaabc"));
