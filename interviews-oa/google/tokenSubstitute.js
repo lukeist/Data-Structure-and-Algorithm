@@ -12,33 +12,32 @@
 //
 // const map1 = { USER: "admin", HOME: "/%USER%/home" };
 // const input1 = "I am %USER% My home is %HOME%";
-//                      i
+//                       i
 // I am admin My home is %HOME%
 //                            j
 
-const substitutedTokens = (map, str) => {
+const tokenSubstitute = (map, s) => {
   let i = 0,
-    j = 1;
+    j = 1,
+    str = "";
 
-  //   let s = "";
-
-  while (j < str.length) {
-    if (str[i] === "%") {
-      if (str[j] === "%") {
-        const tokenWithPercent = str.slice(i, j + 1);
-        const token = tokenWithPercent.split("%")[1];
+  while (i < s.length) {
+    if (s[i] === "%") {
+      if (s[j] === "%") {
+        const token = s.slice(i, j + 1).split("%")[1];
         if (token in map) {
-          str = str.replace(tokenWithPercent, map[token]);
-          j = i + 1;
-        } else {
-          str = str.replace(tokenWithPercent, "%");
-          i++;
-          j++;
-        }
+          const sub = tokenSubstitute(map, map[token]);
+          map[token] = sub;
+          str += sub;
+        } else str += "%";
+
+        i = j + 1;
+        j = i + 1;
       } else {
         j++;
       }
     } else {
+      str += s[i];
       i++;
       j++;
     }
@@ -48,7 +47,7 @@ const substitutedTokens = (map, str) => {
 
 const map1 = { USER: "admin", HOME: "/%USER%/home" };
 const input1 = "I am %USER% My home is %HOME%";
-console.log(substitutedTokens(map1, input1));
+console.log(tokenSubstitute(map1, input1));
 // Output: I am admin My home is /admin/home
 
 const map2 = {
@@ -60,6 +59,36 @@ const map2 = {
 const input2a = "/home/%USER%"; // -> /home/bob
 const input2b = "Hello %USER%!"; // -> Hello bob!
 const input2c = "The user %USER% is at 50%%"; //-> The user bob is at 50%
-console.log(substitutedTokens(map2, input2a));
-console.log(substitutedTokens(map2, input2b));
-console.log(substitutedTokens(map2, input2c));
+console.log(tokenSubstitute(map2, input2a));
+console.log(tokenSubstitute(map2, input2b));
+console.log(tokenSubstitute(map2, input2c));
+
+// const tokenSubstitute = (map, str) => {
+//   let i = 0,
+//     j = 1;
+
+//   //   let s = "";
+
+//   while (j < str.length) {
+//     if (str[i] === "%") {
+//       if (str[j] === "%") {
+//         const tokenWithPercent = str.slice(i, j + 1);
+//         const token = tokenWithPercent.split("%")[1];
+//         if (token in map) {
+//           str = str.replace(tokenWithPercent, map[token]);
+//           j = i + 1;
+//         } else {
+//           str = str.replace(tokenWithPercent, "%");
+//           i++;
+//           j++;
+//         }
+//       } else {
+//         j++;
+//       }
+//     } else {
+//       i++;
+//       j++;
+//     }
+//   }
+//   return str;
+// };
